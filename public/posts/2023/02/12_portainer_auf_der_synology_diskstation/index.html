@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Portainer auf der Synology DiskStation - blog.buanet.de</title><meta name="Description" content="Ein Blog über Docker im Smarthome."><meta property="og:title" content="Portainer auf der Synology DiskStation" />
+<meta property="og:description" content="Einleitung Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst. Dabei werden wir sogar komplett auf die Kommandozeile verzichten. :) Zunächst aber wie üblich die&hellip;
+Voraussetzungen Natürlich benötigt ihr eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob ir noch auf DSM 6, doer bereits unter DSM 7 arbeitet." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/" />
+<meta property="og:image" content="http://blog.buanet.de/img/og/default.png"/>
+<meta property="article:published_time" content="2023-02-12T21:12:44+01:00" />
+<meta property="article:modified_time" content="2023-02-12T21:12:44+01:00" /><meta property="og:site_name" content="blog.buanet.de" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.buanet.de/img/og/default.png"/>
+
+<meta name="twitter:title" content="Portainer auf der Synology DiskStation"/>
+<meta name="twitter:description" content="Einleitung Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst. Dabei werden wir sogar komplett auf die Kommandozeile verzichten. :) Zunächst aber wie üblich die&hellip;
+Voraussetzungen Natürlich benötigt ihr eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob ir noch auf DSM 6, doer bereits unter DSM 7 arbeitet."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/" /><link rel="prev" href="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" /><link rel="next" href="http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Portainer auf der Synology DiskStation",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.buanet.de\/posts\/2023\/02\/12_portainer_auf_der_synology_diskstation\/"
+        },"genre": "posts","keywords": "portainer, docker, container, synology, diskstation","wordcount":  768 ,
+        "url": "http:\/\/blog.buanet.de\/posts\/2023\/02\/12_portainer_auf_der_synology_diskstation\/","datePublished": "2023-02-12T21:12:44+01:00","dateModified": "2023-02-12T21:12:44+01:00","publisher": {
+            "@type": "Organization",
+            "name": "André (buanet)"},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><a class="menu-item" href="/tags/"> Schlagworte </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a class="menu-item" href="/tags/" title="">Schlagworte</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Portainer auf der Synology DiskStation</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">enthalten in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-12">2023-02-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;768 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-12/header.png"
+        data-srcset="/img/posts/2023-02-12/header.png, /img/posts/2023-02-12/header.png 1.5x, /img/posts/2023-02-12/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-12/header.png"
+        title="/img/posts/2023-02-12/header.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#portainer-container-starten">Portainer Container starten</a></li>
+    <li><a href="#bonus-portainer-aktualisieren">Bonus: Portainer Aktualisieren</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>Nachdem ich in meinem <a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes" rel="">letzten Beitrag</a> schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst. Dabei werden wir sogar komplett auf die Kommandozeile verzichten. :) Zunächst aber wie üblich die&hellip;</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Natürlich benötigt ihr eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob ir noch auf DSM 6, doer bereits unter DSM 7 arbeitet. Hauptsache ist, dass euer NAS das Docker Paket von Synology unterstützt (siehe <a href="https://www.synology.com/de-de/dsm/packages/Docker" target="_blank" rel="noopener noreffer ">Liste der Unterstützten Modelle</a>).</p>
+<p>Da die Installation des Docker Pakets in der Regel keine große Hürde darstellen sollte, gehe ich auch davon aus, dass dieses bereits Installiert und funktionstüchtig ist.</p>
+<p>Zu guter Letzt brauchen wir auch noch ein Verzeichnis, welches wir als Datenverzeichnis in den Portainer Container mounten. Hier können wir einfach über die Systemsteuerung und die FileStation einen Ordner anlegen. Ich habe mir dazu einen freigegebenen Ordner <code>docker</code> auf Volume1 erstellt und einen Unterordner <code>portainer-data</code> angelegt. Daraus ergibt sich in meinem Fall der folgende Pfad für die Einbindung im Portainer Contaier:</p>
+<p><code>/volume1/docker/portainer-data</code></p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology1.png" title="Portainer Datenverzeichnis" data-thumbnail="/img/posts/2023-02-12/portainer_synology1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology1.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology1.png, /img/posts/2023-02-12/portainer_synology1.png 1.5x, /img/posts/2023-02-12/portainer_synology1.png 2x"
+            data-sizes="auto"
+            alt="Portainer Datenverzeichnis" width="100%" />
+    </a>
+<p>Kurz zusammengefasst also nochmal die Voraussetzungen:</p>
+<ul>
+<li>Vorhanden sein einer DiskStation mit DSM 6 oder 7</li>
+<li>Installiertes Docker Paket aus dem Paket-Zentrum</li>
+<li>Verzeichnis für die Speicherung des Portainer-Konfigurationsdaten</li>
+</ul>
+<p>Und damit geht es dann auch schon los.</p>
+<h2 id="portainer-container-starten">Portainer Container starten</h2>
+<p>Im Prinzip ist es nun Zeit den Portainer Container mit dem <code>docker run</code>-Befehl zu starten. Den Befehl habe ich in meinem <a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes" rel="">letzten Beitrag</a> schon ausführlich erläutert. Er kann genau so auch auf der DiskStation verwendet werden. Einziger Unterschied ist, dass wir den Dateipfad für die Portainer Konfigurationsdaten anpassen müssen. Am Ende steht dieser Befehl:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d -p 9443:9443 --name portainer --restart<span class="o">=</span>always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-data:/data portainer/portainer-ce:latest
+</code></pre></div><p>Statt diesen Befehl jetzt über die Kommandozeile der DS einzutippen, nutzen wir zur Ausführung den Aufgabenplaner in der Systemsteuerung. Hier erstellen wir zunächst eine neue &ldquo;Geplante Aufgabe&rdquo; vom Typ &ldquo;Benutzerdefiniertes Skript&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology2.png" title="DSM Aufgabenplaner - Allgemein" data-thumbnail="/img/posts/2023-02-12/portainer_synology2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology2.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology2.png, /img/posts/2023-02-12/portainer_synology2.png 1.5x, /img/posts/2023-02-12/portainer_synology2.png 2x"
+            data-sizes="auto"
+            alt="DSM Aufgabenplaner - Allgemein" width="100%" />
+    </a>
+<p>Wir vergeben einen Namen und ändern den Benutzer auf <code>root</code>. Das ist notwendig, da zur Bedienung des Docker Dienstes erweiterte Berechtigungen erforderlich sind. Zuletzt können wir das Häkchen bei &ldquo;Aktiviert&rdquo; noch entfernen, da wir die Aufgabe nur manuell ausführen werden.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology3.png" title="DSM Aufgabenplaner - Zeitplan" data-thumbnail="/img/posts/2023-02-12/portainer_synology3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology3.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology3.png, /img/posts/2023-02-12/portainer_synology3.png 1.5x, /img/posts/2023-02-12/portainer_synology3.png 2x"
+            data-sizes="auto"
+            alt="DSM Aufgabenplaner - Zeitplan" width="100%" />
+    </a>
+<p>Im Prinzip können wir den Zeitplan konfigurieren wie wir wollen, da die Aufgabe ja nicht aktiviert ist. Ich mache es trotzdem wie im Screenshot dargestellt. So bin ich sicher, dass auch fall die Aufgabe mal aus Versehen aktiviert wurde keine Ausführung statt findet.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology4.png" title="DSM Aufgabenplaner - Aufgabeneinstellungen" data-thumbnail="/img/posts/2023-02-12/portainer_synology4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology4.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology4.png, /img/posts/2023-02-12/portainer_synology4.png 1.5x, /img/posts/2023-02-12/portainer_synology4.png 2x"
+            data-sizes="auto"
+            alt="DSM Aufgabenplaner - Aufgabeneinstellungen" width="100%" />
+    </a>
+<p>In der letzten Registerkarte &ldquo;Aufgabeneinstellungen&rdquo; konfigurieren wir dann letztendlich unter &ldquo;Benutzerdefiniertes Skript&rdquo; unseren <code>docker run</code>-Befehl.<!-- raw HTML omitted --><br>
+Damit ist die Konfiguration der Aufgabe abgeschlossen. Über die Schaltfläche &ldquo;Ausführen&rdquo; oder per Rechtsklick &gt; &ldquo;Ausführen&rdquo; auf die Aufgabe, können wir die Erstellung des Portainer Docker Containers anstoßen.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology5.png" title="DSM Aufgabenplaner - Aufgabe Starten" data-thumbnail="/img/posts/2023-02-12/portainer_synology5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology5.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology5.png, /img/posts/2023-02-12/portainer_synology5.png 1.5x, /img/posts/2023-02-12/portainer_synology5.png 2x"
+            data-sizes="auto"
+            alt="DSM Aufgabenplaner - Aufgabe Starten" width="100%" />
+    </a>
+<p>Die Abfrage bestätigen wir natürlich mit &ldquo;Ja&rdquo;.</p>
+<p>Die Erstellung kann nun einen kurzen Moment dauern. Den Erfolg können wir über die im DSM eingebaute Administrationsoberfläche für Docker überprüfen.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology6.png" title="DSM Docker - Container" data-thumbnail="/img/posts/2023-02-12/portainer_synology6.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology6.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology6.png, /img/posts/2023-02-12/portainer_synology6.png 1.5x, /img/posts/2023-02-12/portainer_synology6.png 2x"
+            data-sizes="auto"
+            alt="DSM Docker - Container" width="100%" />
+    </a>
+<p>Wenn es so ausschaut, dann läuft unser Portainer. :) Wir können nun auf die Weboberfläche des Portainer zugreifen, indem wir die URL nach folgendem Schema aufrufen:</p>
+<p><code>https://[IP oder Hostname]:9443</code></p>
+<p>Die folgende Seite sollte erscheinen:</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology7.png" title="Portainer - Start" data-thumbnail="/img/posts/2023-02-12/portainer_synology7.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology7.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology7.png, /img/posts/2023-02-12/portainer_synology7.png 1.5x, /img/posts/2023-02-12/portainer_synology7.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Start" width="100%" />
+    </a>
+<p>Hier können wir Portainer aus einem Backup wiederherstellen oder einfach mit einer frischen Portainer Installation starten, indem wir einen neuen Benutzer für die Administration anlegen.<br>
+Nach einem Klick auf &ldquo;Create user&rdquo; landen wir im &ldquo;Quick Setup&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology8.png" title="Portainer - Quick Setup" data-thumbnail="/img/posts/2023-02-12/portainer_synology8.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology8.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology8.png, /img/posts/2023-02-12/portainer_synology8.png 1.5x, /img/posts/2023-02-12/portainer_synology8.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Quick Setup" width="100%" />
+    </a>
+<p>Mit einem Klick auf &ldquo;Get Started&rdquo; ist das &ldquo;Quick Setup&rdquo; auch schon erledigt, und wir landen in der Übersicht unseres Portainers.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology9.png" title="Portainer - Home" data-thumbnail="/img/posts/2023-02-12/portainer_synology9.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology9.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology9.png, /img/posts/2023-02-12/portainer_synology9.png 1.5x, /img/posts/2023-02-12/portainer_synology9.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Home" width="100%" />
+    </a>
+<p>Unser Portainer ist nun startklar.</p>
+<h2 id="bonus-portainer-aktualisieren">Bonus: Portainer Aktualisieren</h2>
+<p>Von Zeit zu Zeit bekommt natürlich auch Portainer Updates. Wenn ein neues Update zur Verfügung steht, informiert euch Portainer über die Weboberfläche. Da Portainer ein Docker Container ist, lässt sich das Update aber nicht über die Weboberfläche einspielen. Stattdessen müssen wir den Portainer Container und das Portainer Docker Image löschen und den Container neu erstellen. Und das geht so:</p>
+<p>Zunächst rufen wir die Docker Web UI im Synology DSM auf und stoppen den Portainer Container.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology10.png" title="DSM Docker - Container entfernen" data-thumbnail="/img/posts/2023-02-12/portainer_synology10.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology10.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology10.png, /img/posts/2023-02-12/portainer_synology10.png 1.5x, /img/posts/2023-02-12/portainer_synology10.png 2x"
+            data-sizes="auto"
+            alt="DSM Docker - Container entfernen" width="100%" />
+    </a>
+<p>Über das Menü &ldquo;Aktion&rdquo; &gt; &ldquo;Löschen&rdquo; oder &ldquo;Rechtsklick&rdquo; &gt; &ldquo;Löschen&rdquo; entfernen wir den Portainer Container.<!-- raw HTML omitted --><br>
+Anschließend wechseln wir auf der linken Seite in den Bereich &ldquo;Image&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-12/portainer_synology11.png" title="DSM Docker - Image entfernen" data-thumbnail="/img/posts/2023-02-12/portainer_synology11.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-12/portainer_synology11.png"
+            data-srcset="/img/posts/2023-02-12/portainer_synology11.png, /img/posts/2023-02-12/portainer_synology11.png 1.5x, /img/posts/2023-02-12/portainer_synology11.png 2x"
+            data-sizes="auto"
+            alt="DSM Docker - Image entfernen" width="100%" />
+    </a>
+<p>Dort entfernen wir auch das Portainer Docker Image. Anschließend können wie über den Aufgabenplaner, wie oben beschrieben, den Portainer Container neu erstellen. Dabei wird automatisch das neuste Docker Image geladen und verwendet. Sobald der Container erstellt ist, sollte auch der Zugriff auf die Weboberfläche wieder funktionieren.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Für den Fall, dass beim Update etwas schief geht, bietet es sich an vor dem Update eure Portainer Konfigurationsdaten zu sichern. Das können wir entweder über das weg Kopieren des <code>portainer-data</code>-Ordner machen oder über den Export der Konfiguration im Portainer unter &ldquo;Settings&rdquo; &gt; &ldquo;Backup Portainer&rdquo;.</div>
+        </div>
+    </div>
+<hr>
+<p>MfG,<br>
+André</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 2023-02-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/" data-title="Portainer auf der Synology DiskStation" data-via="buanetde" data-hashtags="portainer,docker,container,synology,diskstation"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/" data-hashtag="portainer"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/portainer/">portainer</a>,&nbsp;<a href="/tags/docker/">docker</a>,&nbsp;<a href="/tags/container/">container</a>,&nbsp;<a href="/tags/synology/">synology</a>,&nbsp;<a href="/tags/diskstation/">diskstation</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" class="prev" rel="prev" title="Portainer zur Verwaltung des Docker Dienstes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Portainer zur Verwaltung des Docker Dienstes</a>
+            <a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/" class="next" rel="next" title="Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer">Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Lecker!","link":"Erfahren Sie mehr","message":"Diese Website verwendet Cookies."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Portainer zur Verwaltung des Docker Dienstes - blog.buanet.de</title><meta name="Description" content="Ein Blog über Docker im Smarthome."><meta property="og:title" content="Portainer zur Verwaltung des Docker Dienstes" />
+<meta property="og:description" content="Einleitung Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Über verschiedene Kommandos lassen sich Images herunterladen, Container erstellen und noch vieles mehr. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück. Bei vielen Systemen, die heutzutage Docker von Haus aus unterstützen sind diese grafischen Benutzeroberflächen bereits integriert." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" />
+<meta property="og:image" content="http://blog.buanet.de/img/og/default.png"/>
+<meta property="article:published_time" content="2023-02-10T20:23:42+01:00" />
+<meta property="article:modified_time" content="2023-02-10T20:23:42+01:00" /><meta property="og:site_name" content="blog.buanet.de" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.buanet.de/img/og/default.png"/>
+
+<meta name="twitter:title" content="Portainer zur Verwaltung des Docker Dienstes"/>
+<meta name="twitter:description" content="Einleitung Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Über verschiedene Kommandos lassen sich Images herunterladen, Container erstellen und noch vieles mehr. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück. Bei vielen Systemen, die heutzutage Docker von Haus aus unterstützen sind diese grafischen Benutzeroberflächen bereits integriert."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" /><link rel="prev" href="http://blog.buanet.de/posts/2023/02/01_grundlagen/" /><link rel="next" href="http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Portainer zur Verwaltung des Docker Dienstes",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.buanet.de\/posts\/2023\/02\/10_portainer_zur_verwaltung_des_docker_dienstes\/"
+        },"genre": "posts","keywords": "portainer, docker, container","wordcount":  814 ,
+        "url": "http:\/\/blog.buanet.de\/posts\/2023\/02\/10_portainer_zur_verwaltung_des_docker_dienstes\/","datePublished": "2023-02-10T20:23:42+01:00","dateModified": "2023-02-10T20:23:42+01:00","publisher": {
+            "@type": "Organization",
+            "name": "André (buanet)"},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><a class="menu-item" href="/tags/"> Schlagworte </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a class="menu-item" href="/tags/" title="">Schlagworte</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Portainer zur Verwaltung des Docker Dienstes</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">enthalten in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-10">2023-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;814 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-10/header.png"
+        data-srcset="/img/posts/2023-02-10/header.png, /img/posts/2023-02-10/header.png 1.5x, /img/posts/2023-02-10/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-10/header.png"
+        title="/img/posts/2023-02-10/header.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#was-ist-portainer">Was ist Portainer?</a></li>
+    <li><a href="#wo-finde-ich-was">Wo finde ich was?</a></li>
+    <li><a href="#portainer-container-aufsetzen">Portainer Container aufsetzen</a>
+      <ul>
+        <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+        <li><a href="#persistente-datenspeicherung">Persistente Datenspeicherung</a></li>
+        <li><a href="#portainer-container-starten">Portainer Container starten</a></li>
+        <li><a href="#zugriff-auf-die-portainer-web-ui">Zugriff auf die Portainer Web UI</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Über verschiedene Kommandos lassen sich Images herunterladen, Container erstellen und noch vieles mehr. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück. Bei vielen Systemen, die heutzutage Docker von Haus aus unterstützen sind diese grafischen Benutzeroberflächen bereits integriert. Bei den gängigen NAS-Systemen wie Synology DSM, TrueNAS oder Unraid zum Beispiel, ist die Bedienung des Docker Dienstes direkt über die eigenen, webbasierten Administrationsoberflächen möglich. Doch nicht immer schöpfen diese Oberflächen die vollen Möglichkeiten, die Docker eigentlich bietet, auch aus. So ist es zum Beispiel im DSM bis heute nicht möglich Docker Containern Systemressourcen oder Devices zuzuteilen.</p>
+<h2 id="was-ist-portainer">Was ist Portainer?</h2>
+<p>An dieser Stelle kommt Portainer ins Spiel. Portainer ist eine eigens für die Verwaltung von Docker konzipierte, webbasierte Benutzeroberfläche und wird einfach als eigener Docker Container aufgesetzt. Indem der Container Zugriff auf den Docker Socket erhält, ist es dem darin laufenden Portainer möglich andere Container zu erstellen und zu verwalten (und noch vieles mehr).<br>
+Die Community Edition (CE) von Portainer ist ein Open-Source-Projekt und steht allen Usern kostenlos zur Verfügung. Zusätzlich existiert auch eine kostenpflichtige Business Edition mit einigen interessanten Zusatzfeatures. In meinen Tutorials beziehe ich mich aber ausschließlich auf die Community Edition.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Die Portainer Business Edition lässt sich für <a href="https://www.portainer.io/take-5" target="_blank" rel="noopener noreffer ">bis zu 5 Nodes ebenfalls kostenlos</a> nutzen. Erforderlich ist lediglich eine Registrierung. Die entsprechende Lizenz wird per E-Mail zugeschickt. Mit der Lizenz kann dann das <code>portainer-ee</code> Docker Image verwendet werden. Ein <a href="https://docs.portainer.io/start/upgrade" target="_blank" rel="noopener noreffer ">Upgrade von der Community Edition</a> ist dabei problemlos möglich.</div>
+        </div>
+    </div>
+<h2 id="wo-finde-ich-was">Wo finde ich was?</h2>
+<p>Bevor ich dir an einem kurzen Beispiel zeige, wie du einen Portainer Docker Container auf setzt und die Ersteinrichtung erledigst, hier noch eine kleine Linkliste zu den wichtigsten Informationen rund um Portainer:</p>
+<ul>
+<li><a href="https://www.portainer.io/" target="_blank" rel="noopener noreffer ">Portainer Website &raquo; portainer.io</a></li>
+<li><a href="https://docs.portainer.io/" target="_blank" rel="noopener noreffer ">Portainer Documentation &raquo; docs.portainer.io</a></li>
+<li><a href="https://github.com/portainer/portainer" target="_blank" rel="noopener noreffer ">Portainer Source Code &amp; Issues &raquo; github.com/portainer/portainer</a></li>
+<li><a href="https://www.portainer.io/take-5" target="_blank" rel="noopener noreffer ">Portainer Business Edition - Take 5 for free &raquo; portainer.io/take-5</a></li>
+<li><a href="https://hub.docker.com/r/portainer/portainer-ce" target="_blank" rel="noopener noreffer ">Portainer Comunity Edition im Docker Hub &raquo; hub.docker.com/r/portainer/portainer-ce</a></li>
+<li><a href="https://hub.docker.com/r/portainer/portainer-ce" target="_blank" rel="noopener noreffer ">Portainer Business Edition im Docker Hub &raquo; hub.docker.com/r/portainer/portainer-ee</a></li>
+</ul>
+<h2 id="portainer-container-aufsetzen">Portainer Container aufsetzen</h2>
+<p>Im Folgenden werden wir einen frischen Portainer Docker Container der Community Edition aufsetzen und dafür sorgen, dass unsere Konfiguration in einem lokalen Verzeichnis bzw. Docker Volume gespeichert wird.</p>
+<h3 id="voraussetzungen">Voraussetzungen</h3>
+<p>ich gehen davon aus, dass folgende Voraussetzungen bereits erfüllt sind:</p>
+<ul>
+<li>Linux basierter Docker Host (NAS Systeme basieren in der Regel auf Linux)</li>
+<li>Zugriff auf die Kommandozeile des Docker Hosts</li>
+<li>Installierter und gestarteter Docker Dienst</li>
+<li>Internetzugang für den Docker Host</li>
+</ul>
+<h3 id="persistente-datenspeicherung">Persistente Datenspeicherung</h3>
+<p>Damit unsere Konfigurationsdaten dauerhaft gespeichert werden, benötigen wir entweder ein lokales Verzeichnis oder ein Docker-Volume auf dem Docker Host. Dieses Verzeichnis bzw. Volume mounten wir dann beim Erstellen des Docker Containers in den Pfad <code>/data</code>, in dem Portainer alle Konfigurationsdaten speichert. So stellen wir sicher, dass unsere Konfigurationsdaten erhalten bleiben, auch wenn der Portainer Container gelöscht wird.</p>
+<p>Ich persönlich bevorzuge die Speicherung der Daten meiner Container in einem Verzeichnis, statt in einem Docker Volume. Dazu lege ich mir zunächst im Verzeichnis <code>/mnt</code> meines Docker Hosts ein Verzeichnis <code>docker</code> an. Es tut natürlich auch jeder andere lokale Pfad, wie zum Beispiel das Home Verzeichnis deines Benutzers.<br>
+Innerhalb des <code>docker</code>-Verzeichnisses erstelle ich mir dann ein Unterverzeichnis <code>portainer_data</code>. Der vollständig Pfad für meine Portainer Daten lautet nun also: <code>/mnt/docker/portainer_data</code>.</p>
+<h3 id="portainer-container-starten">Portainer Container starten</h3>
+<h5 id="mit-lokalem-verzeichnispfad">Mit lokalem Verzeichnispfad</h5>
+<p>Da nun alles vorbereitet ist, erstellen wir den Container mit folgendem Befehl:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d -p 9443:9443 --name portainer --restart<span class="o">=</span>always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/docker/portainer_data:/data portainer/portainer-ce:latest
+</code></pre></div><p>Der Befehl setzt sich dabei aus folgenden Parametern zusammen:</p>
+<ul>
+<li><code>docker run</code>zum Erstellen eines neuen Containers</li>
+<li><code>-d</code> für &ldquo;detached&rdquo;</li>
+<li><code>-p 9443:9443</code> &laquo; Port für den Zugriff auf die Web UI</li>
+<li><code>--name portainer</code> &laquo; Container Name</li>
+<li><code>--restart=always</code> &laquo; Restart Policy = always</li>
+<li><code>-v /var/run/docker.sock:/var/run/docker.sock</code> &laquo; Mount des Docker Sockets</li>
+<li><code>-v /mnt/docker/portainer_data:/data</code> &laquo; Mount des Datenverzeichnisses</li>
+<li><code>portainer/portainer-ce:latest</code> &laquo; Verwendetes Image und Tag</li>
+</ul>
+<h5 id="mit-docker-volume">Mit Docker Volume</h5>
+<p>Falls du statt eines lokalen Verzeichnisses ein Docker Volume verwenden willst, kannst du mit dem folgenden Befehl ein Volume mit dem Namen <code>portainer-data</code> erstellen:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker volume create portainer-data
+</code></pre></div><p>Den Portainer Container startest du in diesem Fall dann mit:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d -p 9443:9443 --name portainer --restart<span class="o">=</span>always -v /var/run/docker.sock:/var/run/docker.sock -v portainer-data:/data portainer/portainer-ce:latest
+</code></pre></div><h3 id="zugriff-auf-die-portainer-web-ui">Zugriff auf die Portainer Web UI</h3>
+<p>Nachdem der Container gestartet ist, können wir auf die Weboberfläche des Portainer zugreifen, indem wir die URL nach folgendem Schema aufrufen:</p>
+<p><code>https://[IP oder Hostname]:9443</code></p>
+<p>Wenn alles korrekt ausgeführt wurde, erscheint die folgende Seite:</p>
+<a class="lightgallery" href="/img/posts/2023-02-10/portainer1.png" title="Portainer Startseite" data-thumbnail="/img/posts/2023-02-10/portainer1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-10/portainer1.png"
+            data-srcset="/img/posts/2023-02-10/portainer1.png, /img/posts/2023-02-10/portainer1.png 1.5x, /img/posts/2023-02-10/portainer1.png 2x"
+            data-sizes="auto"
+            alt="Portainer Startseite" width="100%" />
+    </a>
+<p>Hier können wir Portainer aus einem Backup wiederherstellen oder einfach mit einer frischen Portainer Installation starten, indem wir einen neuen Benutzer für die Administration anlegen.<br>
+Nach einem Klick auf &ldquo;Create user&rdquo; landen wir im &ldquo;Quick Setup&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-10/portainer2.png" title="Portainer Quick Setup" data-thumbnail="/img/posts/2023-02-10/portainer2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-10/portainer2.png"
+            data-srcset="/img/posts/2023-02-10/portainer2.png, /img/posts/2023-02-10/portainer2.png 1.5x, /img/posts/2023-02-10/portainer2.png 2x"
+            data-sizes="auto"
+            alt="Portainer Quick Setup" width="100%" />
+    </a>
+<p>Mit einem Klick auf &ldquo;Get Started&rdquo; ist das &ldquo;Quick Setup&rdquo; auch schon erledigt, und wir landen in der Übersicht unseres Portainers.</p>
+<a class="lightgallery" href="/img/posts/2023-02-10/portainer3.png" title="Portainer Home" data-thumbnail="/img/posts/2023-02-10/portainer3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-10/portainer3.png"
+            data-srcset="/img/posts/2023-02-10/portainer3.png, /img/posts/2023-02-10/portainer3.png 1.5x, /img/posts/2023-02-10/portainer3.png 2x"
+            data-sizes="auto"
+            alt="Portainer Home" width="100%" />
+    </a>
+<p>Unser Portainer ist nun startklar.</p>
+<hr>
+<p>Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über Portainer und dessen Inbetriebnahme geben.</p>
+<p>MfG,<br>
+André</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 2023-02-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" data-title="Portainer zur Verwaltung des Docker Dienstes" data-via="buanetde" data-hashtags="portainer,docker,container"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" data-hashtag="portainer"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/portainer/">portainer</a>,&nbsp;<a href="/tags/docker/">docker</a>,&nbsp;<a href="/tags/container/">container</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/01_grundlagen/" class="prev" rel="prev" title="Grundlagen und Voraussetzungen"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Grundlagen und Voraussetzungen</a>
+            <a href="/posts/2023/02/12_portainer_auf_der_synology_diskstation/" class="next" rel="next" title="Portainer auf der Synology DiskStation">Portainer auf der Synology DiskStation<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Lecker!","link":"Erfahren Sie mehr","message":"Diese Website verwendet Cookies."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

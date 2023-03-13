@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Portainer - Kategorie - blog.buanet.de</title>
+        <link>http://blog.buanet.de/categories/portainer/</link>
+        <description>Portainer - Kategorie - blog.buanet.de</description>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/categories/portainer/" rel="self" type="application/rss+xml" /><item>
+    <title>Einrichtung eines MACVLAN Netzwerks über Portainer</title>
+    <link>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_%C3%BCber_portainer/</link>
+    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_%C3%BCber_portainer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-23/header.png" referrerpolicy="no-referrer">
+            </div>Einleitung In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. Hier geht es zum Beispiel um Broadcast oder Multicast Traffic, der den Container über das Bridge Netzwerk schlicht nicht erreichen kann, aber von vielen Tools und Protokollen benötigt wird. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an.
+Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse im Netzwerk und ist damit von anderen Geräten vollständig erreichbar.]]></description>
+</item>
+<item>
+    <title>Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer</title>
+    <link>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/</link>
+    <pubDate>Thu, 23 Feb 2023 20:49:17 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-23/header.png" referrerpolicy="no-referrer">
+            </div>Einleitung Wer mehrere Container über das Standard-Netzwerk „bridge“ verbindet, wird wohl früher oder später darüber stolpern: Im Standard-Bridge-Netzwerk von Docker gibt es unter anderem nicht nur keine Namensauflösung (DNS) sondern auch keine Möglichkeit den Containern feste IP-Adressen im virtuellen Netz zu vergeben (alle Einschränkungen zum Nachlesen in den Docker Docs). Doch es gibt eine Lösung. Legt man sich nämlich sein eigenes Bridge-Netzwerk an umgeht man die Beschränkungen.
+Wie man ein benutzerdefiniertes Bridge Netzwerk über Portainer anlegt, das zeige ich dir in diesem Tutorial.]]></description>
+</item>
+</channel>
+</rss>

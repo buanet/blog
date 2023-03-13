@@ -1,0 +1,26 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>http://blog.buanet.de/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/categories/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/container/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/docker/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_%C3%BCber_portainer/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/macvlan/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/netzwerk/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/categories/portainer/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/portainer/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/categories/tutorials/</loc><lastmod>2023-02-23T22:31:15&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/bridge/</loc><lastmod>2023-02-23T20:49:17&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/</loc><lastmod>2023-02-23T20:49:17&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/diskstation/</loc><lastmod>2023-02-12T21:12:44&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/</loc><lastmod>2023-02-12T21:12:44&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/tags/synology/</loc><lastmod>2023-02-12T21:12:44&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/</loc><lastmod>2023-02-10T20:23:42&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/01_grundlagen/</loc><lastmod>2023-02-01T00:00:01&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/categories/sonstiges/</loc><lastmod>2023-02-01T00:00:01&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/posts/2023/02/01_erster_beitrag/</loc><lastmod>2023-02-01T00:00:00&#43;01:00</lastmod></url><url>
+            <loc>http://blog.buanet.de/license/</loc></url></urlset>

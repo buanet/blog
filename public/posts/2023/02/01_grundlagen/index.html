@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Grundlagen und Voraussetzungen - blog.buanet.de</title><meta name="Description" content="Ein Blog über Docker im Smarthome."><meta property="og:title" content="Grundlagen und Voraussetzungen" />
+<meta property="og:description" content="Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind. Dazu habe ich ein paar Fragen zusammen gestellt über die ihr euch vorab einmal Gedanken gemacht haben solltet.
+Was ist Docker? Wer in seinem Smarthome die Vorzüge von Docker nutzen möchte, der wird nicht umhin kommen sich tiefer mit diesem Thema zu beschäftigen und sich ggf." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.buanet.de/posts/2023/02/01_grundlagen/" />
+<meta property="og:image" content="http://blog.buanet.de/img/og/default.png"/>
+<meta property="article:published_time" content="2023-02-01T00:00:01+01:00" />
+<meta property="article:modified_time" content="2023-02-01T00:00:01+01:00" /><meta property="og:site_name" content="blog.buanet.de" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.buanet.de/img/og/default.png"/>
+
+<meta name="twitter:title" content="Grundlagen und Voraussetzungen"/>
+<meta name="twitter:description" content="Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind. Dazu habe ich ein paar Fragen zusammen gestellt über die ihr euch vorab einmal Gedanken gemacht haben solltet.
+Was ist Docker? Wer in seinem Smarthome die Vorzüge von Docker nutzen möchte, der wird nicht umhin kommen sich tiefer mit diesem Thema zu beschäftigen und sich ggf."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://blog.buanet.de/posts/2023/02/01_grundlagen/" /><link rel="prev" href="http://blog.buanet.de/posts/2023/02/01_erster_beitrag/" /><link rel="next" href="http://blog.buanet.de/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Grundlagen und Voraussetzungen",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/blog.buanet.de\/posts\/2023\/02\/01_grundlagen\/"
+        },"genre": "posts","wordcount":  1457 ,
+        "url": "http:\/\/blog.buanet.de\/posts\/2023\/02\/01_grundlagen\/","datePublished": "2023-02-01T00:00:01+01:00","dateModified": "2023-02-01T00:00:01+01:00","publisher": {
+            "@type": "Organization",
+            "name": "André (buanet)"},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><a class="menu-item" href="/tags/"> Schlagworte </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a class="menu-item" href="/tags/" title="">Schlagworte</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Grundlagen und Voraussetzungen</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">enthalten in <a href="/categories/sonstiges/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Sonstiges</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-01">2023-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1457 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-01_header1.png"
+        data-srcset="/img/posts/2023-02-01_header1.png, /img/posts/2023-02-01_header1.png 1.5x, /img/posts/2023-02-01_header1.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-01_header1.png"
+        title="/img/posts/2023-02-01_header1.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#was-ist-docker">Was ist Docker?</a></li>
+    <li><a href="#welche-hardware-benötige-ich">Welche Hardware benötige ich?</a>
+      <ul>
+        <li><a href="#nas-systeme">NAS Systeme</a></li>
+        <li><a href="#einplatinencomputer-raspberrypi--co">Einplatinencomputer (RaspberryPi &amp; Co)</a></li>
+        <li><a href="#mini-pcs">Mini PCs</a></li>
+        <li><a href="#proxmox-vmware-hyper-v-oder-virtual-box">Proxmox, VMware, Hyper-V oder Virtual Box</a></li>
+      </ul>
+    </li>
+    <li><a href="#habe-ich-mein-netzwerk-im-griff">Habe ich mein Netzwerk im Griff?</a></li>
+    <li><a href="#habe-ich-angst-vor-der-kommandozeile">Habe ich Angst vor der Kommandozeile?</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind. Dazu habe ich ein paar Fragen zusammen gestellt über die ihr euch vorab einmal Gedanken gemacht haben solltet.</p>
+<h2 id="was-ist-docker">Was ist Docker?</h2>
+<p>Wer in seinem Smarthome die Vorzüge von Docker nutzen möchte, der wird nicht umhin kommen sich tiefer mit diesem Thema zu beschäftigen und sich ggf. selbst Wissen dazu anzueignen.</p>
+<p>Wenn es um die Definition von Docker geht, sagt Wikipedia dazu: <a href="https://de.wikipedia.org/wiki/Docker_%28Software%29" target="_blank" rel="noopener noreffer ">„Docker ist eine Freie Software zur Isolierung von Anwendungen mit Containervirtualisierung.“</a>.</p>
+<p>Zugegeben, so richtig schlau gemacht (in praktischer Hinsicht) hat mich der Artikel nicht. Daher hier ein kleiner Tipp: Schaut mal bei <a href="https://www.youtube.com/results?search_query=docker" target="_blank" rel="noopener noreffer ">Youtube</a> vorbei. Dort gibt es eine Menge Informationen zu Docker. Das geht los bei &ldquo;Docker in 5 Minuten&rdquo; und endet bei mehrteiligen Video-Tutorials oder zweistündigen Online-Video-Kursen. Da ist wirklich für jeden was dabei.</p>
+<p>Für alle weiteren Infos zu Docker würde ich dann unbedingt auf die offiziellen <a href="https://docs.docker.com/" target="_blank" rel="noopener noreffer ">Docker Docs</a> verweisen. Hier findet ihr wirklich alles was es zum Thema zu wissen gibt.</p>
+<h2 id="welche-hardware-benötige-ich">Welche Hardware benötige ich?</h2>
+<p>Ein weiteres Thema ist die Frage nach der verwendeten Hardwareplattform für den Docker Dienst. Mittlerweile ist Docker weit verbreitet, sodass man den Dienst eigentlich in allen gängigen NAS Systemen finden kann. Unter Linux gibt es Distributionen die entweder bereits Docker enthalten oder die Möglichkeit bieten den Dienst bei der Einrichtung automatisch installieren zu lassen. Und auch unter Windows hält der Dienst dank WSL Einzug.</p>
+<p>Im folgenden habe ich einmal die gängigsten Plattformen aufgelistet und eine kurze Einschätzung, basierend auf meinen eigenen Erfahrungen, formuliert. Vielleicht hilft euch dies bei der Entscheidung wie ihr Docker in eurer Smarthomeumgebung integrienen könnt.</p>
+<h3 id="nas-systeme">NAS Systeme</h3>
+<p>Der einfachste Weg Docker zu nutzen führt wahrscheinlich über die fertigen NAS Lösungen der gängigen Anbieter wie Synology und QNAP oder NAS-Betriebssysteme wie Unraid, OpenMediaVault oder TreuNAS. Der Vorteil liegt auf der Hand. Docker ist auf den meisten Systemen über Zusatzpakete oder Apps aus der Weboberfläche heraus installierbar. Das Erstellen und Verwalten von Containern erfolgt dann ebenfalls über eigens entwickelte Weboberflächen. Leider können diese herstellerspezifischen Oberflächen meist nicht den kompletten Funktionsumfang von Docker bereitstellen. Abhilfe schaffen hier aber herstellerunabhängige Oberflächen wie z.B. Portainer. Ein Tool auf das ich hier im Blog demnächst noch genauer eingehen werde.</p>
+<p>Ein weiterer Aspekt den es bei NAS Systemen zu berücksichtigen gilt sind die Systemressourcen. Gerade die kleineren, günstigen Geräte kommen oftmals mit wenig Rechenleistung und Arbeitsspeicher. Das reicht zwar für die Verwaltung von Netzwerkspeicher, bei größeren Aufgaben wie z.B. der Steuerung eines Smarthomes oder einer Videoaufzeichnung stoßen die Geräte schnell an ihre Grenzen. Man sollte also stets die Auslastung der Ressourcen im Blick behalten und, sofern möglich, z.B. den Arbeitsspeicher entsprechend aufrüsten.</p>
+<p>Für jeden der bereits ein NAS sein Eigen nennt ist dies eine gute Option um in das Thema Smarthome mit Docker einzutauchen. Wer kein NAS besitzt, der sollte in Anbetracht des in der Regel relativ hohen Anschaffungspreises abwägen ob ein NAS die richtige Entscheidung ist. Andere Lösungen wie SBCs oder Mini PCs bieten oftmals mehr Leistung bei weniger Investition.</p>
+<p>Meine Erfahrung: Ich habe mit einer Synology DiskStation 1515+ (Prozessor: Intel Atom C2538 Quad Core 2,4 GHz) und 6GB Arbeitsspeicher begonnen. Nachdem ich aber einen Plex Mediaserver und die Survelliance Station (Videoüberwachung) mit 6 Kameras aktiviert hatte, war das dann doch ein bisschen zu wenig Leistung und ich musste mit meinem Smarthome auf einen anderen Docker Host umziehen.</p>
+<h3 id="einplatinencomputer-raspberrypi--co">Einplatinencomputer (RaspberryPi &amp; Co)</h3>
+<p>Gerade auch wegen ihres geringen Stromverbrauchs sind Einplatinen Computer, kurz SBCs, wie der Raspberry Pi sehr beliebt wenn es um die Übernahme von Aufgaben im Smarthome geht. Allerdings gilt auch hier, dass die Ressourcen schnell erschöpft sein können. Ich persönlich bin ein Fan vom Raspberry Pi 4 mit 4 oder 8 GB RAM. Hier bekommt man schon eine Menge geboten. Zudem ist der Raspberry wegen seiner Verbreitung gut dokumentiert und es finden sich zahllose Anleitungen und Tutorials im Netz.</p>
+<p>Ich persönlich halte den Raspberry Pi und seine SBC-Kollegen für die beste Möglichkeit mit relativ wenig Investition den Einstieg in Smarthome mit Docker zu wagen. Zumindest wenn man nicht schon ein Docker taugliches NAS Zuhause hat.</p>
+<p>Trotzdem birgt der Raspberry Pi natürlich seine Tücken. So hört man immer wieder von SD Karten die durch zu viele Lese- und Schreibzyklen das Zeitliche segnen. Aber auch hierfür gibt es Lösungen. Diese reichen von Konfigurationsänderungen zur Minimierung der Last, über die Verwendung externer Speichermedien, bis hin zum Umstieg auf eine Raspberry Pi Alternative mit z.B. einer SATA-Schnittstelle für Festplatten.</p>
+<p>Meine Empfehlung: Schmeißt die Stichworte dazu einfach mal in eine Suchmaschine. Ihr werdet reichlich Erfahrungsberichte und Lösungen finden. Versprochen.</p>
+<h3 id="mini-pcs">Mini PCs</h3>
+<p>Mini PCs, wie z.B. der Intel NUC, sind wohl sowas wie die nächste Evolutionsstufe der SBCs. Geringer Stromverbrauch, genügend Leistung und manchmal sogar die Möglichkeit zwei SSDs zu verbauen erfüllen in der Regel alle Wünsche wenn es um den eigenen Homeserver für Docker geht. Egal ob als Docker Host mit Ubuntu Betriebssystem oder gar als komplette Virtualisierungsplattform mit Proxmox oder Vmware. Viele User (mich eingeschlossen) setzen auf die kleinen PCs. Allerdings sind hier die technischen Hürden zum Aufsetzen eines solchen Systems auch geringfügig höher als das flashen einer SD Karte für einen Einplatinen Computer. Dank ausführlicher Anleitungen im Internet für fortgeschrittene Benutzer aber kein Problem.</p>
+<p>Meine Erfahrung: Für mein Smarthome habe ich eine Zeit lang auf einen Intel NUC (Intel Quad-Core J3455 Prozessor 4x 1,50 GHz mit Turbo-Boost bis zu 4x 2,30 GHz) mit 16 GB RAM gesetzt. Meines Erachtens für ein mittelgroßes Smarthome völlig ausreichend. Umgestiegen bin ich letztendlich nur, weil ich mir für die Softwareentwicklung, Desktop Virtualisierung und meine Testumgebung einen eigenen Proxmox Server aufgesetzt habe. Da dieser genügend Ressourcen hat, habe ich schlicht den NUC eingespart und das komplette Smarthome Setup auf den Server umgezogen.</p>
+<h3 id="proxmox-vmware-hyper-v-oder-virtual-box">Proxmox, VMware, Hyper-V oder Virtual Box</h3>
+<p>Die letzte Evolutionsstufe für das Smarthome ist dann wohl die Verwendung eines Hypervisors (Virtualisierungshost). Letztendlich handelt es sich dabei um ein Server Betriebssystem (läuft aber in der Regel auch auf einem Mini PC) über welches man virtuelle Maschinen erstellen kann, in denen dann z.B. ein Docker Dienst seine Arbeit verrichtet. Zum Aufsetzen einer solchen Lösung ist dann allerdings schon etwas mehr technisches Verständnis und Wissen erforderlich. Zudem sind entsprechende Server und Lösungen meist für das eigene Smarthome recht überdimensioniert.</p>
+<p>Eine solche virtuelle Infrastruktur hat natürlich aber auch Vorteile. So ist es in der Regel dank Snapshot Funktionalitäten und eingebauten Backup Tools recht einfach möglich Sicherungen der virtuellen Maschinen anzulegen und bei Bedarf auf Knopfdruck wiederherzustellen.</p>
+<p>Meine Erfahrung: Ich setze seit einiger Zeit auf einen Proxmox Virtualisierungshost. Darüber laufen verschiedene virtuelle Maschinen und LXC Container. Darin dann wiederum mein Docker Dienst und die verschiedenen Container für meine Smarthome-Dienste. Ich nutze den Server allerdings nicht nur als Zuhause für mein Smarthome, sondern auch für meine Test- und Spielumgebung sowie zur Softwareentwicklung und Desktop-Virtualisierung.</p>
+<h2 id="habe-ich-mein-netzwerk-im-griff">Habe ich mein Netzwerk im Griff?</h2>
+<p>Nach dem kleinen Ausflug bezüglich der Hardwareplattformen auf denen wir Docker einsetzen können, nun zurück zu einem nicht zwingend entscheidendem, aber sehr wohl wichtigem Thema: Eurem Heimnetzwerk. Je größer euer Smarthome wird, um so wichtiger ist meines Erachtens, dass ihr etwas mit Begriffen wie DHCP, DNS oder Gateway anfangen könnt und wisst was z.B. IP-Adressen sind. Bei größeren Smarthomes oder wenn euch bestimmte Sicherheitsthemen wichtig sind wird dann vermutlich irgendwann auch so etwas wie VLANs interessant. Also genau die richtige Zeit euch hier etwas weiter zu bilden, wenn es hier noch Wissenslücken gibt.</p>
+<p>Denn, genauso wie das Heimnetzwerk eurer Fritzbox die physischen Netzwerkgeräte verbindet, so verbindet der Docker Dienst mit seiner eigenen Netzwerkkonfiguration später auch die Docker Container untereinander oder macht sie aus dem Heimnetzwerk erreichbar. Wenn ihr euch also in eurem Heimnetzwerk auskennt, wird es euch leichter fallen die virtuelle Netzwerkstruktur von Docker zu verstehen und für eure Zwecke einzusetzen. Dazu aber zu gegebener Zeit mehr.</p>
+<h2 id="habe-ich-angst-vor-der-kommandozeile">Habe ich Angst vor der Kommandozeile?</h2>
+<p>Zugegeben, diese Frage ist nicht so richtig ernst gemeint. Obwohl ich mir nicht sicher bin ob es das vielleicht nicht doch als Krankheitsbild gibt&hellip;</p>
+<p>Wie dem auch sei, ein Docker-Dienst fühlt sich am wohlsten in einer Linux Umgebung. Wer bereits erste Erfahrungen im Umgang mit Linux sammeln durfte weiß wie schnell man dort den Weg auf die Kommandozeile findet. Und auch in einem Smarthome mit Docker wird man hin und wieder die Kommandozeile bemühen müssen. In meinen Tutorials versuche ich dies zwar immer so gut es geht zu umschiffen, aber es ist vielleicht keine schlechte Idee wenn man grundsätzlich weiß wie man auf die Kommandozeile zugreifen und etwas mit Befehlen wie <code>cd</code>, <code>mkdir</code>, <code>ls</code> oder <code>sudo</code> anfangen kann.</p>
+<hr>
+<p>Soviel dann ersteinmal zu den Grundlagen für&rsquo;s Smarthome. Ich hoffe meine Erfahrungen und Tips helfen euch, euren ganz eigenen Weg ins Smarthome mit Docker zu finden.</p>
+<p>MfG,<br>
+André</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 2023-02-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://blog.buanet.de/posts/2023/02/01_grundlagen/" data-title="Grundlagen und Voraussetzungen" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://blog.buanet.de/posts/2023/02/01_grundlagen/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://blog.buanet.de/posts/2023/02/01_grundlagen/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/01_erster_beitrag/" class="prev" rel="prev" title="Ein Blog über Docker im Smarthome"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Ein Blog über Docker im Smarthome</a>
+            <a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/" class="next" rel="next" title="Portainer zur Verwaltung des Docker Dienstes">Portainer zur Verwaltung des Docker Dienstes<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Lecker!","link":"Erfahren Sie mehr","message":"Diese Website verwendet Cookies."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

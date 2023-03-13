@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>diskstation - Tag - blog.buanet.de</title>
+        <link>http://blog.buanet.de/tags/diskstation/</link>
+        <description>diskstation - Tag - blog.buanet.de</description>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/tags/diskstation/" rel="self" type="application/rss+xml" /><item>
+    <title>Portainer auf der Synology DiskStation</title>
+    <link>http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/</link>
+    <pubDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://blog.buanet.de/posts/2023/02/12_portainer_auf_der_synology_diskstation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-12/header.png" referrerpolicy="no-referrer">
+            </div>Einleitung Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst. Dabei werden wir sogar komplett auf die Kommandozeile verzichten. :) Zunächst aber wie üblich die&hellip;
+Voraussetzungen Natürlich benötigt ihr eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob ir noch auf DSM 6, doer bereits unter DSM 7 arbeitet.]]></description>
+</item>
+</channel>
+</rss>
