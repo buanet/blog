@@ -86,10 +86,13 @@ params:
     xing: Andre_Germann3
   page:
     share:
-      enable: false
+      enable: true
       Twitter: true
       Facebook: true
       Reddit: true
+      HackerNews: false
+      Line: false
+      Weibo: false
     comment:
       utterances:
         enable: true
