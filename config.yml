@@ -90,6 +90,14 @@ params:
       Twitter: true
       Facebook: true
       Reddit: true
+    comment:
+      utterances:
+        enable: true
+        repo: 'buant/blog'
+        issueTerm: 'title'
+        label: 'website comment'
+        lightTheme: 'github-light'
+        darkTheme: 'github-dark'
   cookieconsent:
     enable: true
     content:
