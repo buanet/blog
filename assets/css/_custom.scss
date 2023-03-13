@@ -1,13 +1,32 @@
 // ==============================
-// Custom style
-// 自定义样式
+// custom style / override theme css
 // ==============================
 
+// header logo size
 header .logo {
     min-height: 1.3em;
     height: 1.3em;
 }
 
+// title for single sites align left
 .special .single-title, .special .single-subtitle {
     text-align: left;
+}
+
+// devider (hr) solid
+.single .content hr {
+    border-top: 1px solid #f0f0f0;
+}
+[theme=dark] .single .content hr {
+    border-top: 1px solid #363636;
+}
+
+// justification 
+.single .content p {
+    text-align: justify;
+}
+
+// Abstände Überschrift
+.single .content h2 {
+    margin: 30px 0px 15px 0px;
 }

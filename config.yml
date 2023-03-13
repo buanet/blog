@@ -17,14 +17,14 @@ menu:
       name: Beiträge
       url: /posts/
       title: ''
-    - weight: 2
+    - weight: 3
       identifier: tags
       pre: ''
       post: ''
       name: Schlagworte
       url: /tags/
       title: ''
-    - weight: 3
+    - weight: 2
       identifier: categories
       pre: ''
       post: ''
@@ -34,6 +34,12 @@ menu:
 markup:
   highlight:
     noClasses: false
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      hardWraps: true
+enableEmoji: true
+enableRobotsTXT: true
 params:
   defaultTheme: auto
   gitRepo: https://github.com/buanet/docs # <<< Change this later!!!
