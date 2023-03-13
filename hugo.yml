@@ -94,6 +94,7 @@ params:
       Line: false
       Weibo: false
     comment:
+      enable: true
       utterances:
         enable: true
         repo: buanet/blog

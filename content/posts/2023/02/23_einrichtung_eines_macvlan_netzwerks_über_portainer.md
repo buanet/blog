@@ -7,7 +7,7 @@ lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-23/header.png
 
-comments: true
+comments: false
 
 tags: [portainer, docker, container, netzwerk, macvlan]
 categories: [Tutorials, Portainer]
