@@ -42,7 +42,7 @@ enableEmoji: true
 enableRobotsTXT: true
 params:
   defaultTheme: auto
-  gitRepo: https://github.com/buanet/docs # <<< Change this later!!!
+  gitRepo: https://github.com/buanet/blog
   title: blog.buanet.de
   description: Ein Blog über Docker im Smarthome.
   images: [/img/og/default.png]

@@ -17,19 +17,21 @@ Nachdem mir die alte Website mit Wordpress zu schwerfällig geworden ist, und ic
 
 ## Was ist der Plan?
 
-Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Docker im Smarthome. Das bedeutet, dass über kurz oder lang alle bereits existierenden Tutorials (nach einer ausführlichen Überarbeitung) von meiner alten Website (smarthome.buanet.de) in diesen Blog umziehen werden. Außerdem würde ich gerne meine Tutorial-Sammlung noch etwas erweitern und mich nicht mehr unbedingt auf einen Zusammenhang mit meinen eigenen Projekten beschränken.
+Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Docker im Smarthome. Das bedeutet, dass über kurz oder lang alle bereits existierenden Tutorials (nach einer ausführlichen Überarbeitung) von meiner alten Website ([smarthome.buanet.de](https://smarthome.buanet.de)) in diesen Blog umziehen werden. Außerdem würde ich gerne meine Tutorial-Sammlung noch etwas erweitern und mich nicht mehr unbedingt auf einen Zusammenhang mit meinen eigenen Projekten beschränken.
 
 ## Dieser Blog
 
 Bei diesem Blog handelt es sich um einen privaten Blog. Alle Inhalte veröffentliche ich mit Hinweis auf die [MIT Lizenz](/license). Falls ihr also meine Inhalte verwerten wollt, steht euch hier nichts im Wege. Ich erwarte lediglich einen entsprechende Quellverweis.
 Des Weiteren übernehme ich natürlich auch keinerlei Haftung für Anleitungen und Tutorials die ich euch hier kostenfrei bereit stelle.
 
-Anders als bisher biete ich (derzeit noch) keine Kommentarfunktion und auch kein Kontaktformular an. Während ich bei den Kommentaren noch unschlüssig bin, ist die Sache beim Kontaktformular bereits beschlossene Sache. Dies bedeutet jedoch nicht, dass ich euch den Kontakt zu mir erschweren möchte. Auf der Startseite findet ihr Links zu Social Media Plattformen und Communities in denen ich regelmäßig unterwegs bin. Wer also unbedingt mit mir in Kontakt treten will, der wird ganz sicher einen passenden Weg finden. 
-
 ## Hinter den Kulissen
 
 Diese Website ist mit [HUGO](https://gohugo.io/) erstellt. Hugo ist ein unkompliziertes Framework um statische Websites zu generieren. Für das Design kommt das Theme [LoveIt](https://hugoloveit.com/) zum Einsatz.
-Alles zusammen hoste ich, ebenso wie meine [Docs Website (docs.buanet.de)](https://docs.buanet.de), bei Github. Wer sich also für den Quellcode der Seite interessiert wird hier fündig.
+Alles zusammen hoste ich, ebenso wie meine [Docs Website (docs.buanet.de)](https://docs.buanet.de), bei Github. Wer sich also für den Quellcode der Seite interessiert wird [hier](https://github.com/buanet/blog) fündig.
+
+## Kommentare
+
+Ich habe mich dazu entschlossen in diesem Blog eine Kommentarfunktion anzubieten. Das Ganze ist [powered by utteranc.es](https://utteranc.es) und basiert auf [Github issues](https://github.com/buanet/blog/issues). Das sparrt mir letztendlich viel Zeit und macht es deutlich einfacher Kommentare zu abbonieren und bei Neuigkeiten entsprechend benachrichtigt zu werden. Außerdem ermöglicht dies, durch die Markdown-Unterstützung, das einfache Einbinden von Bildern und Code. Ich bin mal gespannt wie das so laufen wird.
 
 ## Keine Werbung
 
@@ -39,7 +41,9 @@ Wie schon beim Vorgänger dieser Website (smarthome.buanet.de) stelle ich meine 
 
 Ich betreibe diesen Blog nur als Hobby neben meiner Tätigkeit als Ehemann, Vater, Hausmeister und Informatiker (und etwa 100 Weiteren). Erwartet also bitte nicht, dass ich hier täglich oder wöchentlich neue Beiträge oder Tutorials raus haue.
 
-***
+&nbsp;
+
 Ich denke damit ist fürs Erste alles gesagt. Viel Spaß beim Lesen und Ausprobieren. 
 
-MfG, André
+MfG,
+André
