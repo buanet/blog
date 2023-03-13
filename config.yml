@@ -86,7 +86,7 @@ params:
     xing: Andre_Germann3
   page:
     share:
-      enable: true
+      enable: false
       Twitter: true
       Facebook: true
       Reddit: true
