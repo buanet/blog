@@ -93,11 +93,11 @@ params:
     comment:
       utterances:
         enable: true
-        repo: 'buant/blog'
-        issueTerm: 'title'
+        repo: buanet/blog
+        issueTerm: title
         label: 'website comment'
-        lightTheme: 'github-light'
-        darkTheme: 'github-dark'
+        lightTheme: github-light
+        darkTheme: github-dark
   cookieconsent:
     enable: true
     content:
