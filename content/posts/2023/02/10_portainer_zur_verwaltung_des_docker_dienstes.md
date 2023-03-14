@@ -9,7 +9,7 @@ draft: false
 featuredImage: /img/posts/2023-02-10/header.png
 
 tags: [portainer, docker, container]
-categories: [Tutorials]
+categories: [Docker Images, Portainer]
 
 seo:
   image: ''

@@ -67,7 +67,6 @@ params:
     rss: 10
     profile:
       enable: true
-#      gravatarEmail: andre@buanet.de
       avatarURL: '/img/andre.jpg' 
 #      title: blog.buanet.de
       subtitle: Ein Blog über Docker im Smarthome.
@@ -103,11 +102,13 @@ params:
         lightTheme: github-light
         darkTheme: github-dark
   cookieconsent:
-    enable: true
+    enable: false
     content:
       message: 'Diese Website verwendet Cookies.'
       dismiss: 'Lecker!'
       link: ''
   search:
-    enable: false
+    enable: true
     type: 'lunr'
+outputs:
+  home: [HTML, RSS, JSON]

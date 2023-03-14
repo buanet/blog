@@ -1,5 +1,8 @@
 ---
 title: "MIT License"
+
+comment:
+  enable: false
 ---
 
 Copyright (c) 2023 André Germann
