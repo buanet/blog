@@ -1,7 +1,8 @@
 ---
 title: 'Portainer auf der Synology DiskStation'
 #subtitle: 'Das Fundament für unser Smarthome mit Docker'
-description: ''
+description: 'Ein Tutorial zur Einrichtung von Portainer auf der Synology DiskStation'
+summary: 'Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst....'
 date: 2023-02-12T21:12:44+01:00
 lastmod: ''
 draft: false

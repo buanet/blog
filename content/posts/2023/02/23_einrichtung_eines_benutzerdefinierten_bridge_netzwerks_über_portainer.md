@@ -1,7 +1,8 @@
 ---
 title: 'Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer'
 subtitle: ''
-description: ''
+description: 'Ein Tutorial zur Einrichtung eines benutzerdefinierten Docker Bridge Netzwerks über Portainer'
+summary: 'Wer mehrere Docker Container über das Standard-Netzwerk "bridge" verbindet, wird früher oder später die Einschränkungen dieses Netzwerks kennenlernen. Doch es gibt eine Lösung. Ein benutzerdefiniertes Bridge Netzwerk muss her. Wie du dieses einrichtest zeige ich dir in diesem Tutorial...'
 date: 2023-02-23T20:49:17+01:00
 lastmod: ''
 draft: false
@@ -16,7 +17,7 @@ seo:
 
 ## Einleitung
 
-Wer mehrere Container über das Standard-Netzwerk „bridge“ verbindet, wird wohl früher oder später darüber stolpern: Im Standard-Bridge-Netzwerk von Docker gibt es unter anderem nicht nur keine Namensauflösung (DNS) sondern auch keine Möglichkeit den Containern feste IP-Adressen im virtuellen Netz zu vergeben (alle Einschränkungen zum Nachlesen in den [Docker Docs](https://docs.docker.com/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge)). Doch es gibt eine Lösung. Legt man sich nämlich sein eigenes Bridge-Netzwerk an umgeht man die Beschränkungen.
+Wer mehrere Docker Container über das Standard-Netzwerk "bridge" verbindet, wird wohl früher oder später darüber stolpern: Im Standard-Bridge-Netzwerk von Docker gibt es unter anderem nicht nur keine Namensauflösung (DNS) sondern auch keine Möglichkeit den Containern feste IP-Adressen im virtuellen Netz zu vergeben (alle Einschränkungen zum Nachlesen in den [Docker Docs](https://docs.docker.com/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge)). Doch es gibt eine Lösung. Legt man sich nämlich sein eigenes Bridge-Netzwerk an umgeht man die Beschränkungen.
 
 Wie man ein benutzerdefiniertes Bridge Netzwerk über Portainer anlegt, das zeige ich dir in diesem Tutorial.
 

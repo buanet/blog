@@ -1,7 +1,8 @@
 ---
 title: 'Portainer zur Verwaltung des Docker Dienstes'
 #subtitle: 'Das Fundament für unser Smarthome mit Docker'
-description: ''
+description: 'Ein Überblick über Portainer als grafische Benutzeroberfläche zur Administration des Docker Dienstes'
+summary: 'Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück...'
 date: 2023-02-10T20:23:42+01:00
 lastmod: ''
 draft: false
@@ -15,7 +16,7 @@ seo:
 ---
 ## Einleitung
 
-Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Über verschiedene Kommandos lassen sich Images herunterladen, Container erstellen und noch vieles mehr. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück. Bei vielen Systemen, die heutzutage Docker von Haus aus unterstützen sind diese grafischen Benutzeroberflächen bereits integriert. Bei den gängigen NAS-Systemen wie Synology DSM, TrueNAS oder Unraid zum Beispiel, ist die Bedienung des Docker Dienstes direkt über die eigenen, webbasierten Administrationsoberflächen möglich. Doch nicht immer schöpfen diese Oberflächen die vollen Möglichkeiten, die Docker eigentlich bietet, auch aus. So ist es zum Beispiel im DSM bis heute nicht möglich Docker Containern Systemressourcen oder Devices zuzuteilen.
+Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Über verschiedene Kommandos lassen sich Images herunterladen, Container erstellen und noch vieles mehr. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück. Bei vielen Systemen, die heutzutage Docker von Haus aus unterstützen, sind diese grafischen Benutzeroberflächen bereits integriert. Bei den gängigen NAS-Systemen wie Synology DSM, TrueNAS oder Unraid zum Beispiel, ist die Bedienung des Docker Dienstes direkt über die eigenen, webbasierten Administrationsoberflächen möglich. Doch nicht immer schöpfen diese Oberflächen die vollen Möglichkeiten, die Docker eigentlich bietet, auch aus. So ist es zum Beispiel im DSM bis heute nicht möglich Docker Containern Systemressourcen oder Devices zuzuteilen.
 
 ## Was ist Portainer?
 
@@ -63,12 +64,16 @@ Innerhalb des `docker`-Verzeichnisses erstelle ich mir dann ein Unterverzeichnis
 Da nun alles vorbereitet ist, erstellen wir den Container mit folgendem Befehl: 
 
 ```bash
-docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/docker/portainer_data:/data portainer/portainer-ce:latest
+docker run -d -p 9443:9443 \
+  --name portainer --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /mnt/docker/portainer_data:/data \
+  portainer/portainer-ce:latest
 ```
 
 Der Befehl setzt sich dabei aus folgenden Parametern zusammen:
-* `docker run`zum Erstellen eines neuen Containers
-* `-d` für "detached" 
+* `docker run` << [zum Erstellen eines neuen Containers](https://docs.docker.com/engine/reference/run/#docker-run-reference)
+* `-d` << [für "detached"](https://docs.docker.com/engine/reference/run/#detached--d) 
 * `-p 9443:9443` << Port für den Zugriff auf die Web UI
 * `--name portainer` << Container Name
 * `--restart=always` << Restart Policy = always
