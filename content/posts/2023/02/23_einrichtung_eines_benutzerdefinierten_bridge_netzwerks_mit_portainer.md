@@ -1,7 +1,7 @@
 ---
-title: 'Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer'
+title: 'Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer'
 subtitle: ''
-description: 'Ein Tutorial zur Einrichtung eines benutzerdefinierten Docker Bridge Netzwerks über Portainer'
+description: 'Ein Tutorial zur Einrichtung eines benutzerdefinierten Docker Bridge Netzwerks mit Portainer'
 summary: 'Wer mehrere Docker Container über das Standard-Netzwerk "bridge" verbindet, wird früher oder später die Einschränkungen dieses Netzwerks kennenlernen. Doch es gibt eine Lösung. Ein benutzerdefiniertes Bridge Netzwerk muss her. Wie du dieses einrichtest zeige ich dir in diesem Tutorial...'
 date: 2023-02-23T20:49:17+01:00
 lastmod: ''

@@ -1,14 +1,12 @@
 ---
-title: 'Einrichtung eines MACVLAN Netzwerks über Portainer'
+title: 'Einrichtung eines MACVLAN Netzwerks mit Portainer'
 subtitle: ''
-description: 'Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks über Portainer'
+description: 'Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer'
 summary: 'In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an. Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse im Netzwerk und ist damit von anderen Geräten vollständig erreichbar....'
 date: 2023-02-23T22:31:15+01:00
 lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-23/header.png
-
-comments: false
 
 tags: [portainer, docker, container, netzwerk, macvlan]
 categories: [Tutorials, Portainer]
