@@ -44,7 +44,7 @@ params:
   defaultTheme: auto
   gitRepo: https://github.com/buanet/blog
   title: blog.buanet.de
-  description: Ein Blog über Docker im Smarthome.
+  description: Ein Blog über Smarthome mit Docker.
   images: [/img/og/default.png]
   header:
     desktopMode: fixed
@@ -57,7 +57,7 @@ params:
       typeit: false
   footer:
     enable: true
-#    custom: 'Meine Lieblingsspielfigur ist der Lange bei Tetris.'
+    custom: '<a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a>'
     hugo: false
     copyright: true
     author: true
@@ -69,13 +69,13 @@ params:
       enable: true
       avatarURL: '/img/andre.jpg' 
 #      title: blog.buanet.de
-      subtitle: Ein Blog über Docker im Smarthome.
+      subtitle: Ein Blog über Smarthome mit Docker.
       typeit: false
       social: true
 #      disclaimer: 'I would love to change the world, but they wont give me the source code...'
     posts:
       enable: true
-      paginate: '6'
+      paginate: '10'
   social:
     github: buanet
     discord: '591003148542279690'

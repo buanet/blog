@@ -1,5 +1,5 @@
 ---
-title: 'Ein Blog über Docker im Smarthome'
+title: 'Ein Blog über Smarthome mit Docker'
 subtitle: 'aka #ersterpost #wasistdashiereigentlich'
 description: 'Ein kurzes Into zu meinem neuen Blog, der sich mit Docker im Smarthome auseinandersetzen wird.'
 summary: 'Nachdem mir die alte Website mit Wordpress zu schwerfällig geworden ist, und ich die Entscheidung getroffen habe meine Tutorials komplett von meine Projekten und deren Dokus zu lösen, habe ich mich auf die Suche nach einem neuen Konzept begeben. Herausgekommen ist nun doch (wieder) ein Blog...'
@@ -18,7 +18,8 @@ Nachdem mir die alte Website mit Wordpress zu schwerfällig geworden ist, und ic
 
 ## Was ist der Plan?
 
-Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Docker im Smarthome. Das bedeutet, dass über kurz oder lang alle bereits existierenden Tutorials (nach einer ausführlichen Überarbeitung) von meiner alten Website ([smarthome.buanet.de](https://smarthome.buanet.de)) in diesen Blog umziehen werden. Außerdem würde ich gerne meine Tutorial-Sammlung noch etwas erweitern und mich nicht mehr unbedingt auf einen Zusammenhang mit meinen eigenen Projekten beschränken.
+Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Smarthome mit Docker. Das bedeutet, dass sich meine Beiträge und Tutorials hier hauptsächlich darum drehen werden, wie man mit Hilfe von Docker ein Smarthome aufbauen und betreiben kann.
+Das schließt auch die bereits existierenden Tutorials von meiner alten Website ([smarthome.buanet.de](https://smarthome.buanet.de)) mit ein. Diese werde ich entsprechend überarbeiten und nach und nach in die Beiträge dieses Blogs einfließen lassen.
 
 ## Dieser Blog
 
