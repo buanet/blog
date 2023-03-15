@@ -25,11 +25,10 @@ Wie man ein benutzerdefiniertes Bridge Netzwerk über Portainer anlegt, das zeig
 
 Selbstverständlich gibt es auch hier ein paar Voraussetzungen die du schon erfüllt haben solltest. Hier eine kurze Liste:
 
-* Vorhandensein eines Docker Hosts (Linux) mit eingerichtetem Portainer Docker Container
+* Vorhandensein eines aud Linux basierenden Docker Hosts oder NAS mit Docker
+* [Portainer zur Verwaltung des Docker Dienstes](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes)
 * Grundverständnis zum Thema [(Docker) Netzwerk](https://docs.docker.com/network/)
 * optional: Zugriff auf die Kommandozeile des Docker Hosts (nur für Bonus)
-
-Dann kann es eigentlich auch schon los gehen.
 
 ## Bridge Netzwerk über Portainer anlegen
 
@@ -171,7 +170,7 @@ $ docker network inspect my_other_bridge
     }
 ]
 ```
-Natürlich können wir die Parameter auch selbst mit geben. Hier ein Beispiel analog zu unserem `my_bridge`-Netzwerk von oben.
+Natürlich können wir die Parameter auch selbst mit geben. Hier ein Beispiel zum Erstellen unsere `my_bridge`-Netzwerks von oben:
 
 ```shell
 docker network create \
@@ -179,11 +178,13 @@ docker network create \
   --ip-range=172.20.0.0/24 \
   --gateway=172.20.0.1 my_bridge
 ```
-Das soll es zur kommandozeile auch gewesen sein. In den [Docker Docs zu docker network create](https://docs.docker.com/engine/reference/commandline/network_create/) findest du weiterführende Informationen. 
-
-&nbsp;
+Das soll es zur Kommandozeile auch gewesen sein. In den [Docker Docs zu docker network create](https://docs.docker.com/engine/reference/commandline/network_create/) findest du weiterführende Informationen und Beispiele. 
 
 ---
 
+Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über die Einrichtung eines benutzerdefinierten Docker Bridge Netzwerks mit Portainer geben.  
+&nbsp;
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag. 
+&nbsp;
 MfG,
 André

@@ -18,15 +18,16 @@ seo:
 ## Einleitung
 
 In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. Hier geht es zum Beispiel um [Broadcast](https://de.wikipedia.org/wiki/Broadcast) oder [Multicast Traffic](https://de.wikipedia.org/wiki/Multicast), der den Container über das Bridge Netzwerk schlicht nicht erreichen kann, aber von vielen Tools und Protokollen benötigt wird. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an.
-Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse im Netzwerk und ist damit von anderen Geräten vollständig erreichbar. Eine Freigabe einzelner Ports ist nicht mehr erforderlich. 
+Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse in deinem (Heim-)Netzwerk und ist damit von anderen Geräten vollständig erreichbar. Eine Freigabe einzelner Ports ist nicht mehr erforderlich. 
 
-In diesem zeige ich dir, wie du über Portainer ein MACVLAN Netzwerk erstellst und worauf du achten musst. Am Beispiel meines Testnetzes werden wir zusammen ein Subnetz für das MACVLAN finden und entsprechend konfigurieren. 
+In diesem Tutorial zeige ich dir, wie du über Portainer ein MACVLAN Netzwerk erstellst und worauf du achten musst. Am Beispiel meines Testnetzes werden wir zusammen ein Subnetz für das MACVLAN finden und entsprechend konfigurieren. 
 
 ## Voraussetzungen
 
 Auch dieses Mal gilt es wieder Voraussetzungen zu erfüllen um das Tutorial erfolgreich umsetzen zu können. Hier eine kurze Liste: 
 
-* Vorhandensein eines Docker Hosts (Linux) mit eingerichtetem Portainer Docker Container
+* Vorhandensein eines aud Linux basierenden Docker Hosts oder NAS mit Docker
+* [Portainer zur Verwaltung des Docker Dienstes](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes)
 * Grundverständnis zum Thema IP-Netzwerk im Allgemeinen (IP-Adressen und Bereiche, Subnetze, DHCP, Gateway)
 * Grundverständnis zum Thema [Docker Netzwerk](https://docs.docker.com/network/)
 * Kenntnisse des eigenen Netzwerks (DHCP-Bereiche, Gateways, usw.)
@@ -36,11 +37,11 @@ Auch dieses Mal gilt es wieder Voraussetzungen zu erfüllen um das Tutorial erfo
 
 Starten wir mit dem Ermitteln eines passenden Adressbereichs für unser MACVLAN. Dazu muss man wissen, dass Docker, im für das MACVLAN verwendeten Adressbereich, selbst IP-Adressen für Container vergeben kann, wenn diese mit dem Netzwerk verbunden werden. Ganz ähnlich wie es auch ein DHCP-Server tut wenn sich ein neues Gerät im Netzwerk meldet. Um hier später IP-Adresskonflikte im Heimnetz zu vermeiden, sollte sich daher der Adressbereich für das MACVLAN nicht mit dem Adressbereich deines DHCP überschneiden. 
 
-Nehmen wir mein Test-Netzwerk als praktisches Beispiel. Ich verwende das Subnetz `192.168.11.0/24`. Ein Netzwerkbereich der 254 Adressen (`192.168.11.0 bis 192.168.11.254`) umfasst. Das Gateway ist die `192.168.11.1`. Mein DHCP vergibt IP-Adressen im Bereich von `192.168.11.200 bis 192.168.11.250`.
-Vergleichbar ist dieses Netz von der Beschaffenheit her zum Beispiel mit den Standard Netzwerken die auch Heimnetz-Router wie die Fritzbox verwenden.
+Nehmen wir mein Test-Netzwerk als praktisches Beispiel. Ich verwende das Netzwerk `192.168.11.0/24`. Es umfasst einen Netzwerkbereich von 254 Adressen (`192.168.11.0` bis `192.168.11.254`). Das Gateway ist die `192.168.11.1`. Mein DHCP vergibt IP-Adressen im Bereich von `192.168.11.200` bis `192.168.11.250`.
+Vergleichbar ist dieses Netz von der Beschaffenheit her zum Beispiel mit den Standard Netzwerken, die auch Heimnetz-Router wie die Fritzbox verwenden.
 
-Um nun innerhalb dieses Subnetzes einen passenden Adressbereich zu finden, welches sich für das MACVLAN eignet, nutze ich immer wieder gerne den [Netzwerkrechner von Heise](https://www.heise.de/netze/tools/netzwerkrechner/). Dort gebe ich zunächst eine IP-Adresse aus dem Adressbereich ein, von dem ich denke, dass er sich für mein MACVLAN Netzwerk eignet und nicht mit dem DHCP kollidiert. In meinem Fall ist das zum Beispiel der Bereich um `192.168.11.120`.
-Weiter geht es mit dem CIDR-Suffix (Definiert die Größe der Netzmaske). Für mein komplettes Netz ist das CIDR-Suffix `/24`. Je größer das Suffix wird, desto kleiner wird mein Netzwerkbereich. Dabei halbiert sich mit jedem Schritt die Anzahl der nutzbaren IP-Adressen im Netzwerkbereich (-2 für Netzadresse und Broadcast). Bedeutet für die Adressbereiche: 
+Um nun innerhalb dieses Netzwerks einen passenden Adressbereich zu finden, welches sich für das MACVLAN eignet, nutze ich immer wieder gerne den [Netzwerkrechner von Heise](https://www.heise.de/netze/tools/netzwerkrechner/). Dort gebe ich zunächst eine IP-Adresse aus dem Adressbereich ein, von dem ich denke, dass er sich für mein MACVLAN Netzwerk eignet und nicht mit dem DHCP kollidiert. In meinem Fall ist das zum Beispiel der Bereich um `192.168.11.120`.
+Weiter geht es im Netzwerkrechner mit dem CIDR-Suffix (Definiert die Größe der Netzmaske). Für mein komplettes Netz ist das CIDR-Suffix `/24`. Je größer das Suffix wird, desto kleiner wird mein Netzwerkbereich. Dabei halbiert sich mit jedem Schritt die Anzahl der nutzbaren IP-Adressen im Netzwerkbereich (-2 für Netzadresse und Broadcast). Bedeutet für die Größe der möglichen Adressbereiche: 
 
 ```
 /24 = 254 nutzbare IP-Adressen im Bereich
@@ -60,17 +61,17 @@ Da mir ein Netzbereich mit 6 IP-Adressen ausreicht, verwende ich das CIDR-Suffix
 
 {{< image src="/img/posts/2023-02-23/portainer_macvlan1.png" alt="Netzwerkrechner" width="100%" >}}
 
-Dieser Adressbereich umfasst nun insgesamt die IP-Adressen von `192.168.11..120 bis 192.168.11..127`, während ich die Adressen von `192.168.11..121 bis 192.168.11.126` für Docker Container verwenden könnte. 
+Dieser Adressbereich umfasst nun insgesamt die IP-Adressen von `192.168.11..120` bis `192.168.11..127`, während ich die Adressen von `192.168.11.121` bis `192.168.11.126` für Docker Container verwenden könnte. 
 
 {{< admonition type=warning title="Hinweis" open=true >}}
-Dieses Tutorial ist kein Netzwerkkurs. :nerd_face: Die Auswahl des Netzbereiches ist sehr oberflächlich gehalten, funktioniert aber für diesen Anwendungsfall. Für weiteren Infos hier ein [Link zum Thema "IP-Adressen"](https://de.wikipedia.org/wiki/IP-Adresse). Außerdem findest du reichlich [Videos zum Thema "Netzwerk/ Subnetting" bei Youtube](https://www.youtube.com/results?search_query=netzwerk+subnetting).
+Dieses Tutorial ersetzt keinen Netzwerkkurs. :nerd_face: Die Auswahl des Netzbereiches ist sehr oberflächlich gehalten, funktioniert aber für diesen Anwendungsfall (im einfachen Heimnetz). Für weiteren Infos hier ein [Link zum Thema "IP-Adressen"](https://de.wikipedia.org/wiki/IP-Adresse). Außerdem findest du reichlich [Videos zum Thema "Netzwerk/ Subnetting" bei Youtube](https://www.youtube.com/results?search_query=netzwerk+subnetting).
 {{< /admonition >}}
 
-Damit haben wir unseren Adressbereich ermittelt und können die gewonnenen Informationen in unserer MACVLAN-Konfiguration verwenden.
+Damit haben wir unseren Adressbereich ermittelt und können die gewonnenen Informationen in unserer MACVLAN-Konfiguration verwenden. Jetzt kann es doch eigentlich los gehen oder?
 
 ## Parent network card ermitteln
 
-Um ein MACVLAN anlegen zu können, muss dieses an einen Netzwerkadapter im Docker Host gebunden werden. Damit wir dies bei der Konfiguration über die Portainer erledigen können, müssen wir zunächst die Bezeichnung des Adapters ermitteln. Dies geht am einfachsten über die Kommandozeile.
+Fast. Um ein MACVLAN anlegen zu können, muss dieses an einen Netzwerkadapter im Docker Host gebunden werden. Damit wir dies bei der Konfiguration über die Portainer erledigen können, müssen wir zunächst die Bezeichnung des Adapters ermitteln, der mit unserem Heimnetz verbunden ist. Dies geht am einfachsten über die Kommandozeile.
 Über `ifconfig` oder `ip addr show` können wir uns eine Auflistung der Netzwerkkonfiguration anzeigen lassen.
 
 ```shell
@@ -149,11 +150,11 @@ $ ip addr show
        valid_lft forever preferred_lft forever
 ```
 
-In beiden Ausgaben finde ich die IP-Adresse `192.168.11.200` meines Docker Hosts. Zugewiesen ist diese der Netzwerkinterface `eth0`. Mit dieser Info im Gepäck können wir nun das MACVLAN anlegen. 
+In beiden Ausgaben finde ich die IP-Adresse meines Docker Hosts (`192.168.11.200`) in meinem Heimnetz. Zugewiesen ist diese dem Netzwerkinterface `eth0`. Mit dieser Info im Gepäck können wir nun mit dem Anlegen des MACVLAN beginnen. 
 
 ## MACVLAN über UI anlegen
 
-Das Anlegen eines MACVLAN über Portainer erfolgt in zwei Schritten. Zunächst müssen wir eine MACVLAN "Configuration" anlegen, bevor wir in einem weiteren Schritt eine MACVLAN "Creation" erstellen können. Fangen wir also mit der "Configuration" an.  
+Das Anlegen eines MACVLAN über Portainer erfolgt in zwei Schritten. Zunächst müssen wir eine MACVLAN "Configuration" anlegen, bevor wir in einem weiteren Schritt daraus eine MACVLAN "Creation" erstellen können. Fangen wir also mit der "Configuration" an.  
 
 ### "Configuration" erstellen
 
@@ -166,7 +167,7 @@ Wir vergeben einen aussagekräftigen Namen, in meinem Fall wähle ich `my_macvla
 {{< image src="/img/posts/2023-02-23/portainer_macvlan3.png" alt="Portainer - Create network" width="100%" >}}
 
 Unter "Parent network card" geben wir das ermittelte Netzwerkinterface `eth0` an.
-Die "IPv4 Network configuration" füllen wir mit den Daten zu unserem Subnetz und dem ausgewählten Adressbereich aus. In meinem Fall ist das das Subnetz (Heimnetz) `192.168.11.0/24`. Das Gateway (mein Router) darin hat die `192.168.0.1`. Als IP-Adressbereich habe ich `192.168.11.120/29`ermittelt.  
+Die "IPv4 Network configuration" füllen wir mit den Daten zu unserem Subnetz (Heimnetzwerk) und dem ausgewählten Adressbereich aus. In meinem Fall ist das das Subnetz `192.168.11.0/24`. Das Gateway (mein Router) darin hat die `192.168.0.1`. Als IP-Adressbereich habe ich `192.168.11.120/29`ermittelt.  
 Weitere Optionen müssen wir in diesem Fall nicht konfigurieren. 
 
 {{< admonition type=tip title="Tip" open=true >}}
@@ -268,8 +269,13 @@ $ docker network inspect my_macvlan
     }
 ]
 ```
+Das soll es zur Kommandozeile auch gewesen sein. In den [Docker Docs zu docker network create](https://docs.docker.com/engine/reference/commandline/network_create/) findest du weiterführende Informationen und Beispiele. 
 
 ---
 
+Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über die Einrichtung eines Docker MACVLAN Netzwerks mit Portainer geben.  
+&nbsp;
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag. 
+&nbsp;
 MfG,
 André

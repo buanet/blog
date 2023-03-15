@@ -16,6 +16,9 @@ header .logo {
 // devider (hr) solid
 .single .content hr {
     border-top: 1px solid #f0f0f0;
+    border-left: 0px;
+    border-right: 0px;
+    margin: 2rem 0rem;
 }
 [theme=dark] .single .content hr {
     border-top: 1px solid #363636;

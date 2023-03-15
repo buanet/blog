@@ -22,7 +22,7 @@ Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Docker im Smart
 
 ## Dieser Blog
 
-Bei diesem Blog handelt es sich um einen privaten Blog. Alle Inhalte veröffentliche ich mit Hinweis auf die [MIT Lizenz](/license). Falls ihr also meine Inhalte verwerten wollt, steht euch hier nichts im Wege. Ich erwarte lediglich einen entsprechende Quellverweis.
+Bei diesem Blog handelt es sich um einen privaten Blog. Alle Inhalte veröffentliche ich mit Hinweis auf die [MIT Lizenz](/license). Falls ihr also meine Inhalte verwerten wollt, steht euch hier nichts im Wege. Ich erwarte lediglich einen entsprechenden Quellverweis.
 Des Weiteren übernehme ich natürlich auch keinerlei Haftung für Anleitungen und Tutorials die ich euch hier kostenfrei bereit stelle.
 
 ## Hinter den Kulissen
@@ -48,9 +48,9 @@ Ich biete auf diesem Blog absichtlich kein Kontaktformular an, da dies in der Ve
 Daher gilt: Falls du zu einem Post Fragen oder Ergänzungen hast nutze gerne die öffentliche Kommentarfunktion.
 Für den Fall, dass du aus anderen Gründen persönlich mit mir in Kontakt treten willst, findest du auf der Startseite unter dem Profilbild eine Liste der Communities in denen ich unterwegs bin. Ich bin mir sicher, dass du einen Weg finden wirst.
 
-&nbsp;
+---
 
 Ich denke damit ist fürs Erste alles gesagt. Viel Spaß beim Lesen und Ausprobieren. 
-
+&nbsp;
 MfG,
 André

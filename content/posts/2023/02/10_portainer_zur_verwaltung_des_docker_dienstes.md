@@ -44,7 +44,7 @@ Im Folgenden werden wir einen frischen Portainer Docker Container der Community 
 
 ### Voraussetzungen
 
-ich gehen davon aus, dass folgende Voraussetzungen bereits erfüllt sind:
+Ich gehen davon aus, dass die folgenden Voraussetzungen bereits erfüllt sind:
 * Linux basierter Docker Host (NAS Systeme basieren in der Regel auf Linux)
 * Zugriff auf die Kommandozeile des Docker Hosts
 * Installierter und gestarteter Docker Dienst
@@ -72,8 +72,8 @@ docker run -d -p 9443:9443 \
 ```
 
 Der Befehl setzt sich dabei aus folgenden Parametern zusammen:
-* `docker run` << [zum Erstellen eines neuen Containers](https://docs.docker.com/engine/reference/run/#docker-run-reference)
-* `-d` << [für "detached"](https://docs.docker.com/engine/reference/run/#detached--d) 
+* `docker run` << zum Erstellen eines neuen Containers
+* `-d` << für "[detached](https://docs.docker.com/engine/reference/run/#detached--d)" 
 * `-p 9443:9443` << Port für den Zugriff auf die Web UI
 * `--name portainer` << Container Name
 * `--restart=always` << Restart Policy = always
@@ -115,9 +115,13 @@ Mit einem Klick auf "Get Started" ist das "Quick Setup" auch schon erledigt, und
 
 Unser Portainer ist nun startklar. 
 
+Da sich mit einer Portainer Weboberfläche mehrere Docker Hosts (Environments) verwalten lassen, müssen wir zum Anlegen unseres ersten Containers noch unser Environment auswählen. Dies tun wir mit einem Klick auf "local" oder auf den Button "Live connect". 
+
 ---
 
 Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über Portainer und dessen Inbetriebnahme geben.  
-
+&nbsp;
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag. 
+&nbsp;
 MfG,
 André

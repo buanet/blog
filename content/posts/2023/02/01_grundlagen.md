@@ -82,7 +82,8 @@ Wie dem auch sei, ein Docker-Dienst fühlt sich am wohlsten in einer Linux Umgeb
 -----
 
 Soviel dann ersteinmal zu den Grundlagen für's Smarthome. Ich hoffe meine Erfahrungen und Tips helfen dir, deinen ganz eigenen Weg ins Smarthome mit Docker zu finden.
-
-
+&nbsp;
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag. 
+&nbsp;
 MfG,
 André

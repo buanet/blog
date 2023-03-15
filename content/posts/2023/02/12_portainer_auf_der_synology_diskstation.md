@@ -20,43 +20,45 @@ Nachdem ich in meinem [letzten Beitrag](/posts/2023/02/10_portainer_zur_verwaltu
 
 ## Voraussetzungen
 
-Natürlich benötigt ihr eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob ir noch auf DSM 6, doer bereits unter DSM 7 arbeitet. Hauptsache ist, dass euer NAS das Docker Paket von Synology unterstützt (siehe [Liste der Unterstützten Modelle](https://www.synology.com/de-de/dsm/packages/Docker)).
+Natürlich benötigst du eine Synology DiskStation, oder etwas allgemeiner, ein NAS auf dem der Synology DiskStation Manager (DSM) ausgeführt wird. Dabei ist es unerheblich ob dein System noch auf DSM 6, oder bereits mit DSM 7 arbeitet. Hauptsache ist, dass dein NAS das Docker Paket von Synology unterstützt (siehe [Liste der Unterstützten Modelle](https://www.synology.com/de-de/dsm/packages/Docker)).
 
-Da die Installation des Docker Pakets in der Regel keine große Hürde darstellen sollte, gehe ich auch davon aus, dass dieses bereits Installiert und funktionstüchtig ist.
+Da die Installation des Docker Pakets in der Regel keine große Hürde darstellen sollte, gehe ich auch davon aus, dass du dieses bereits über die Paketverwaltung Installiert hast und die Docker-Anwendung auf deinem Synology Desktop verfügbar ist.
 
-Zu guter Letzt brauchen wir auch noch ein Verzeichnis, welches wir als Datenverzeichnis in den Portainer Container mounten. Hier können wir einfach über die Systemsteuerung und die FileStation einen Ordner anlegen. Ich habe mir dazu einen freigegebenen Ordner `docker` auf Volume1 erstellt und einen Unterordner `portainer-data` angelegt. Daraus ergibt sich in meinem Fall der folgende Pfad für die Einbindung im Portainer Contaier:
+Zu guter Letzt brauchen wir noch ein Verzeichnis, welches wir als Datenverzeichnis in den Portainer Container mounten, um eine persistente Speicherung der Konfigurationsdaten zu ermöglichen. Hierzu können wir einfach über die Systemsteuerung einen gemeinsamen Order und die FileStation einen Unterordner anlegen. Ich habe mir dazu einen gemeinsamen Ordner `docker` auf Volume1 erstellt und einen Unterordner `portainer-data` angelegt. Daraus ergibt sich in meinem Fall der folgende Pfad für die Einbindung im Portainer Contaier:
 
 `/volume1/docker/portainer-data`
 
 {{< image src="/img/posts/2023-02-12/portainer_synology1.png" alt="Portainer Datenverzeichnis" width="100%" >}}
 
 Kurz zusammengefasst also nochmal die Voraussetzungen:
-* Vorhanden sein einer DiskStation mit DSM 6 oder 7
+* Vorhandensein einer DiskStation mit DSM 6 oder 7
 * Installiertes Docker Paket aus dem Paket-Zentrum
-* Verzeichnis für die Speicherung des Portainer-Konfigurationsdaten
-
-Und damit geht es dann auch schon los.
+* Verzeichnis für die Speicherung der Portainer-Konfigurationsdaten
 
 ## Portainer Container starten
 
-Im Prinzip ist es nun Zeit den Portainer Container mit dem `docker run`-Befehl zu starten. Den Befehl habe ich in meinem [letzten Beitrag](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes) schon ausführlich erläutert. Er kann genau so auch auf der DiskStation verwendet werden. Einziger Unterschied ist, dass wir den Dateipfad für die Portainer Konfigurationsdaten anpassen müssen. Am Ende steht dieser Befehl:
+Im Prinzip ist es nun bereits Zeit den Portainer Container mit dem `docker run`-Befehl zu starten. Den Befehl habe ich in meinem [letzten Beitrag](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes) schon ausführlich erläutert. Er kann genau so auch auf der DiskStation verwendet werden. Einziger Unterschied ist, dass wir den Dateipfad für die Portainer Konfigurationsdaten anpassen müssen. Am Ende steht dabei dieser Befehl:
 ```bash
-docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-data:/data portainer/portainer-ce:latest
+docker run -d -p 9443:9443 \
+  --name portainer --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /volume1/docker/portainer-data:/data \
+  portainer/portainer-ce:latest
 ```
 
 Statt diesen Befehl jetzt über die Kommandozeile der DS einzutippen, nutzen wir zur Ausführung den Aufgabenplaner in der Systemsteuerung. Hier erstellen wir zunächst eine neue "Geplante Aufgabe" vom Typ "Benutzerdefiniertes Skript".
 
 {{< image src="/img/posts/2023-02-12/portainer_synology2.png" alt="DSM Aufgabenplaner - Allgemein" width="100%" >}}
 
-Wir vergeben einen Namen und ändern den Benutzer auf `root`. Das ist notwendig, da zur Bedienung des Docker Dienstes erweiterte Berechtigungen erforderlich sind. Zuletzt können wir das Häkchen bei "Aktiviert" noch entfernen, da wir die Aufgabe nur manuell ausführen werden.
+Wir vergeben einen Namen und ändern den (ausführenden) Benutzer auf `root`. Das ist notwendig, da zur Bedienung des Docker Dienstes erweiterte Berechtigungen erforderlich sind. Zuletzt können wir das Häkchen bei "Aktiviert" noch entfernen, da wir die Aufgabe ja nur manuell ausführen werden.
 
 {{< image src="/img/posts/2023-02-12/portainer_synology3.png" alt="DSM Aufgabenplaner - Zeitplan" width="100%" >}}
 
-Im Prinzip können wir den Zeitplan konfigurieren wie wir wollen, da die Aufgabe ja nicht aktiviert ist. Ich mache es trotzdem wie im Screenshot dargestellt. So bin ich sicher, dass auch fall die Aufgabe mal aus Versehen aktiviert wurde keine Ausführung statt findet.
+Den Zeitplan können wir konfigurieren wie wir wollen, da die Aufgabe ja nicht aktiviert sein wird. Ich mache es trotzdem wie im Screenshot dargestellt. So bin ich sicher, dass auch falls die Aufgabe mal aus Versehen aktiviert wurde keine zeitgesteuerte Ausführung statt findet.
 
 {{< image src="/img/posts/2023-02-12/portainer_synology4.png" alt="DSM Aufgabenplaner - Aufgabeneinstellungen" width="100%" >}}
 
-In der letzten Registerkarte "Aufgabeneinstellungen" konfigurieren wir dann letztendlich unter "Benutzerdefiniertes Skript" unseren `docker run`-Befehl.<br>
+In der letzten Registerkarte "Aufgabeneinstellungen" konfigurieren wir dann letztendlich unter "Benutzerdefiniertes Skript" unseren `docker run`-Befehl.
 Damit ist die Konfiguration der Aufgabe abgeschlossen. Über die Schaltfläche "Ausführen" oder per Rechtsklick > "Ausführen" auf die Aufgabe, können wir die Erstellung des Portainer Docker Containers anstoßen.
 
 {{< image src="/img/posts/2023-02-12/portainer_synology5.png" alt="DSM Aufgabenplaner - Aufgabe Starten" width="100%" >}}
@@ -67,7 +69,7 @@ Die Erstellung kann nun einen kurzen Moment dauern. Den Erfolg können wir über
 
 {{< image src="/img/posts/2023-02-12/portainer_synology6.png" alt="DSM Docker - Container" width="100%" >}}
 
-Wenn es so ausschaut, dann läuft unser Portainer. :) Wir können nun auf die Weboberfläche des Portainer zugreifen, indem wir die URL nach folgendem Schema aufrufen: 
+Wenn es so ausschaut, dann läuft unser Portainer bereits. Wir können nun auf die Weboberfläche des Portainer zugreifen, indem wir die URL nach folgendem Schema aufrufen: 
 
 `https://[IP oder Hostname]:9443`
 
@@ -86,27 +88,32 @@ Mit einem Klick auf "Get Started" ist das "Quick Setup" auch schon erledigt, und
 
 Unser Portainer ist nun startklar. 
 
+Da sich mit einer Portainer Weboberfläche mehrere Docker Hosts (Environments) verwalten lassen, müssen wir zum Anlegen unseres ersten Containers noch unser Environment auswählen. Dies tun wir mit einem Klick auf "local" oder auf den Button "Live connect". 
+
 ## Bonus: Portainer Aktualisieren
 
-Von Zeit zu Zeit bekommt natürlich auch Portainer Updates. Wenn ein neues Update zur Verfügung steht, informiert euch Portainer über die Weboberfläche. Da Portainer ein Docker Container ist, lässt sich das Update aber nicht über die Weboberfläche einspielen. Stattdessen müssen wir den Portainer Container und das Portainer Docker Image löschen und den Container neu erstellen. Und das geht so:
+Von Zeit zu Zeit bekommt natürlich auch Portainer Updates. Wenn ein neues Update zur Verfügung steht, informiert euch Portainer über die Weboberfläche. Da Portainer ein Docker Container ist, lässt sich das Update aber leider nicht über die Weboberfläche einspielen. Stattdessen müssen wir den Portainer Container und das Portainer Docker Image löschen und den Container neu erstellen. Und das geht so:
 
 Zunächst rufen wir die Docker Web UI im Synology DSM auf und stoppen den Portainer Container.
 
 {{< image src="/img/posts/2023-02-12/portainer_synology10.png" alt="DSM Docker - Container entfernen" width="100%" >}}
 
-Über das Menü "Aktion" > "Löschen" oder "Rechtsklick" > "Löschen" entfernen wir den Portainer Container.<br>
+Über das Menü "Aktion" > "Löschen" oder "Rechtsklick" > "Löschen" entfernen wir den Portainer Container.
 Anschließend wechseln wir auf der linken Seite in den Bereich "Image".
 
 {{< image src="/img/posts/2023-02-12/portainer_synology11.png" alt="DSM Docker - Image entfernen" width="100%" >}}
 
-Dort entfernen wir auch das Portainer Docker Image. Anschließend können wie über den Aufgabenplaner, wie oben beschrieben, den Portainer Container neu erstellen. Dabei wird automatisch das neuste Docker Image geladen und verwendet. Sobald der Container erstellt ist, sollte auch der Zugriff auf die Weboberfläche wieder funktionieren. 
+Dort entfernen wir auch das Portainer Docker Image. Anschließend können wie über den Aufgabenplaner, wie oben beschrieben, den Portainer Container neu erstellen. Dabei wird automatisch das neuste Docker Image geladen und verwendet. Sobald der Container erstellt ist, sollte auch der Zugriff auf die Weboberfläche wieder wie gewohnt funktionieren. 
 
 {{< admonition type=note title="Hinweis" open=true >}}
-Für den Fall, dass beim Update etwas schief geht, bietet es sich an vor dem Update eure Portainer Konfigurationsdaten zu sichern. Das können wir entweder über das weg Kopieren des `portainer-data`-Ordner machen oder über den Export der Konfiguration im Portainer unter "Settings" > "Backup Portainer".
+Für den Fall, dass beim Update etwas schief geht, bietet es sich an vor dem Update eure Portainer Konfigurationsdaten zu sichern. Das kannst du entweder über das weg Kopieren des `portainer-data`-Ordners machen oder über den Export der Konfiguration im Portainer unter "Settings" > "Backup Portainer".
 {{< /admonition >}}
 
 ---
 
+Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über die Einrichtung von Portainer auf der Synology DiskStation geben.  
+&nbsp;
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag. 
+&nbsp;
 MfG,
 André
-
