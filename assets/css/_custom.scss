@@ -43,3 +43,17 @@ header .logo {
 .single #comments {
     padding: 4rem 0 2rem;
 }
+
+// external Link icon
+a[href^="http"]:not([href^="{{ (urls.Parse .Page.Permalink).Scheme }}://{{ (urls.Parse .Page.Permalink).Host }}"]):not(.no-external-icon)::after {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 600; 
+    font-size: 0.8em;
+    padding-left: 0.3em;
+    color: rgb(109, 109, 109);
+    content: "\f08e";
+}
+// remove icon on social links
+div.links a::after {
+    display: none;
+}

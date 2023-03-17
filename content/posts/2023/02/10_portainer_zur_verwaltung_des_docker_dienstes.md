@@ -27,7 +27,7 @@ Die Community Edition (CE) von Portainer ist ein Open-Source-Projekt und steht a
 Die Portainer Business Edition lässt sich für [bis zu 5 Nodes ebenfalls kostenlos](https://www.portainer.io/take-5) nutzen. Erforderlich ist lediglich eine Registrierung. Die entsprechende Lizenz wird per E-Mail zugeschickt. Mit der Lizenz kann dann das `portainer-ee` Docker Image verwendet werden. Ein [Upgrade von der Community Edition](https://docs.portainer.io/start/upgrade) ist dabei problemlos möglich. 
 {{< /admonition >}}
 
-## Wo finde ich was?
+## Wo finde ich weitere Infos?
 
 Bevor ich dir an einem kurzen Beispiel zeige, wie du einen Portainer Docker Container auf setzt und die Ersteinrichtung erledigst, hier noch eine kleine Linkliste zu den wichtigsten Informationen rund um Portainer: 
 
@@ -38,13 +38,13 @@ Bevor ich dir an einem kurzen Beispiel zeige, wie du einen Portainer Docker Cont
 * [Portainer Comunity Edition im Docker Hub >> hub.docker.com/r/portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 * [Portainer Business Edition im Docker Hub >> hub.docker.com/r/portainer/portainer-ee](https://hub.docker.com/r/portainer/portainer-ce)
 
-## Portainer Container aufsetzen
+## Portainer Docker Container erstellen
 
-Im Folgenden werden wir einen frischen Portainer Docker Container der Community Edition aufsetzen und dafür sorgen, dass unsere Konfiguration in einem lokalen Verzeichnis bzw. Docker Volume gespeichert wird.
+Im Folgenden werden wir einen frischen Portainer Docker Container der Community Edition erstellen und dafür sorgen, dass unsere Konfiguration in einem lokalen Verzeichnis bzw. Docker Volume gespeichert wird.
 
 ### Voraussetzungen
 
-Ich gehen davon aus, dass die folgenden Voraussetzungen bereits erfüllt sind:
+Ich gehe davon aus, dass die folgenden Voraussetzungen bereits erfüllt sind:
 * Linux basierter Docker Host (NAS Systeme basieren in der Regel auf Linux)
 * Zugriff auf die Kommandozeile des Docker Hosts
 * Installierter und gestarteter Docker Dienst
@@ -91,7 +91,11 @@ docker volume create portainer-data
 
 Den Portainer Container startest du in diesem Fall dann mit:
 ```bash
-docker run -d -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer-data:/data portainer/portainer-ce:latest
+docker run -d -p 9443:9443 \
+  --name portainer --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer-data:/data \
+  portainer/portainer-ce:latest
 ```
 
 ### Zugriff auf die Portainer Web UI
