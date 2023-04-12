@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-12/header.png
 tags: [portainer, docker, container, synology, diskstation]
 categories: [Tutorials, DiskStation, Portainer]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---

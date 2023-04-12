@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-23/header.png
 tags: [portainer, docker, container, netzwerk, bridge]
 categories: [Tutorials, Portainer]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---
@@ -25,7 +27,7 @@ Wie man ein benutzerdefiniertes Bridge Netzwerk über Portainer anlegt, das zeig
 
 Selbstverständlich gibt es auch hier ein paar Voraussetzungen die du schon erfüllt haben solltest. Hier eine kurze Liste:
 
-* Vorhandensein eines aud Linux basierenden Docker Hosts oder NAS mit Docker
+* Vorhandensein eines auf Linux basierenden [Docker Hosts oder NAS mit Docker](/posts/2023/02/01_grundlagen/)
 * [Portainer zur Verwaltung des Docker Dienstes](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes)
 * Grundverständnis zum Thema [(Docker) Netzwerk](https://docs.docker.com/network/)
 * optional: Zugriff auf die Kommandozeile des Docker Hosts (nur für Bonus)

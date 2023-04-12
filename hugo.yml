@@ -17,13 +17,13 @@ menu:
       name: Beiträge
       url: /posts/
       title: ''
-    - weight: 3
-      identifier: tags
-      pre: ''
-      post: ''
-      name: Schlagworte
-      url: /tags/
-      title: ''
+#    - weight: 3
+#      identifier: tags
+#      pre: ''
+#      post: ''
+#      name: Schlagworte
+#      url: /tags/
+#      title: ''
     - weight: 2
       identifier: categories
       pre: ''
@@ -46,6 +46,7 @@ params:
   title: blog.buanet.de
   description: Ein Blog über Smarthome mit Docker.
   images: [/img/og/default.png]
+  dateFormat: 02.01.2006
   header:
     desktopMode: fixed
     mobileMode: auto

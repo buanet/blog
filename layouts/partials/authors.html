@@ -1,0 +1,16 @@
+{{- $params := .Scratch.Get "params" -}}
+
+{{- if eq $params.author "André (buanet)" -}}
+<div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div>
+{{- else if eq $params.author "Sabrije" -}}
+<div class="author-card">
+    Author info not found!
+</div>
+{{- end -}}

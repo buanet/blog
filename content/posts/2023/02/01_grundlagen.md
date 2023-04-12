@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-01_header1.png
 tags: []
 categories: [Sonstiges]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---

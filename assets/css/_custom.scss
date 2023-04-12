@@ -2,6 +2,88 @@
 // custom style / override theme css
 // ==============================
 
+// Colors
+$ColorMain: #0d1117;
+$ColorMain1: #25292E;
+$ColorMain2: #3D4145;
+$ColorMain3: #56585D;
+$ColorMain4: #6E7074;
+$ColorMain5: #86888B;
+$ColorMain6: #9EA0A2;
+$ColorMain7: #B6B8B9;
+$ColorMain8: #CFCFD1;
+$ColorMain9: #E7E7E8;
+$ColorMain10: #FFFFFF;
+
+body {
+    background-color: $ColorMain10;
+    color: $ColorMain;
+}
+body[theme=dark] {
+    background-color: $ColorMain;
+    color: $ColorMain9;
+}
+header {
+    background-color: $ColorMain9;
+}
+[theme=dark] header {
+    background-color: $ColorMain1;
+}
+.fixed-button {
+    color: $ColorMain5;
+    background: $ColorMain9;
+}
+[theme=dark] .fixed-button {
+    color: $ColorMain5;
+    background: $ColorMain1;
+}
+.search input {
+    background-color: $ColorMain9;
+}
+[theme=dark] .search input {
+    background-color: $ColorMain1;
+}
+.open .search input, .search.mobile input {
+    color: $ColorMain3;
+    background-color: $ColorMain10;
+}
+[theme=dark] .open .search input, [theme=dark] .search.mobile input {
+    color: $ColorMain2;
+    background-color: $ColorMain8;
+}
+.search-dropdown .dropdown-menu {
+    background-color: $ColorMain8;
+}
+[theme=dark] .search-dropdown .dropdown-menu {
+    background-color: $ColorMain2;
+}
+[theme=dark] .single .post-footer .post-info .post-info-line .post-info-mod {
+    color: $ColorMain5;
+}
+[theme=dark] #toc-auto {
+    border-left-color: $ColorMain2;
+}
+[theme=dark] a, [theme=dark] a::before, [theme=dark] a::after {
+    color: #c9d1d9;
+}
+[theme=dark] .single .post-meta {
+    color: $ColorMain5;
+}
+[theme=dark] .single .post-meta a, [theme=dark] .single .post-meta a::before, [theme=dark] .single .post-meta a::after {
+    color: $ColorMain5;
+}
+[theme=dark] .home[data-home=posts] .summary {
+    color: $ColorMain5;
+    border-bottom: 5px solid $ColorMain2;
+}
+[theme=dark] .home[data-home=posts] .summary .content {
+    color: $ColorMain9;
+    text-align: justify;
+}
+[theme=dark] .home[data-home=posts] .summary .post-footer a, [theme=dark] .home[data-home=posts] .summary .post-footer a::before, [theme=dark] .home[data-home=posts] .summary .post-footer a::after {
+    color: #66b3ff;
+}
+
 // header logo size
 header .logo {
     min-height: 1.3em;
@@ -15,13 +97,14 @@ header .logo {
 
 // devider (hr) solid
 .single .content hr {
-    border-top: 1px solid #f0f0f0;
+    border-top: 5px solid $ColorMain9;
     border-left: 0px;
     border-right: 0px;
     margin: 2rem 0rem;
 }
 [theme=dark] .single .content hr {
-    border-top: 1px solid #363636;
+    border-top: 5px solid $ColorMain2;
+    // border-radius: 3px;
 }
 
 // justification 
@@ -50,10 +133,42 @@ a[href^="http"]:not([href^="{{ (urls.Parse .Page.Permalink).Scheme }}://{{ (urls
     font-weight: 600; 
     font-size: 0.8em;
     padding-left: 0.3em;
-    color: rgb(109, 109, 109);
+    color: $ColorMain3;
     content: "\f08e";
 }
 // remove icon on social links
 div.links a::after {
     display: none;
+}
+
+// author card
+div.author-card {
+    margin-top: 2em;
+    background-color: #fdfbfb;
+    width: 100%;
+    border-top: 5px solid #f0f0f0;
+    display: -webkit-flex;
+    display: flex;
+}
+[theme=dark] div.author-card {
+    background-color: $ColorMain1;
+    border-top: 5px solid $ColorMain2;
+}
+
+img.author-card {
+    max-width:100px;
+    max-height:100px;
+    width: auto;
+    height: auto;
+    margin: 25px;
+    border-radius: 100%;
+    box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.075);
+}
+div.author-info {
+    font-size: 0.8em;
+    margin: 10px;
+}
+div.author-info h1{
+    font-size: 1.5em;
+    margin: 5px 0px;
 }

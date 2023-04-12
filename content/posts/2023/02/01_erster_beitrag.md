@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-01_header.png
 tags: []
 categories: [Sonstiges]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---
@@ -52,6 +54,3 @@ Für den Fall, dass du aus anderen Gründen persönlich mit mir in Kontakt trete
 ---
 
 Ich denke damit ist fürs Erste alles gesagt. Viel Spaß beim Lesen und Ausprobieren. 
-&nbsp;
-MfG,
-André

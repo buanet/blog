@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-23/header.png
 tags: [portainer, docker, container, netzwerk, macvlan]
 categories: [Tutorials, Portainer]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---
@@ -26,7 +28,7 @@ In diesem Tutorial zeige ich dir, wie du über Portainer ein MACVLAN Netzwerk er
 
 Auch dieses Mal gilt es wieder Voraussetzungen zu erfüllen um das Tutorial erfolgreich umsetzen zu können. Hier eine kurze Liste: 
 
-* Vorhandensein eines aud Linux basierenden Docker Hosts oder NAS mit Docker
+* Vorhandensein eines auf Linux basierenden [Docker Hosts oder NAS mit Docker](/posts/2023/02/01_grundlagen/)
 * [Portainer zur Verwaltung des Docker Dienstes](/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes)
 * Grundverständnis zum Thema IP-Netzwerk im Allgemeinen (IP-Adressen und Bereiche, Subnetze, DHCP, Gateway)
 * Grundverständnis zum Thema [Docker Netzwerk](https://docs.docker.com/network/)
@@ -37,11 +39,11 @@ Auch dieses Mal gilt es wieder Voraussetzungen zu erfüllen um das Tutorial erfo
 
 Starten wir mit dem Ermitteln eines passenden Adressbereichs für unser MACVLAN. Dazu muss man wissen, dass Docker, im für das MACVLAN verwendeten Adressbereich, selbst IP-Adressen für Container vergeben kann, wenn diese mit dem Netzwerk verbunden werden. Ganz ähnlich wie es auch ein DHCP-Server tut wenn sich ein neues Gerät im Netzwerk meldet. Um hier später IP-Adresskonflikte im Heimnetz zu vermeiden, sollte sich daher der Adressbereich für das MACVLAN nicht mit dem Adressbereich deines DHCP überschneiden. 
 
-Nehmen wir mein Test-Netzwerk als praktisches Beispiel. Ich verwende das Netzwerk `192.168.11.0/24`. Es umfasst einen Netzwerkbereich von 254 Adressen (`192.168.11.0` bis `192.168.11.254`). Das Gateway ist die `192.168.11.1`. Mein DHCP vergibt IP-Adressen im Bereich von `192.168.11.200` bis `192.168.11.250`.
+Nehmen wir mein Test-Netzwerk als praktisches Beispiel. Ich verwende das Netzwerk `192.168.11.0/24`. Es umfasst einen Netzwerkbereich von 254 Adressen (`192.168.11.1` bis `192.168.11.254`). Das Gateway belegt die `192.168.11.1`. Mein DHCP vergibt IP-Adressen im Bereich von `192.168.11.200` bis `192.168.11.250`.
 Vergleichbar ist dieses Netz von der Beschaffenheit her zum Beispiel mit den Standard Netzwerken, die auch Heimnetz-Router wie die Fritzbox verwenden.
 
-Um nun innerhalb dieses Netzwerks einen passenden Adressbereich zu finden, welches sich für das MACVLAN eignet, nutze ich immer wieder gerne den [Netzwerkrechner von Heise](https://www.heise.de/netze/tools/netzwerkrechner/). Dort gebe ich zunächst eine IP-Adresse aus dem Adressbereich ein, von dem ich denke, dass er sich für mein MACVLAN Netzwerk eignet und nicht mit dem DHCP kollidiert. In meinem Fall ist das zum Beispiel der Bereich um `192.168.11.120`.
-Weiter geht es im Netzwerkrechner mit dem CIDR-Suffix (Definiert die Größe der Netzmaske). Für mein komplettes Netz ist das CIDR-Suffix `/24`. Je größer das Suffix wird, desto kleiner wird mein Netzwerkbereich. Dabei halbiert sich mit jedem Schritt die Anzahl der nutzbaren IP-Adressen im Netzwerkbereich (-2 für Netzadresse und Broadcast). Bedeutet für die Größe der möglichen Adressbereiche: 
+Um nun innerhalb dieses Netzwerks einen passenden Adressbereich zu finden, welcher sich für das MACVLAN eignet, nutze ich immer wieder gerne den [Netzwerkrechner von Heise](https://www.heise.de/netze/tools/netzwerkrechner/). Dort gebe ich zunächst eine IP-Adresse aus dem Adressbereich ein, von dem ich denke, dass er sich für mein MACVLAN Netzwerk eignet und nicht mit dem DHCP kollidiert. In meinem Fall ist das zum Beispiel der Bereich um `192.168.11.120`.
+Weiter geht es im Netzwerkrechner mit dem CIDR-Suffix (Definiert die Größe der Netzmaske). Für mein komplettes Test-Netzwerk ist das CIDR-Suffix `/24` (`255.255.255.0`). Je größer das Suffix wird, desto kleiner wird mein Netzwerkbereich. Dabei halbiert sich mit jedem Schritt die Anzahl der nutzbaren IP-Adressen im Netzwerkbereich (-2 für Netzadresse und Broadcast). Bedeutet für die Größe der möglichen Adressbereiche: 
 
 ```
 /24 = 254 nutzbare IP-Adressen im Bereich
@@ -57,7 +59,7 @@ Mein Tip: Einfach mal verschiedene Werte im Rechner eingeben und schauen wie sic
 Kleine, ergänzende Info zum CIDR-Suffix und Spezialfall `/31`. Eigentlich wäre hier die Anzahl der nutzbaren Adressen = 0. Docker nutzt allerdings auch die "Netzadresse", sodass wir das MACVLAN auch mit dem Suffix `/31` definieren könnten. In diesem Fall wäre im Netz genau eine Adresse (nämlich die Netzadresse) für Container verfügbar.
 {{< /admonition >}}
 
-Da mir ein Netzbereich mit 6 IP-Adressen ausreicht, verwende ich das CIDR-Suffix `/29`und erhalte über den Rechner folgendes Ergebnis:
+Da mir ein Adressbereich mit 6 IP-Adressen ausreicht, verwende ich das CIDR-Suffix `/29`und erhalte über den Rechner folgendes Ergebnis:
 
 {{< image src="/img/posts/2023-02-23/portainer_macvlan1.png" alt="Netzwerkrechner" width="100%" >}}
 
@@ -71,7 +73,7 @@ Damit haben wir unseren Adressbereich ermittelt und können die gewonnenen Infor
 
 ## Parent network card ermitteln
 
-Fast. Um ein MACVLAN anlegen zu können, muss dieses an einen Netzwerkadapter im Docker Host gebunden werden. Damit wir dies bei der Konfiguration über die Portainer erledigen können, müssen wir zunächst die Bezeichnung des Adapters ermitteln, der mit unserem Heimnetz verbunden ist. Dies geht am einfachsten über die Kommandozeile.
+Fast. Um ein MACVLAN anlegen zu können, muss dieses an einen Netzwerkadapter im Docker Host gebunden werden. Damit wir dies bei der Konfiguration über die Portainer Web UI erledigen können, müssen wir zunächst die Bezeichnung des Adapters ermitteln, der mit unserem Heimnetz verbunden ist. Dies geht am einfachsten über die Kommandozeile.
 Über `ifconfig` oder `ip addr show` können wir uns eine Auflistung der Netzwerkkonfiguration anzeigen lassen.
 
 ```shell
@@ -150,7 +152,7 @@ $ ip addr show
        valid_lft forever preferred_lft forever
 ```
 
-In beiden Ausgaben finde ich die IP-Adresse meines Docker Hosts (`192.168.11.200`) in meinem Heimnetz. Zugewiesen ist diese dem Netzwerkinterface `eth0`. Mit dieser Info im Gepäck können wir nun mit dem Anlegen des MACVLAN beginnen. 
+In beiden Ausgaben finde ich die IP-Adresse meines Docker Hosts (`192.168.11.200`) innerhalb meines Netzwerks. Zugewiesen ist diese dem Netzwerkinterface `eth0`. Mit dieser Info im Gepäck können wir nun mit dem Anlegen des MACVLAN beginnen. 
 
 ## MACVLAN über UI anlegen
 
@@ -166,7 +168,7 @@ Wir vergeben einen aussagekräftigen Namen, in meinem Fall wähle ich `my_macvla
 
 {{< image src="/img/posts/2023-02-23/portainer_macvlan3.png" alt="Portainer - Create network" width="100%" >}}
 
-Unter "Parent network card" geben wir das ermittelte Netzwerkinterface `eth0` an.
+Unter "Parent network card" geben wir das ermittelte Netzwerkinterface `eth0` an, an das wir unser MACVLAN binden wollen.
 Die "IPv4 Network configuration" füllen wir mit den Daten zu unserem Subnetz (Heimnetzwerk) und dem ausgewählten Adressbereich aus. In meinem Fall ist das das Subnetz `192.168.11.0/24`. Das Gateway (mein Router) darin hat die `192.168.0.1`. Als IP-Adressbereich habe ich `192.168.11.120/29`ermittelt.  
 Weitere Optionen müssen wir in diesem Fall nicht konfigurieren. 
 
@@ -178,11 +180,11 @@ Ein Klick auf "Create the network" erstellt die Konfiguration für unser neues M
 
 ### "Creation" erstellen
 
-Wir befinden uns wieder im Bereich "Networks" des Portainer Web interfaces. Um die "Creation" zu erstellen, klicken wir nochmal auf "+ Add network". 
+Wir befinden uns wieder im Bereich "Networks" des Portainer Web interfaces. Um die "Creation" zu erstellen, klicken wir nochmals auf "+ Add network". 
 
 {{< image src="/img/posts/2023-02-23/portainer_macvlan4.png" alt="Portainer - Network list" width="100%" >}}
 
-Wir vergeben einen aussagekräftigen Namen für die Creation, in meinem Fall wähle ich `my_macvlan`. Als Driver wählen wir `macvlan`. Anders als zuvor wählen wir nun aber den Button "Creation".
+Wir vergeben einen aussagekräftigen Namen für die Creation, in meinem Fall wähle ich `my_macvlan`. Als Driver wählen wir wieder `macvlan`. Anders als zuvor wählen wir nun aber den Button "Creation".
 
 {{< image src="/img/posts/2023-02-23/portainer_macvlan5.png" alt="Portainer - Create network" width="100%" >}}
 

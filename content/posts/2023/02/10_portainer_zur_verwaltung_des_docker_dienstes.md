@@ -11,6 +11,8 @@ featuredImage: /img/posts/2023-02-10/header.png
 tags: [portainer, docker, container]
 categories: [Docker Images, Portainer]
 
+author: 'André (buanet)'
+
 seo:
   image: ''
 ---
