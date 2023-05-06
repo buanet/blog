@@ -15,9 +15,6 @@ author: 'André (buanet)'
 
 seo:
   image: ''
-
-#comment:
-#  enable: false
 ---
 
 ## Einleitung

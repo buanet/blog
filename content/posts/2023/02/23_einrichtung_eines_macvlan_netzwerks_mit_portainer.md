@@ -8,7 +8,7 @@ lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-23/header.png
 
-tags: [portainer, docker, container, netzwerk, macvlan]
+tags: []
 categories: [Tutorials, Portainer]
 
 author: 'André (buanet)'

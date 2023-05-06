@@ -1,15 +1,15 @@
 ---
 title: ioBroker unter Docker auf der Synology DiskStation
 subtitle: ''
-description: 'Ein Tutorial zue Einrichtung des ioBroker Docker Images auf der Synology DiskStation'
-summary: ''
+description: 'Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation'
+summary: 'In diesem Tutorial zeige ich dir, wie du mit Hilfe von Docker und Portainer das ioBroker Docker Image auf deiner Synology DiskStation installierst...'
 date: 2023-02-27T21:50:05+01:00
 lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-27/header.png
 
 tags: []
-categories: [tutorials, iobroker, diskstation]
+categories: [Tutorials, ioBroker, DiskStation]
 
 author: 'André (buanet)'
 

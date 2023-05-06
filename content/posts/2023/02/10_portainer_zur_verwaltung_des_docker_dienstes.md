@@ -1,6 +1,6 @@
 ---
 title: 'Portainer zur Verwaltung des Docker Dienstes'
-#subtitle: 'Das Fundament für unser Smarthome mit Docker'
+subtitle: ''
 description: 'Ein Überblick über Portainer als grafische Benutzeroberfläche zur Administration des Docker Dienstes'
 summary: 'Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück...'
 date: 2023-02-10T20:23:42+01:00
@@ -8,7 +8,7 @@ lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-10/header.png
 
-tags: [portainer, docker, container]
+tags: []
 categories: [Docker Images, Portainer]
 
 author: 'André (buanet)'

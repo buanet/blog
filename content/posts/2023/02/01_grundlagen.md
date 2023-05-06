@@ -1,6 +1,6 @@
 ---
 title: 'Grundlagen und Voraussetzungen'
-#subtitle: 'Das Fundament für unser Smarthome mit Docker'
+subtitle: ''
 description: 'Grundlagen und Voraussetzungen für das Verstehen und Umsetzen meiner Tutorials'
 summary: 'Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind...'
 date: 2023-02-01T00:00:01+01:00

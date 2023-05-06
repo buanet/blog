@@ -8,16 +8,13 @@ lastmod: ''
 draft: false
 featuredImage: /img/posts/2023-02-15/header.png
 
-tags: [portainer, docker, stacks]
+tags: []
 categories: [Tutorials, Portainer]
 
 author: 'André (buanet)'
 
 seo:
   image: ''
-
-#comment:
-#  enable: false
 ---
 
 ## Einleitung
