@@ -41,7 +41,7 @@ Bevor wir loslegen hier noch einen kleine Liste mit Links zu weiterführenden In
 * [Offizielle ioBroker Docker Image Dokumentation](https://docs.buanet.de/iobroker-docker-image/docs/)
 * [IoBroker Docker Image Source Code & Issues](https://github.com/buanet/ioBroker.docker)
 * [IoBroker Docker Image im Docker Hub](https://hub.docker.com/r/buanet/iobroker)
-* IoBroker Communities: [Forum](https://forum.iobroker.net/), [Discord](https://discord.gg/HwUCwsH), [Telegram](https://t.me/+Xfjuou6-LztkOTBi), [Facebook](https://www.facebook.com/groups/440499112958264)
+* IoBroker Communities: [Forum](https://forum.iobroker.net/), [Discord](https://discord.gg/5jGWNKnpZ8), [Facebook](https://www.facebook.com/groups/440499112958264)
 
 ## ioBroker Docker Container erstellen
 
