@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Einrichtung eines MACVLAN Netzwerks mit Portainer - blog.buanet.de</title><meta name="Description" content="Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer"><meta property="og:url" content="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="Einrichtung eines MACVLAN Netzwerks mit Portainer">
+  <meta property="og:description" content="Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-02-23T22:31:15+01:00">
+    <meta property="article:modified_time" content="2023-02-23T22:31:15+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="Einrichtung eines MACVLAN Netzwerks mit Portainer">
+  <meta name="twitter:description" content="Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" /><link rel="prev" href="http://localhost:1313/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" /><link rel="next" href="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Einrichtung eines MACVLAN Netzwerks mit Portainer",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/02\/23_einrichtung_eines_macvlan_netzwerks_mit_portainer\/"
+        },"genre": "posts","wordcount":  1743 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/02\/23_einrichtung_eines_macvlan_netzwerks_mit_portainer\/","datePublished": "2023-02-23T22:31:15+01:00","dateModified": "2023-02-23T22:31:15+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Einrichtung eines MACVLAN Netzwerks mit Portainer</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a>&nbsp;<a href="/categories/portainer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Portainer</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="23.02.2023">23.02.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1743 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-23/header.png"
+        data-srcset="/img/posts/2023-02-23/header.png, /img/posts/2023-02-23/header.png 1.5x, /img/posts/2023-02-23/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-23/header.png"
+        title="Ein Tutorial zur Einrichtung eines Docker MACVLAN Netzwerks mit Portainer" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#adressbereich-ip-range-ermitteln">Adressbereich (IP range) ermitteln</a></li>
+    <li><a href="#parent-network-card-ermitteln">Parent network card ermitteln</a></li>
+    <li><a href="#macvlan-über-ui-anlegen">MACVLAN über UI anlegen</a>
+      <ul>
+        <li><a href="#configuration-erstellen">&ldquo;Configuration&rdquo; erstellen</a></li>
+        <li><a href="#creation-erstellen">&ldquo;Creation&rdquo; erstellen</a></li>
+      </ul>
+    </li>
+    <li><a href="#macvlan-über-stack-docker-compose-definieren">MACVLAN über stack/ docker-compose definieren</a></li>
+    <li><a href="#bonus-macvlan-über-die-konsole-anlegen">Bonus: MACVLAN über die Konsole anlegen</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. Hier geht es zum Beispiel um <a href="https://de.wikipedia.org/wiki/Broadcast" target="_blank" rel="noopener noreffer ">Broadcast</a> oder <a href="https://de.wikipedia.org/wiki/Multicast" target="_blank" rel="noopener noreffer ">Multicast Traffic</a>, der den Container über das Bridge Netzwerk schlicht nicht erreichen kann, aber von vielen Tools und Protokollen benötigt wird. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an.<br>
+Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse in deinem (Heim-)Netzwerk und ist damit von anderen Geräten vollständig erreichbar. Eine Freigabe einzelner Ports ist nicht mehr erforderlich.</p>
+<p>In diesem Tutorial zeige ich dir, wie du über Portainer ein MACVLAN Netzwerk erstellst und worauf du achten musst. Am Beispiel meines Testnetzes werden wir zusammen ein Subnetz für das MACVLAN finden und entsprechend konfigurieren.</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Auch dieses Mal gilt es wieder Voraussetzungen zu erfüllen um das Tutorial erfolgreich umsetzen zu können. Hier eine kurze Liste:</p>
+<ul>
+<li>Vorhandensein eines auf Linux basierenden <a href="/posts/2023/02/01_grundlagen/" rel="">Docker Hosts oder NAS mit Docker</a></li>
+<li><a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes" rel="">Portainer zur Verwaltung des Docker Dienstes</a></li>
+<li>Grundverständnis zum Thema IP-Netzwerk im Allgemeinen (IP-Adressen und Bereiche, Subnetze, DHCP, Gateway)</li>
+<li>Grundverständnis zum Thema <a href="https://docs.docker.com/network/" target="_blank" rel="noopener noreffer ">Docker Netzwerk</a></li>
+<li>Kenntnisse des eigenen Netzwerks (DHCP-Bereiche, Gateways, usw.)</li>
+<li>Zugriff auf die Kommandozeile des Docker Hosts</li>
+</ul>
+<h2 id="adressbereich-ip-range-ermitteln">Adressbereich (IP range) ermitteln</h2>
+<p>Starten wir mit dem Ermitteln eines passenden Adressbereichs für unser MACVLAN. Dazu muss man wissen, dass Docker, im für das MACVLAN verwendeten Adressbereich, selbst IP-Adressen für Container vergeben kann, wenn diese mit dem Netzwerk verbunden werden. Ganz ähnlich wie es auch ein DHCP-Server tut wenn sich ein neues Gerät im Netzwerk meldet. Um hier später IP-Adresskonflikte im Heimnetz zu vermeiden, sollte sich daher der Adressbereich für das MACVLAN nicht mit dem Adressbereich deines DHCP überschneiden.</p>
+<p>Nehmen wir mein Test-Netzwerk als praktisches Beispiel. Ich verwende das Netzwerk <code>192.168.11.0/24</code>. Es umfasst einen Netzwerkbereich von 254 Adressen (<code>192.168.11.1</code> bis <code>192.168.11.254</code>). Das Gateway belegt die <code>192.168.11.1</code>. Mein DHCP vergibt IP-Adressen im Bereich von <code>192.168.11.200</code> bis <code>192.168.11.250</code>.<br>
+Vergleichbar ist dieses Netz von der Beschaffenheit her zum Beispiel mit den Standard Netzwerken, die auch Heimnetz-Router wie die Fritzbox verwenden.</p>
+<p>Um nun innerhalb dieses Netzwerks einen passenden Adressbereich zu finden, welcher sich für das MACVLAN eignet, nutze ich immer wieder gerne den <a href="https://www.heise.de/netze/tools/netzwerkrechner/" target="_blank" rel="noopener noreffer ">Netzwerkrechner von Heise</a>. Dort gebe ich zunächst eine IP-Adresse aus dem Adressbereich ein, von dem ich denke, dass er sich für mein MACVLAN Netzwerk eignet und nicht mit dem DHCP kollidiert. In meinem Fall ist das zum Beispiel der Bereich um <code>192.168.11.120</code>.<br>
+Weiter geht es im Netzwerkrechner mit dem CIDR-Suffix (Definiert die Größe der Netzmaske). Für mein komplettes Test-Netzwerk ist das CIDR-Suffix <code>/24</code> (<code>255.255.255.0</code>). Je größer das Suffix wird, desto kleiner wird mein Netzwerkbereich. Dabei halbiert sich mit jedem Schritt die Anzahl der nutzbaren IP-Adressen im Netzwerkbereich (-2 für Netzadresse und Broadcast). Bedeutet für die Größe der möglichen Adressbereiche:</p>
+<pre tabindex="0"><code>/24 = 254 nutzbare IP-Adressen im Bereich
+/25 = 126 nutzbare IP-Adressen im Bereich
+/26 = 62 nutzbare IP-Adressen im Bereich
+/27 = 30 nutzbare IP-Adressen im Bereich
+/28 = 14 nutzbare IP-Adressen im Bereich
+/29 = 6 nutzbare IP-Adressen im Bereich
+/30 = 2 nutzbare IP-Adressen im Bereich
+</code></pre><p>Mein Tip: Einfach mal verschiedene Werte im Rechner eingeben und schauen wie sich die Ergebnisse verändern.<br>
+<div class="details admonition warning">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Kleine, ergänzende Info zum CIDR-Suffix und Spezialfall <code>/31</code>. Eigentlich wäre hier die Anzahl der nutzbaren Adressen = 0. Docker nutzt allerdings auch die &ldquo;Netzadresse&rdquo;, sodass wir das MACVLAN auch mit dem Suffix <code>/31</code> definieren könnten. In diesem Fall wäre im Netz genau eine Adresse (nämlich die Netzadresse) für Container verfügbar.</div>
+        </div>
+    </div></p>
+<p>Da mir ein Adressbereich mit 6 IP-Adressen ausreicht, verwende ich das CIDR-Suffix <code>/29</code>und erhalte über den Rechner folgendes Ergebnis:</p>
+<a class="lightgallery" href="/img/posts/2023-02-23/portainer_macvlan1.png" title="Netzwerkrechner" data-thumbnail="/img/posts/2023-02-23/portainer_macvlan1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-23/portainer_macvlan1.png"
+            data-srcset="/img/posts/2023-02-23/portainer_macvlan1.png, /img/posts/2023-02-23/portainer_macvlan1.png 1.5x, /img/posts/2023-02-23/portainer_macvlan1.png 2x"
+            data-sizes="auto"
+            alt="Netzwerkrechner" width="100%" />
+    </a>
+<p>Dieser Adressbereich umfasst nun insgesamt die IP-Adressen von <code>192.168.11..120</code> bis <code>192.168.11..127</code>, während ich die Adressen von <code>192.168.11.121</code> bis <code>192.168.11.126</code> für Docker Container verwenden könnte.</p>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Dieses Tutorial ersetzt keinen Netzwerkkurs. &#x1f913; Die Auswahl des Netzbereiches ist sehr oberflächlich gehalten, funktioniert aber für diesen Anwendungsfall (im einfachen Heimnetz). Für weiteren Infos hier ein <a href="https://de.wikipedia.org/wiki/IP-Adresse" target="_blank" rel="noopener noreffer ">Link zum Thema &ldquo;IP-Adressen&rdquo;</a>. Außerdem findest du reichlich <a href="https://www.youtube.com/results?search_query=netzwerk&#43;subnetting" target="_blank" rel="noopener noreffer ">Videos zum Thema &ldquo;Netzwerk/ Subnetting&rdquo; bei Youtube</a>.</div>
+        </div>
+    </div>
+<p>Damit haben wir unseren Adressbereich ermittelt und können die gewonnenen Informationen in unserer MACVLAN-Konfiguration verwenden. Jetzt kann es doch eigentlich los gehen oder?</p>
+<h2 id="parent-network-card-ermitteln">Parent network card ermitteln</h2>
+<p>Fast. Um ein MACVLAN anlegen zu können, muss dieses an einen Netzwerkadapter im Docker Host gebunden werden. Damit wir dies bei der Konfiguration über die Portainer Web UI erledigen können, müssen wir zunächst die Bezeichnung des Adapters ermitteln, der mit unserem Heimnetz verbunden ist. Dies geht am einfachsten über die Kommandozeile.<br>
+Über <code>ifconfig</code> oder <code>ip addr show</code> können wir uns eine Auflistung der Netzwerkkonfiguration anzeigen lassen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ifconfig
+</span></span><span class="line"><span class="cl">docker0   Link encap:Ethernet  HWaddr 02:42:32:39:3E:55
+</span></span><span class="line"><span class="cl">          inet addr:172.17.0.1  Bcast:172.17.255.255  Mask:255.255.0.0
+</span></span><span class="line"><span class="cl">          inet6 addr: fe80::42:32ff:fe39:3e55/64 Scope:Link
+</span></span><span class="line"><span class="cl">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</span></span><span class="line"><span class="cl">          RX packets:2391 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span class="line"><span class="cl">          TX packets:2657 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span class="line"><span class="cl">          collisions:0 txqueuelen:1000
+</span></span><span class="line"><span class="cl">          RX bytes:3308725 <span class="o">(</span>3.1 MiB<span class="o">)</span>  TX bytes:872522 <span class="o">(</span>852.0 KiB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker-67 Link encap:Ethernet  HWaddr 02:42:33:D2:74:92
+</span></span><span class="line"><span class="cl">          inet addr:172.20.0.1  Bcast:172.20.255.255  Mask:255.255.0.0
+</span></span><span class="line"><span class="cl">          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+</span></span><span class="line"><span class="cl">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span class="line"><span class="cl">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span class="line"><span class="cl">          collisions:0 txqueuelen:1000
+</span></span><span class="line"><span class="cl">          RX bytes:0 <span class="o">(</span>0.0 B<span class="o">)</span>  TX bytes:0 <span class="o">(</span>0.0 B<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker66f Link encap:Ethernet  HWaddr 0E:1B:75:00:0A:ED
+</span></span><span class="line"><span class="cl">          inet6 addr: fe80::c1b:75ff:fe00:aed/64 Scope:Link
+</span></span><span class="line"><span class="cl">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</span></span><span class="line"><span class="cl">          RX packets:2391 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span class="line"><span class="cl">          TX packets:2662 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span class="line"><span class="cl">          collisions:0 txqueuelen:0
+</span></span><span class="line"><span class="cl">          RX bytes:3342199 <span class="o">(</span>3.1 MiB<span class="o">)</span>  TX bytes:872960 <span class="o">(</span>852.5 KiB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">eth0      Link encap:Ethernet  HWaddr EE:10:EC:B0:CB:20
+</span></span><span class="line"><span class="cl">          inet addr:192.168.11.200  Bcast:192.168.11.255  Mask:255.255.255.0
+</span></span><span class="line"><span class="cl">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</span></span><span class="line"><span class="cl">          RX packets:10802 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span class="line"><span class="cl">          TX packets:6910 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span class="line"><span class="cl">          collisions:0 txqueuelen:1000
+</span></span><span class="line"><span class="cl">          RX bytes:2018717 <span class="o">(</span>1.9 MiB<span class="o">)</span>  TX bytes:15025239 <span class="o">(</span>14.3 MiB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">lo        Link encap:Local Loopback
+</span></span><span class="line"><span class="cl">          inet addr:127.0.0.1  Mask:255.0.0.0
+</span></span><span class="line"><span class="cl">          inet6 addr: ::1/128 Scope:Host
+</span></span><span class="line"><span class="cl">          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+</span></span><span class="line"><span class="cl">          RX packets:68 errors:0 dropped:0 overruns:0 frame:0
+</span></span><span class="line"><span class="cl">          TX packets:68 errors:0 dropped:0 overruns:0 carrier:0
+</span></span><span class="line"><span class="cl">          collisions:0 txqueuelen:1
+</span></span><span class="line"><span class="cl">          RX bytes:7279 <span class="o">(</span>7.1 KiB<span class="o">)</span>  TX bytes:7279 <span class="o">(</span>7.1 KiB<span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ip addr show
+</span></span><span class="line"><span class="cl">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="m">65536</span> qdisc noqueue state UNKNOWN group default qlen <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span><span class="line"><span class="cl">    inet 127.0.0.1/8 scope host lo
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">    inet6 ::1/128 scope host
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc pfifo_fast state UP group default qlen <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    link/ether ee:10:ec:b0:cb:20 brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="cl">    inet 192.168.11.200/24 brd 192.168.11.255 scope global eth0
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">3: sit0@NONE: &lt;NOARP&gt; mtu <span class="m">1480</span> qdisc noop state DOWN group default qlen <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    link/sit 0.0.0.0 brd 0.0.0.0
+</span></span><span class="line"><span class="cl">4: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc noqueue state UP group default qlen <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    link/ether 02:42:32:39:3e:55 brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="cl">    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">    inet6 fe80::42:32ff:fe39:3e55/64 scope link
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">5: docker-6735f2dd: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu <span class="m">1500</span> qdisc noqueue state DOWN group default qlen <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    link/ether 02:42:33:d2:74:92 brd ff:ff:ff:ff:ff:ff
+</span></span><span class="line"><span class="cl">    inet 172.20.0.1/16 brd 172.20.255.255 scope global docker-6735f2dd
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span><span class="line"><span class="cl">7: docker66fe1a9@if6: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc noqueue master docker0 state UP group default
+</span></span><span class="line"><span class="cl">    link/ether 0e:1b:75:00:0a:ed brd ff:ff:ff:ff:ff:ff link-netnsid <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    inet6 fe80::c1b:75ff:fe00:aed/64 scope link
+</span></span><span class="line"><span class="cl">       valid_lft forever preferred_lft forever
+</span></span></code></pre></div><p>In beiden Ausgaben finde ich die IP-Adresse meines Docker Hosts (<code>192.168.11.200</code>) innerhalb meines Netzwerks. Zugewiesen ist diese dem Netzwerkinterface <code>eth0</code>. Mit dieser Info im Gepäck können wir nun mit dem Anlegen des MACVLAN beginnen.</p>
+<h2 id="macvlan-über-ui-anlegen">MACVLAN über UI anlegen</h2>
+<p>Das Anlegen eines MACVLAN über Portainer erfolgt in zwei Schritten. Zunächst müssen wir eine MACVLAN &ldquo;Configuration&rdquo; anlegen, bevor wir in einem weiteren Schritt daraus eine MACVLAN &ldquo;Creation&rdquo; erstellen können. Fangen wir also mit der &ldquo;Configuration&rdquo; an.</p>
+<h3 id="configuration-erstellen">&ldquo;Configuration&rdquo; erstellen</h3>
+<p>Los geht es natürlich wieder im Bereich &ldquo;Networks&rdquo; in der Portainer Weboberfläche mit einem Klick auf &ldquo;+ Add network&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-23/portainer_macvlan2.png" title="Portainer - Network list" data-thumbnail="/img/posts/2023-02-23/portainer_macvlan2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-23/portainer_macvlan2.png"
+            data-srcset="/img/posts/2023-02-23/portainer_macvlan2.png, /img/posts/2023-02-23/portainer_macvlan2.png 1.5x, /img/posts/2023-02-23/portainer_macvlan2.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Network list" width="100%" />
+    </a>
+<p>Wir vergeben einen aussagekräftigen Namen, in meinem Fall wähle ich <code>my_macvlan_conf</code>. Als Driver wählen wir <code>macvlan</code>. An dieser Stelle erscheint dann auch der Hinweis auf &ldquo;Configuration&rdquo; und &ldquo;Creation&rdquo;. Wir wählen den Button für &ldquo;Contiguration&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-23/portainer_macvlan3.png" title="Portainer - Create network" data-thumbnail="/img/posts/2023-02-23/portainer_macvlan3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-23/portainer_macvlan3.png"
+            data-srcset="/img/posts/2023-02-23/portainer_macvlan3.png, /img/posts/2023-02-23/portainer_macvlan3.png 1.5x, /img/posts/2023-02-23/portainer_macvlan3.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Create network" width="100%" />
+    </a>
+<p>Unter &ldquo;Parent network card&rdquo; geben wir das ermittelte Netzwerkinterface <code>eth0</code> an, an das wir unser MACVLAN binden wollen.<br>
+Die &ldquo;IPv4 Network configuration&rdquo; füllen wir mit den Daten zu unserem Subnetz (Heimnetzwerk) und dem ausgewählten Adressbereich aus. In meinem Fall ist das das Subnetz <code>192.168.11.0/24</code>. Das Gateway (mein Router) darin hat die <code>192.168.0.1</code>. Als IP-Adressbereich habe ich <code>192.168.11.120/29</code>ermittelt.<br>
+Weitere Optionen müssen wir in diesem Fall nicht konfigurieren.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Sollte sich im ausgewählten Adressbereich bereits ein Netzwerkgerät befinden, also eine oder mehrere Adressen nicht mehr verfügbar sein, so kannst du bei der Erstellung über &ldquo;+ Add exclude IP&rdquo; Adressen definieren, die Docker aus dem Bereich nicht verwenden darf.</div>
+        </div>
+    </div>
+<p>Ein Klick auf &ldquo;Create the network&rdquo; erstellt die Konfiguration für unser neues MACVLAN Netzwerk.</p>
+<h3 id="creation-erstellen">&ldquo;Creation&rdquo; erstellen</h3>
+<p>Wir befinden uns wieder im Bereich &ldquo;Networks&rdquo; des Portainer Web interfaces. Um die &ldquo;Creation&rdquo; zu erstellen, klicken wir nochmals auf &ldquo;+ Add network&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-23/portainer_macvlan4.png" title="Portainer - Network list" data-thumbnail="/img/posts/2023-02-23/portainer_macvlan4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-23/portainer_macvlan4.png"
+            data-srcset="/img/posts/2023-02-23/portainer_macvlan4.png, /img/posts/2023-02-23/portainer_macvlan4.png 1.5x, /img/posts/2023-02-23/portainer_macvlan4.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Network list" width="100%" />
+    </a>
+<p>Wir vergeben einen aussagekräftigen Namen für die Creation, in meinem Fall wähle ich <code>my_macvlan</code>. Als Driver wählen wir wieder <code>macvlan</code>. Anders als zuvor wählen wir nun aber den Button &ldquo;Creation&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-23/portainer_macvlan5.png" title="Portainer - Create network" data-thumbnail="/img/posts/2023-02-23/portainer_macvlan5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-23/portainer_macvlan5.png"
+            data-srcset="/img/posts/2023-02-23/portainer_macvlan5.png, /img/posts/2023-02-23/portainer_macvlan5.png 1.5x, /img/posts/2023-02-23/portainer_macvlan5.png 2x"
+            data-sizes="auto"
+            alt="Portainer - Create network" width="100%" />
+    </a>
+<p>Aus dem Dropdown &ldquo;Configuration&rdquo; wählen wir unsere Configuration. In meinem Fall <code>my_macvlan_conf</code>.<br>
+Weitere Einstellungen müssen wir nicht konfigurieren. Ein Klick auf &ldquo;Create the network&rdquo; erstellt unser MACVLAN.</p>
+<h2 id="macvlan-über-stack-docker-compose-definieren">MACVLAN über stack/ docker-compose definieren</h2>
+<p>Natürlich lässt sich ein MACVLAN auch in <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/" target="_blank" rel="noopener noreffer ">docker-compose</a> definieren. In der Portainer Web UI nennt sich das Ganze &ldquo;Stacks&rdquo;. Die Definition des oben manuell angelegten MACVLAN Netzwerks sieht dabei so aus:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">my_macvlan</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">macvlan</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver_opts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l">eth0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.0</span><span class="l">/24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ip_range</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.120</span><span class="l">/29</span><span class="w">
+</span></span></span></code></pre></div><h2 id="bonus-macvlan-über-die-konsole-anlegen">Bonus: MACVLAN über die Konsole anlegen</h2>
+<p>Das MACVLAN kann selbstverständlich auch über die Kommandozeile des Docker Hosts angelegt werden. Dafür benötigen wir einen entsprechenden Zugang per SSH oder direkt auf die Konsole des Systems.</p>
+<p>Mit einem <code>docker network ls</code> (je nach Systemkonfiguration sind ggf. erweiterte Rechte über <code>sudo</code> erforderlich), lassen wir uns eine Liste der bereits vorhandenen Netzwerke anzeigen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker network ls
+</span></span><span class="line"><span class="cl">NETWORK ID     NAME        DRIVER    SCOPE
+</span></span><span class="line"><span class="cl">9335f6cb157e   bridge      bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">62d546b7d844   host        host      <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">6735f2dd8b6d   my_bridge   bridge    <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">8b720f638bc1   none        null      <span class="nb">local</span>
+</span></span></code></pre></div><p>Um ein MACVLAN Netzwerk wie oben beschrieben zu erstellen, reicht ein einziges Kommando in dem wir alle nötigen Parameter einfach mitgeben.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> docker network create -d macvlan <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --subnet<span class="o">=</span>192.168.11.0/24 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --ip-range<span class="o">=</span>192.168.11.120/29 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --gateway<span class="o">=</span>192.168.11.1 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -o <span class="nv">parent</span><span class="o">=</span>eth0 my_macvlan
+</span></span></code></pre></div><p>Die Details zum Netzwerk lassen sich anschließend per <code>docker network inspect my_macvlan</code> auslesen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker network inspect my_macvlan
+</span></span><span class="line"><span class="cl"><span class="o">[</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;my_macvlan&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;77dc5f025355da453a3e6a781700bda078bdef596637a415344db99e578df56b&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2023-03-13T14:54:21.688669799+01:00&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Scope&#34;</span>: <span class="s2">&#34;local&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;macvlan&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;EnableIPv6&#34;</span>: false,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;IPAM&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;default&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Options&#34;</span>: <span class="o">{}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Config&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;Subnet&#34;</span>: <span class="s2">&#34;192.168.11.0/24&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;IPRange&#34;</span>: <span class="s2">&#34;192.168.11.120/29&#34;</span>,
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;Gateway&#34;</span>: <span class="s2">&#34;192.168.11.1&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Internal&#34;</span>: false,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Attachable&#34;</span>: false,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Ingress&#34;</span>: false,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ConfigFrom&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Network&#34;</span>: <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ConfigOnly&#34;</span>: false,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Containers&#34;</span>: <span class="o">{}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Options&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;parent&#34;</span>: <span class="s2">&#34;eth0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Labels&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">]</span>
+</span></span></code></pre></div><p>Das soll es zur Kommandozeile auch gewesen sein. In den <a href="https://docs.docker.com/engine/reference/commandline/network_create/" target="_blank" rel="noopener noreffer ">Docker Docs zu docker network create</a> findest du weiterführende Informationen und Beispiele.</p>
+<hr>
+<p>Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über die Einrichtung eines Docker MACVLAN Netzwerks mit Portainer geben.<br>
+ <br>
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 23.02.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" data-title="Einrichtung eines MACVLAN Netzwerks mit Portainer" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" class="prev" rel="prev" title="Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer</a>
+            <a href="/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" class="next" rel="next" title="ioBroker im Smarthome mit Docker">ioBroker im Smarthome mit Docker<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

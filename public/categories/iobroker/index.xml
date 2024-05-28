@@ -1,0 +1,47 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>IoBroker - Kategorie - blog.buanet.de</title>
+        <link>http://localhost:1313/categories/iobroker/</link>
+        <description>IoBroker - Kategorie - blog.buanet.de</description>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Fri, 31 Mar 2023 08:07:00 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/iobroker/" rel="self" type="application/rss+xml" /><item>
+    <title>ioBroker Docker Container: Wartung und Pflege</title>
+    <link>http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/</link>
+    <pubDate>Fri, 31 Mar 2023 08:07:00 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-03-31/header.png" referrerpolicy="no-referrer">
+            </div>Auch der zuverlässigste ioBroker Docker Container braucht hin und wieder ein bisschen Aufmerksamkeit. Ob Backups oder Updates – die regelmäßige Pflege deines Systems ist ein absolutes Muss.]]></description>
+</item>
+<item>
+    <title>USB-Geräte im ioBroker Docker Container</title>
+    <link>http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/</link>
+    <pubDate>Fri, 03 Mar 2023 21:25:42 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-03-02/header.png" referrerpolicy="no-referrer">
+            </div>In diesem Tutorial zeige ich dir wie du ein USB-Gerät in deinen ioBroker Container durchreichen kannst um zum Beispiel einen Zigbee-Stick in ioBroker verwenden zu können&hellip;]]></description>
+</item>
+<item>
+    <title>ioBroker unter Docker auf der Synology DiskStation</title>
+    <link>http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/</link>
+    <pubDate>Mon, 27 Feb 2023 21:50:05 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-27/header.png" referrerpolicy="no-referrer">
+            </div>In diesem Tutorial zeige ich dir, wie du mit Hilfe von Docker und Portainer das ioBroker Docker Image auf deiner Synology DiskStation installierst&hellip;]]></description>
+</item>
+<item>
+    <title>ioBroker im Smarthome mit Docker</title>
+    <link>http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/</link>
+    <pubDate>Sun, 26 Feb 2023 22:25:17 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-26/header.png" referrerpolicy="no-referrer">
+            </div>Eine zentrale Rolle in meinem Smarthome mit Docker spielt ioBroker. In diesem Artikel will ich dir einen kurzen Überblick über ioBroker geben und zeigen, wie einfach und schnell du einen ioBroker Docker Container für einen ersten Test aufsetzen kannst&hellip;]]></description>
+</item>
+</channel>
+</rss>

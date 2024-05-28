@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ioBroker Docker Container: Wartung und Pflege - blog.buanet.de</title><meta name="Description" content="Hier findest du Infos rund um Wartung und Pflege deines ioBroker Docker Containers"><meta property="og:url" content="http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="ioBroker Docker Container: Wartung und Pflege">
+  <meta property="og:description" content="Hier findest du Infos rund um Wartung und Pflege deines ioBroker Docker Containers">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-31T08:07:00+01:00">
+    <meta property="article:modified_time" content="2023-12-14T20:42:23+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="ioBroker Docker Container: Wartung und Pflege">
+  <meta name="twitter:description" content="Hier findest du Infos rund um Wartung und Pflege deines ioBroker Docker Containers">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/" /><link rel="prev" href="http://localhost:1313/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ioBroker Docker Container: Wartung und Pflege",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/03\/31_iobroker_docker-container_wartung_und_pflege\/"
+        },"genre": "posts","wordcount":  1854 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/03\/31_iobroker_docker-container_wartung_und_pflege\/","datePublished": "2023-03-31T08:07:00+01:00","dateModified": "2023-12-14T20:42:23+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Hier findest du Infos rund um Wartung und Pflege deines ioBroker Docker Containers"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ioBroker Docker Container: Wartung und Pflege</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/iobroker/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>IoBroker</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="31.03.2023">31.03.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1854 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-03-31/header.png"
+        data-srcset="/img/posts/2023-03-31/header.png, /img/posts/2023-03-31/header.png 1.5x, /img/posts/2023-03-31/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-03-31/header.png"
+        title="Hier findest du Infos rund um Wartung und Pflege deines ioBroker Docker Containers" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#backups-die-basis-für-alles">Backups: Die Basis für alles</a>
+      <ul>
+        <li><a href="#backup-auf-dateiebene">Backup auf Dateiebene</a></li>
+        <li><a href="#backup-der-konfiguration-aus-iobroker-heraus">Backup der Konfiguration aus ioBroker heraus</a></li>
+        <li><a href="#meine-persönliche-backup-strategie">Meine persönliche Backup-Strategie</a></li>
+      </ul>
+    </li>
+    <li><a href="#updates-wartung-ist-wichtig">Updates: Wartung ist wichtig!</a>
+      <ul>
+        <li><a href="#linux-paket-updates-optional">Linux Paket Updates (optional)</a></li>
+        <li><a href="#docker-image-updates">Docker Image Updates</a></li>
+        <li><a href="#adapter-updates">Adapter Updates</a></li>
+        <li><a href="#iobroker-core-updates">ioBroker Core Updates</a></li>
+      </ul>
+    </li>
+    <li><a href="#fazit">Fazit</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>Auch der zuverlässigste ioBroker Docker Container braucht hin und wieder ein bisschen Aufmerksamkeit. Ob Backups oder Updates – die regelmäßige Pflege deines Systems ist ein absolutes Muss.</p>
+<p>Mit Blick auf den heutigen &ldquo;Welt-Backup-Tag&rdquo; habe ich mich entschlossen, einen umfassenden und leicht verständlichen Beitrag zu diesem Thema zu verfassen. Im Mittelpunkt steht dabei, wie du deinen ioBroker am besten sicherst, Updates durchführst und welche praktischen Tools dir dabei unter die Arme greifen können.</p>
+<p>Bereit, in die Tiefen der Systemwartung einzutauchen? Lass uns gemeinsam sicherstellen, dass dein ioBroker immer auf der Höhe der Zeit ist und du stets ein gutes Backup in der Hinterhand hast.</p>
+<p>Viel Spaß beim Lesen!</p>
+<h2 id="backups-die-basis-für-alles">Backups: Die Basis für alles</h2>
+<p>Die Grundlage dafür, dass du überhaupt gefahrlos mit und an deinem System arbeiten, konfigurieren und aktualisieren kannst, bildet ein zuverlässiges und aktuelles Backup deiner ioBroker Docker Installation. Werfen wir einen Blick auf die Möglichkeiten die du hast und was es ggf. dabei zu beachten gilt.</p>
+<h3 id="backup-auf-dateiebene">Backup auf Dateiebene</h3>
+<p>Beim Einrichten des ioBroker Docker Containers hast du die Konfigurationsdaten von ioBroker, die sich standardmäßig im Container unter <code>/opt/iobroker</code> befinden, in ein Verzeichnis oder Volume auf deinem Docker Host ausgelagert. Das Backup auf Dateiebene bezieht sich darauf, dieses ausgelagerte Verzeichnis zu sichern. Diese Sicherung erfolgt auf der Ebene des Docker Hosts und kann beispielsweise durch die Einrichtung eines Cronjobs in Kombination mit einem kleinen Skript automatisiert werden. Alternativ kannst du auch jedes Backup-Tool verwenden, das in der Lage ist, Daten unter Linux auf Dateiebene zu sichern. Diese Sicherungsstrategie gewährleistet, dass im Falle von Problemen oder Datenverlust eine zuverlässige Wiederherstellung auf Basis der gesicherten Dateien möglich ist.</p>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Achtung<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Um eine Inkonsistenz der Daten beim Datei-Backup zu vermeiden solltest du sicherstellen, dass der ioBroker Docker Container während der Sicherung gestoppt ist!</div>
+        </div>
+    </div>
+<p>Ergänzend zu diesem Ansatz ergeben sich aus dem Backup auf Dateiebene sowohl Vorteile als auch Nachteile:</p>
+<h4 id="vorteile">Vorteile</h4>
+<p>Durch das Backup auf Dateiebene ergeben sich folgende Vorteile:</p>
+<ul>
+<li>
+<p><strong>1:1 Kopie deiner aktuellen ioBroker Installation:</strong> Das Backup sichert exakt den Zustand deiner ioBroker-Umgebung, einschließlich aller Konfigurationen und Daten.</p>
+</li>
+<li>
+<p><strong>Minimale Wiederherstellungszeit:</strong> Im Falle eines Problems ermöglicht das Backup auf Dateiebene eine schnelle Wiederherstellung. Hierzu müssen lediglich der ioBroker-Container gestoppt, die Dateien wiederhergestellt und der Container erneut gestartet werden.</p>
+</li>
+<li>
+<p><strong>Kann mit Bordmitteln des Docker Hosts realisiert werden:</strong> Die Umsetzung dieser Backup-Strategie kann möglicherweise mithilfe der nativen Tools des Docker Hosts erfolgen, wie zum Beispiel bei einer Synology DiskStation durch <a href="https://www.synology.com/de-de/dsm/feature/hyper_backup" target="_blank" rel="noopener noreffer ">Hyper Backup</a>.</p>
+</li>
+<li>
+<p><strong>Einfache Prüfung und Wiederherstellung einzelner Dateien:</strong> Da das Backup auf Dateiebene eine Kopie der einzelnen Dateien und Konfigurationen erstellt, ermöglicht es eine einfache Prüfung und selektive Wiederherstellung bestimmter Dateien, falls erforderlich.</p>
+</li>
+</ul>
+<h4 id="nachteile">Nachteile</h4>
+<p>Jedoch, wo Licht ist, ist auch Schatten. Hier sind mögliche Nachteile des Backups auf Dateiebene:</p>
+<ul>
+<li>
+<p><strong>ioBroker Container sollte beim Backup gestoppt sein:</strong> Um die Gefahr eines defekten Backups zu minimieren, sollte der ioBroker Container während des Backups gestoppt sein.</p>
+</li>
+<li>
+<p><strong>Backup kann sehr groß sein:</strong> Da das gesamte ioBroker-Verzeichnis gesichert wird, kann das Backup beträchtlich groß werden. Dies sollte bei der Speicherplanung berücksichtigt werden.</p>
+</li>
+<li>
+<p><strong>Kann systemressourcenintensiv sein:</strong> Das Erstellen von Backups auf Dateiebene kann systemressourcenintensiv sein, insbesondere wenn große Datenmengen regelmäßig gesichert werden müssen. Dies könnte die Leistung des Systems beeinträchtigen, während das Backup läuft.</p>
+</li>
+</ul>
+<h3 id="backup-der-konfiguration-aus-iobroker-heraus">Backup der Konfiguration aus ioBroker heraus</h3>
+<p>Beim Backup der Konfiguration aus ioBroker heraus erfolgt eine gezielte Sicherung nur der essentiellen Dateien und Konfigurationsdaten. Im Gegensatz zum Backup auf Dateiebene, bei dem sämtliche Dateien der ioBroker-Installation gesichert werden und die Backup-Datei dementsprechend groß sein kann, beschränkt sich dieses Verfahren auf das Notwendigste. Im Falle einer Wiederherstellung lädt ioBroker die Adapter aus dem Internet herunter, installiert sie frisch und stellt dann die Konfiguration wieder her.</p>
+<p>Zusätzlich bietet ioBroker mit der integrierten Backup-Lösung über den Backitup-Adapter die Möglichkeit, Backups nach einem festgelegten Zeitplan automatisch zu erstellen. Auf Wunsch kopiert das System die Backups sogar in die Cloud oder auf ein externes Backup-Ziel.</p>
+<p>Hier ein Blick auf das ioBroker.backitup User Interface:<br>
+<a class="lightgallery" href="/img/posts/2023-03-31/01_backitup_interface.png" title="ioBroker.backitup Interface" data-thumbnail="/img/posts/2023-03-31/01_backitup_interface.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-31/01_backitup_interface.png"
+            data-srcset="/img/posts/2023-03-31/01_backitup_interface.png, /img/posts/2023-03-31/01_backitup_interface.png 1.5x, /img/posts/2023-03-31/01_backitup_interface.png 2x"
+            data-sizes="auto"
+            alt="ioBroker.backitup Interface" width="100%" />
+    </a></p>
+<p>Weiterführende Informationen:</p>
+<ul>
+<li><a href="https://www.iobroker.net/docu/index-98.htm?page_id=3971&amp;lang=de#iobroker_backup" target="_blank" rel="noopener noreffer ">iobroker backup command (ioBroker Doku)</a></li>
+<li><a href="https://github.com/simatec/ioBroker.backitup" target="_blank" rel="noopener noreffer ">ioBroker Backitup-Adapter (GitHub)</a></li>
+</ul>
+<h6 id="vorteile-1">Vorteile</h6>
+<p>Diese Methode weist ebenfalls ihre eigenen Vorzüge auf:</p>
+<ul>
+<li>
+<p><strong>Backups sind relativ klein:</strong> Da nur die notwendigsten Dateien und Konfigurationsdaten gesichert werden, sind die resultierenden Backups vergleichsweise kompakt.</p>
+</li>
+<li>
+<p><strong>Automatisierung direkt aus ioBroker heraus möglich (Backitup-Adapter):</strong> Durch die Nutzung des <a href="https://www.iobroker.net/docu/index-98.htm?page_id=3971&amp;lang=de#iobroker_backup" target="_blank" rel="noopener noreffer ">ioBroker.backitup-Adapters</a> kann die Erstellung der Backups direkt aus der ioBroker-Oberfläche automatisiert werden.</p>
+</li>
+<li>
+<p><strong>Erstellung des Backups während des Betriebs möglich:</strong> Die Sicherung der Konfiguration kann während des laufenden Betriebs erfolgen, ohne dass der ioBroker-Container gestoppt werden muss.</p>
+</li>
+</ul>
+<h6 id="nachteile-1">Nachteile</h6>
+<p>Natürlich existieren auch potentielle Nachteile:</p>
+<ul>
+<li>
+<p><strong>Eventuell sehr lange Wiederherstellungszeit durch Adapterinstallation aus dem Internet:</strong> Die Wiederherstellung könnte unter Umständen lange dauern, insbesondere wenn eine Vielzahl von Adaptern aus dem Internet heruntergeladen und installiert werden muss. Die Geschwindigkeit ist dabei abhängig von der Anzahl der Adapter und der Systemleistung.</p>
+</li>
+<li>
+<p><strong>Bestimmte Voraussetzungen bei der Wiederherstellung gelten (z.B. kompatible js-controller-Version):</strong> Es müssen bestimmte Voraussetzungen erfüllt sein, um eine reibungslose Wiederherstellung sicherzustellen, wie beispielsweise die Kompatibilität mit der verwendeten js-controller-Version.</p>
+</li>
+<li>
+<p><strong>Abhängigkeit von Online-Ressourcen:</strong> Da die Adapter aus dem Internet heruntergeladen werden, besteht eine Abhängigkeit von der Verfügbarkeit dieser Ressourcen. Wenn die Adapter-Downloads aus irgendeinem Grund nicht verfügbar sind, könnte dies die Wiederherstellung beeinträchtigen.</p>
+</li>
+<li>
+<p><strong>Mögliche Inkompatibilitäten nach der Wiederherstellung:</strong> Aufgrund von Aktualisierungen oder Änderungen an den Adaptern könnte es zu Inkompatibilitäten mit der wiederhergestellten Konfiguration kommen. Dem kann allerdings entgegengewirkt werden, indem du dein System stets aktuell hältst.</p>
+</li>
+</ul>
+<h3 id="meine-persönliche-backup-strategie">Meine persönliche Backup-Strategie</h3>
+<p>In meiner individuellen Backup-Strategie verfolge ich einen zweistufigen Ansatz, der sich als äußerst effektiv erwiesen hat. Auf der einen Seite sichere ich die Daten meines ioBroker Docker Containers auf Dateiebene des Docker Hosts mithilfe des Synology Tools <a href="https://www.synology.com/en-global/dsm/feature/active-backup-business/overview" target="_blank" rel="noopener noreffer ">&ldquo;Active Backup for Business&rdquo;</a> (Absoluter Tip für Besitzer einer DiskStation!). Hierbei werden regelmäßig umfassende Dateibackups des gesamten ioBroker Docker Verzeichnisses erstellt. Der &ldquo;Active Backup for Business Agent&rdquo; auf meinem Docker Host ermöglicht eine nahtlose Zusammenarbeit mit der Backup-Software auf meiner Synology DiskStation. Im Bedarfsfall führt er das entsprechende Backup vollautomatisch durch. Ein herausragender Vorteil dieser Lösung liegt darin, dass ich über das Wiederherstellungsportal die Freiheit besitze, in die verschiedenen Backups einzusehen und bei Bedarf sogar nur einzelne Dateien gezielt wiederherzustellen.</p>
+<p>Zusätzlich setze ich aber auch auf die integrierte Backup-Funktion von ioBroker durch den Backitup-Adapter, um eine zusätzliche Sicherungsebene zu schaffen. Die automatischen Backups innerhalb von ioBroker gewährleisten, dass meine Konfigurationen, Einstellungen und Daten regelmäßig gesichert werden. Somit verfüge ich jederzeit über eine Backup-Datei, die mir eine reibungslose Wiederherstellung meines Systems nach einer Neuinstallation ermöglichen würde. Hierbei verlasse ich mich darauf, dass die täglichen ioBroker-Backups in meinen Backups auf Dateiebene integriert sind und zusätzlich vom Backitup Adapter sicher in der Cloud abgelegt werden.</p>
+<p>Durch diese Kombination aus Dateibackup auf Docker-Host-Ebene und den internen Sicherungsfunktionen von ioBroker bin ich zuversichtlich, dass meine ioBroker-Installation zu jeder Zeit optimal geschützt ist – unabhängig von den möglichen Widrigkeiten, die auftreten können.</p>
+<h2 id="updates-wartung-ist-wichtig">Updates: Wartung ist wichtig!</h2>
+<p>Hast du dein Backup auf dem neuesten Stand? Perfekt. Aber damit du es im Ernstfall gar nicht erst benötigst, ist es entscheidend, deinen ioBroker Docker Container regelmäßig zu warten und idealerweise immer aktuell zu halten. Hierbei gilt die einfache Faustregel: Kleine Schritte sind besser als große. Das bedeutet, wenn du dein System regelmäßig mit Updates versorgst, reduzierst du das Risiko von Komplikationen während des Updates oder möglicherweise notwendigen aufwändigen Zwischenschritten.<br>
+Das liegt vor Allem daran, dass sich Software ständig weiterentwickelt und Entwickler nicht immer garantieren können, dass ein Update von Version 1 direkt auf Version 3 genauso reibungslos funktioniert wie ein schrittweises Update von Version 1 auf Version 2 und dann auf Version 3.</p>
+<p>Werfen wir einen Blick auf die verschiedenen Ebenen der Updates für deinen ioBroker Docker Container und wie du diese Updates am besten installieren kannst.</p>
+<h3 id="linux-paket-updates-optional">Linux Paket Updates (optional)</h3>
+<p>Das ioBroker Docker Image umfasst eine Vielzahl von Linux-Paketen, die die Grundlage für die Funktion von ioBroker innerhalb deines Docker Containers bilden. Beispiele für diese Pakete, die dir möglicherweise aus der Admin-Oberfläche von ioBroker bekannt sind, sind unter anderem nodejs oder npm. Um Updates für diese Pakete zu installieren, verfügen die meisten Linux-Systeme, einschließlich des ioBroker Docker Containers, über einen Paketmanager – in unserem Fall ist dies apt.</p>
+<p>Mit Hilfe dieses Paketmanagers kannst du problemlos innerhalb deines Docker Containers Linux-Pakete installieren und aktualisieren. Dies geschieht beispielsweise über die Kommandozeile durch den Aufruf von <code>apt update &amp;&amp; apt upgrade</code>.</p>
+<p>Eine alternative, und besonders empfohlene Methode, insbesondere im Kontext von Docker Containern, besteht darin, einfach dein Docker Image zu aktualisieren und den ioBroker Docker Container anschließend neu zu erstellen. Mehr dazu erfährst du im nächsten Abschnitt.</p>
+<h3 id="docker-image-updates">Docker Image Updates</h3>
+<p>Neben den Linux-Paketen, die im ioBroker Docker Image integriert sind, wird auch das Image selbst kontinuierlich weiterentwickelt. Bei jeder neuen Version wird automatisch ein aktualisiertes Docker Image erstellt und zum Download bereitgestellt. Dieses Image enthält sowohl die neueste ioBroker-Version als auch die aktuellen Versionen aller enthaltenen Linux-Pakete.</p>
+<p>Durch ein Update des Docker Images erreichst du also gleich zwei Ziele auf einmal. Einerseits wird das Docker Image selbst auf den neuesten Stand gebracht, andererseits werden auch die Linux-Pakete aktualisiert. Dieser Ansatz ermöglicht es dir, effizient sicherzustellen, dass nicht nur ioBroker, sondern auch alle erforderlichen Systemkomponenten in ihrer aktuellen Version vorliegen.</p>
+<h3 id="adapter-updates">Adapter Updates</h3>
+<p>Lass uns nun zu den Updates innerhalb der ioBroker-Software übergehen. Da die Adapter deiner ioBroker-Instanz innerhalb des Docker Containers unter <code>/opt/iobroker</code> installiert sind und du dieses Verzeichnis bei jedem Update deines Containers wieder einbindest, bleiben die Adapterversionen beim Aktualisieren des Containers selbst unberührt. Stattdessen erfolgt die Aktualisierung deiner Adapter normalerweise über die Admin-Oberfläche deines ioBrokers. Im Abschnitt &ldquo;Adapter&rdquo; werden dir neue Versionen vorgeschlagen, die sich durch einen einfachen Klick auf den entsprechenden Button direkt installieren lassen.</p>
+<a class="lightgallery" href="/img/posts/2023-03-31/02_adapter_updates.png" title="ioBroker Adapter Updates" data-thumbnail="/img/posts/2023-03-31/02_adapter_updates.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-31/02_adapter_updates.png"
+            data-srcset="/img/posts/2023-03-31/02_adapter_updates.png, /img/posts/2023-03-31/02_adapter_updates.png 1.5x, /img/posts/2023-03-31/02_adapter_updates.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Adapter Updates" width="100%" />
+    </a>
+<p>Alternativ gibt es aber natürlich auch die Möglichkeit <a href="https://www.iobroker.net/docu/index-98.htm?page_id=3971&amp;lang=de#iobroker_add_adapterName" target="_blank" rel="noopener noreffer ">Adapter über die Kommandozeile zu installieren</a>.</p>
+<h3 id="iobroker-core-updates">ioBroker Core Updates</h3>
+<p>Beim &ldquo;ioBroker Core&rdquo; handelt es sich um den js-controller, der das Zentrum des ioBrokers bildet. Der js-controller ist ebenfalls unter <code>/opt/iobroker</code> installiert und wird daher durch ein Update des Docker Images nicht automatisch aktualisiert. Früher war es notwendig, ein Update des js-controllers über die Kommandozeile durchzuführen. Inzwischen kann jedoch ein js-controller-Update, ähnlich wie ein Adapter-Update, bequem über die Admin-Oberfläche im ioBroker erfolgen. Ein verfügbares Update wird im Abschnitt &ldquo;Hosts&rdquo; angezeigt.</p>
+<a class="lightgallery" href="/img/posts/2023-03-31/03_js-controller_updates.png" title="ioBroker.js-controller Updates" data-thumbnail="/img/posts/2023-03-31/03_js-controller_updates.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-31/03_js-controller_updates.png"
+            data-srcset="/img/posts/2023-03-31/03_js-controller_updates.png, /img/posts/2023-03-31/03_js-controller_updates.png 1.5x, /img/posts/2023-03-31/03_js-controller_updates.png 2x"
+            data-sizes="auto"
+            alt="ioBroker.js-controller Updates" width="100%" />
+    </a>
+<p>Natürlich gibt es auch hier weitere Möglichkeiten für die Installation des Updates. Stets aktuelle Details zu den update-Möglichkeiten des js-controllers im ioBroker Docker Container findest du in der <a href="https://docs.buanet.de/iobroker-docker-image/docs/#iobroker-js-controller-core-updates" target="_blank" rel="noopener noreffer ">Offiziellen Doku des ioBroker Docker Images</a>.</p>
+<h2 id="fazit">Fazit</h2>
+<p>Abschließend möchte ich ein bekanntes Zitat teilen, das nicht nur in der ioBroker-Community, sondern auch in der gesamten digitalen Welt seine Berechtigung hat: &ldquo;Kein Backup, kein Mitleid!&rdquo; &#x1f604; Dieser humorvolle Spruch verdeutlicht, wie entscheidend Backup-Strategien sind.</p>
+<p>Ich hoffe, mein Beitrag konnte dir einen ausführlichen Überblick über die Wartung und Pflege deines ioBroker Docker Containers verschaffen. Die Bedeutung von Backups sollte nicht unterschätzt werden, insbesondere wenn du viel Zeit und Herzblut in dein Smarthome investiert hast. Es ist meiner Meinung nach unumgänglich, dass du eine eigene Backup-Strategie entwickelst und konsequent verfolgst.</p>
+<p>In einer Zeit, in der täglich neue Sicherheitslücken Schlagzeilen machen und die Bedeutung der IT-Sicherheit stetig wächst, sollte es fast selbstverständlich sein, Geräte, die mit dem Internet verbunden sind, auf dem neuesten Softwarestand zu halten. Wenn du dies bereits bei deinem Smartphone und Notebook praktizierst, warum nicht auch im Smarthome? Denn am Ende des Tages gilt: Die Sicherheit deiner digitalen Welt liegt in deinen Händen.</p>
+<p> <br>
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 14.12.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/" data-title="ioBroker Docker Container: Wartung und Pflege" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/03/31_iobroker_docker-container_wartung_und_pflege/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/" class="prev" rel="prev" title="Verwaltung mehrerer Docker Hosts mit Portainer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Verwaltung mehrerer Docker Hosts mit Portainer</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

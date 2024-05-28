@@ -1,29 +1,27 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Sonstiges - Kategorie - blog.buanet.de</title>
-        <link>http://blog.buanet.de/categories/sonstiges/</link>
+        <link>http://localhost:1313/categories/sonstiges/</link>
         <description>Sonstiges - Kategorie - blog.buanet.de</description>
-        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Wed, 01 Feb 2023 00:00:01 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/categories/sonstiges/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Wed, 01 Feb 2023 00:00:01 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/sonstiges/" rel="self" type="application/rss+xml" /><item>
     <title>Grundlagen und Voraussetzungen</title>
-    <link>http://blog.buanet.de/posts/2023/02/01_grundlagen/</link>
+    <link>http://localhost:1313/posts/2023/02/01_grundlagen/</link>
     <pubDate>Wed, 01 Feb 2023 00:00:01 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/posts/2023/02/01_grundlagen/</guid>
+    <guid>http://localhost:1313/posts/2023/02/01_grundlagen/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/posts/2023-02-01_header1.png" referrerpolicy="no-referrer">
-            </div>Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind. Dazu habe ich ein paar Fragen zusammen gestellt über die ihr euch vorab einmal Gedanken gemacht haben solltet.
-Was ist Docker? Wer in seinem Smarthome die Vorzüge von Docker nutzen möchte, der wird nicht umhin kommen sich tiefer mit diesem Thema zu beschäftigen und sich ggf.]]></description>
+            </div>Bevor wir unser Smarthome mit Hilfe von Docker zum Leben erwecken können, sollten wir unbedingt kurz über die Grundlagen und Voraussetzungen sprechen, die für das Verständnis und die erfolgreiche Umsetzung meiner Tutorials erforderlich sind&hellip;]]></description>
 </item>
 <item>
-    <title>Ein Blog über Docker im Smarthome</title>
-    <link>http://blog.buanet.de/posts/2023/02/01_erster_beitrag/</link>
+    <title>Ein Blog über Smarthome mit Docker</title>
+    <link>http://localhost:1313/posts/2023/02/01_erster_beitrag/</link>
     <pubDate>Wed, 01 Feb 2023 00:00:00 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/posts/2023/02/01_erster_beitrag/</guid>
+    <guid>http://localhost:1313/posts/2023/02/01_erster_beitrag/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/posts/2023-02-01_header.png" referrerpolicy="no-referrer">
-            </div>Nachdem mir die alte Website mit Wordpress zu schwerfällig geworden ist, und ich die Entscheidung getroffen habe meine Tutorials komplett von meine Projekten und deren Dokus zu lösen, habe ich mich auf die Suche nach einem neuen Konzept begeben. Herausgekommen ist nun doch (wieder) ein Blog.
-Was ist der Plan? Meine Idee ist, diesen Blog voll und ganz einem Thema zu widmen: Docker im Smarthome. Das bedeutet, dass über kurz oder lang alle bereits existierenden Tutorials (nach einer ausführlichen Überarbeitung) von meiner alten Website (smarthome.]]></description>
+            </div>Nachdem mir die alte Website mit Wordpress zu schwerfällig geworden ist, und ich die Entscheidung getroffen habe meine Tutorials komplett von meine Projekten und deren Dokus zu lösen, habe ich mich auf die Suche nach einem neuen Konzept begeben. Herausgekommen ist nun doch (wieder) ein Blog&hellip;]]></description>
 </item>
 </channel>
 </rss>

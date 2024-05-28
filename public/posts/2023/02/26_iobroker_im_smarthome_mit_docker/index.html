@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ioBroker im Smarthome mit Docker - blog.buanet.de</title><meta name="Description" content="Ein Überblick über die ioBroker Smarthome Software und das ioBroker Docker Image."><meta property="og:url" content="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="ioBroker im Smarthome mit Docker">
+  <meta property="og:description" content="Ein Überblick über die ioBroker Smarthome Software und das ioBroker Docker Image.">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-02-26T22:25:17+01:00">
+    <meta property="article:modified_time" content="2023-02-26T22:25:17+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="ioBroker im Smarthome mit Docker">
+  <meta name="twitter:description" content="Ein Überblick über die ioBroker Smarthome Software und das ioBroker Docker Image.">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" /><link rel="prev" href="http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" /><link rel="next" href="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ioBroker im Smarthome mit Docker",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/02\/26_iobroker_im_smarthome_mit_docker\/"
+        },"genre": "posts","wordcount":  1553 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/02\/26_iobroker_im_smarthome_mit_docker\/","datePublished": "2023-02-26T22:25:17+01:00","dateModified": "2023-02-26T22:25:17+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Ein Überblick über die ioBroker Smarthome Software und das ioBroker Docker Image."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ioBroker im Smarthome mit Docker</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/docker-images/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Docker Images</a>&nbsp;<a href="/categories/iobroker/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>IoBroker</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="26.02.2023">26.02.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1553 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-26/header.png"
+        data-srcset="/img/posts/2023-02-26/header.png, /img/posts/2023-02-26/header.png 1.5x, /img/posts/2023-02-26/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-26/header.png"
+        title="Ein Überblick über die ioBroker Smarthome Software und das ioBroker Docker Image." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#was-ist-iobroker">Was ist ioBroker?</a></li>
+    <li><a href="#was-ist-das-iobroker-docker-image">Was ist das ioBroker Docker Image</a></li>
+    <li><a href="#wo-finde-ich-weitere-infos">Wo finde ich weitere Infos?</a></li>
+    <li><a href="#iobroker-docker-container-erstellen">ioBroker Docker Container erstellen</a>
+      <ul>
+        <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+        <li><a href="#persistente-datenspeicherung">Persistente Datenspeicherung</a></li>
+        <li><a href="#per-kommandozeile-erstellen">Per Kommandozeile erstellen</a></li>
+        <li><a href="#bonus-i-mit-portainer-erstellen">Bonus I: Mit Portainer erstellen</a></li>
+        <li><a href="#bonus-ii-mit-stacks-unter-portainer-erstellen">Bonus II: Mit Stacks unter Portainer erstellen</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>Eine zentrale Rolle in meinem Smarthome mit Docker spielt ioBroker. In diesem Artikel will ich dir einen kurzen Überblick über ioBroker geben und zeigen, wie einfach und schnell du einen ioBroker Docker Container für einen ersten Test aufsetzen kannst.</p>
+<h2 id="was-ist-iobroker">Was ist ioBroker?</h2>
+<p>IoBroker ist eine in JavaScript geschriebene Open-Source-IoT-Plattform die Smarthome-Komponenten und Services verschiedener Hersteller verbindet. Mit Hilfe von Plugins (genannt: &ldquo;Adapter&rdquo;) ist ioBroker in der Lage mit einer Vielzahl von IoT-Hardware und -Diensten über verschiedene Protokolle und APIs zu kommunizieren. Alle Daten werden in einer zentralen Datenbank gespeichert auf die alle Adapter zugreifen können. Damit ist es sehr einfach logische Verbindungen, Automatisierungsskripte und schöne Visualisierungen herstellerübergreifend aufzubauen.<br>
+Weitere Informationen zu ioBroker findest du unter <a href="https://www.iobroker.net" target="_blank" rel="noopener noreffer ">iobroker.net</a>.</p>
+<h2 id="was-ist-das-iobroker-docker-image">Was ist das ioBroker Docker Image</h2>
+<p>IoBroker ist nicht speziell für den Betrieb unter Docker entwickelt worden. Daher habe ich bereits 2017 damit begonnen ioBroker in ein Docker Image zu portieren. Seitdem hat sich das <a href="https://github.com/buanet/ioBroker.docker" target="_blank" rel="noopener noreffer ">Projekt</a> stetig weiter entwickelt und trägt mittlerweile auch den Titel &ldquo;Offizielles ioBroker Docker Image&rdquo;.<br>
+Weitere Informationen zum ioBroker Docker Image findest du auf meiner <a href="https://docs.buanet.de/de/iobroker-docker-image/" target="_blank" rel="noopener noreffer ">Docs-Webseite</a>.</p>
+<h2 id="wo-finde-ich-weitere-infos">Wo finde ich weitere Infos?</h2>
+<p>Bevor wir loslegen hier noch einen kleine Liste mit Links zu weiterführenden Informationen, Bezugsquellen und Dokumentationen:</p>
+<ul>
+<li><a href="https://www.iobroker.net" target="_blank" rel="noopener noreffer ">Informationen zu ioBroker</a></li>
+<li><a href="https://www.iobroker.net/#de/documentation" target="_blank" rel="noopener noreffer ">Offizielle ioBroker Dokumentation</a></li>
+<li><a href="https://docs.buanet.de/de/iobroker-docker-image/" target="_blank" rel="noopener noreffer ">Informationen zum ioBroker Docker Image</a></li>
+<li><a href="https://docs.buanet.de/iobroker-docker-image/docs/" target="_blank" rel="noopener noreffer ">Offizielle ioBroker Docker Image Dokumentation</a></li>
+<li><a href="https://github.com/buanet/ioBroker.docker" target="_blank" rel="noopener noreffer ">IoBroker Docker Image Source Code &amp; Issues</a></li>
+<li><a href="https://hub.docker.com/r/buanet/iobroker" target="_blank" rel="noopener noreffer ">IoBroker Docker Image im Docker Hub</a></li>
+<li>IoBroker Communities: <a href="https://forum.iobroker.net/" target="_blank" rel="noopener noreffer ">Forum</a>, <a href="https://discord.gg/5jGWNKnpZ8" target="_blank" rel="noopener noreffer ">Discord</a>, <a href="https://www.facebook.com/groups/440499112958264" target="_blank" rel="noopener noreffer ">Facebook</a></li>
+</ul>
+<h2 id="iobroker-docker-container-erstellen">ioBroker Docker Container erstellen</h2>
+<p>Im folgenden zeige ich dir, wie du schnell und einfach einen ioBroker Docker Container für einen ersten Test unter Docker erstellst und worauf du achten musst. Diese Anleitung ist unter Docker allgemein gültig und eignet sich besonders, wenn du schon Erfahrungen mit Docker gesammelt hast.</p>
+<h3 id="voraussetzungen">Voraussetzungen</h3>
+<p>Folgendes setze ich voraus:</p>
+<ul>
+<li>Linux basierter Docker Host (NAS Systeme basieren in der Regel auf Linux)</li>
+<li>Zugriff auf die Kommandozeile des Docker Hosts</li>
+<li>Installierter und gestarteter Docker Dienst</li>
+<li>Internetzugang für den Docker Host</li>
+</ul>
+<h3 id="persistente-datenspeicherung">Persistente Datenspeicherung</h3>
+<p>Kurz ein paar Worte zur persistenten Speicherung von Konfigurationsdaten.</p>
+<p>Der ioBroker im Docker Container speichert alle Konfigurationsdaten unter <code>/opt/iobroker</code>. Damit diese Daten beim Löschen des Containers nicht verloren gehen, legt das Docker Image (ab v8.0.0) beim Erstellen des Containers automatisch ein <a href="https://docs.docker.com/storage/volumes/" target="_blank" rel="noopener noreffer ">Standard-Docker-Volume</a> an. Dieses Verhalten kannst du überschreiben indem du ein eigenes Volume oder einen Dateipfad an den Pfad <code>/opt/iobroker</code> in den Container mountest. Möchtest du ein Docker Volume nutzen, solltest du es vor dem Start des Container bereits via <code>docker volume create [dein_volume_name]</code> erstellt haben.</p>
+<p>Beim Start des Containers mountest du dein Volume oder Verzeichnis dann mit dieser Option:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">-v <span class="o">[</span>dein_volume_oder_verzeichnis<span class="o">]</span>:/opt/iobroker
+</span></span></code></pre></div><p>In docker-compose sieht das Ganze dann so aus:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - <span class="o">[</span>dein_volume_oder_verzeichnis<span class="o">]</span>:/opt/iobroker
+</span></span></code></pre></div><h3 id="per-kommandozeile-erstellen">Per Kommandozeile erstellen</h3>
+<p>Mit dem folgenden Kommando können wir einen einfachen ioBroker Docker Container erstellen. Ich verzichte dabei auf die Angabe eines Volumes oder Dateipfads für das Verzeichnis <code>/opt/iobroker</code>und lasse von Docker ein Standard Volume anlegen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d -p 8081:8081 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name iobroker --hostname iobroker --restart<span class="o">=</span>always <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  buanet/iobroker:latest
+</span></span></code></pre></div><p>Der Befehl setzt sich dabei aus folgenden Parametern zusammen:</p>
+<ul>
+<li><code>docker run</code> &laquo; zum Erstellen eines neuen Containers</li>
+<li><code>-d</code> &laquo; für &ldquo;<a href="https://docs.docker.com/engine/reference/run/#detached--d" target="_blank" rel="noopener noreffer ">detached</a>&rdquo;</li>
+<li><code>-p 8081:8081</code> &laquo; Port für den Zugriff auf die Web UI</li>
+<li><code>--name iobroker</code> &laquo; Container Name</li>
+<li><code>--hostname iobroker</code> &laquo; Container Hostname (auch Instanzname innerhalb von ioBroker)</li>
+<li><code>--restart=always</code> &laquo; Restart Policy</li>
+<li><code>buanet/iobroker:latest</code> &laquo; Verwendetes Image und Tag</li>
+</ul>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Dies ist ein einfaches Beispiel zum Starten eines ioBroker Docker Containers. Sehr wahrscheinlich sind weitere Parameter, Ports und Variablen hinzuzufügen, damit der Container später auch produktiv genutzt werden kann. Insbesondere bei der Wahl und Konfiguration des Netzwerks gibt es Einiges zu beachten. Weitere Details zur Konfiguration des Containers findest du in der <a href="https://docs.buanet.de/iobroker-docker-image/docs/" target="_blank" rel="noopener noreffer ">offiziellen Doku</a>.</div>
+        </div>
+    </div>
+<p>Nachdem der Container angelegt ist, lassen wir uns mit dem Befehl <code>docker logs --follow iobroker</code> das Log anzeigen, um den Startprozess verfolgen zu können.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ docker logs --follow iobroker
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-------------------------     2023-03-17 21:40:55      -------------------------
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">----- ██╗  ██████╗  ██████╗  ██████╗   ██████╗  ██╗  ██╗ ███████╗ ██████╗  -----
+</span></span><span class="line"><span class="cl">----- ██║ ██╔═══██╗ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║ ██╔╝ ██╔════╝ ██╔══██╗ -----
+</span></span><span class="line"><span class="cl">----- ██║ ██║   ██║ ██████╔╝ ██████╔╝ ██║   ██║ █████╔╝  █████╗   ██████╔╝ -----
+</span></span><span class="line"><span class="cl">----- ██║ ██║   ██║ ██╔══██╗ ██╔══██╗ ██║   ██║ ██╔═██╗  ██╔══╝   ██╔══██╗ -----
+</span></span><span class="line"><span class="cl">----- ██║ ╚██████╔╝ ██████╔╝ ██║  ██║ ╚██████╔╝ ██║  ██╗ ███████╗ ██║  ██║ -----
+</span></span><span class="line"><span class="cl">----- ╚═╝  ╚═════╝  ╚═════╝  ╚═╝  ╚═╝  ╚═════╝  ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----              Welcome to your ioBroker Docker container!              -----
+</span></span><span class="line"><span class="cl">-----                    Startupscript is now running!                     -----
+</span></span><span class="line"><span class="cl">-----                          Please be patient!                          -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                          System Information                          -----
+</span></span><span class="line"><span class="cl">-----                    arch:                x86_64                       -----
+</span></span><span class="line"><span class="cl">-----                    hostname:            iobroker                     -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----                          Version Information                         -----
+</span></span><span class="line"><span class="cl">-----                    image:               v8.0.0                       -----
+</span></span><span class="line"><span class="cl">-----                    build:               2023-02-20T17:21:59+00:00    -----
+</span></span><span class="line"><span class="cl">-----                    node:                v18.14.1                     -----
+</span></span><span class="line"><span class="cl">-----                    npm:                 9.3.1                        -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----                        Environment Variables                         -----
+</span></span><span class="line"><span class="cl">-----                    SETGID:              <span class="m">1000</span>                         -----
+</span></span><span class="line"><span class="cl">-----                    SETUID:              <span class="m">1000</span>                         -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                   Step <span class="m">1</span> of 5: Preparing container                   -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Updating Linux packages on first run... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Registering maintenance script as command... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----             Step <span class="m">2</span> of 5: Detecting ioBroker installation             -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Existing installation of ioBroker detected in <span class="s2">&#34;/opt/iobroker&#34;</span>.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----             Step <span class="m">3</span> of 5: Checking ioBroker installation              -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="o">(</span>Re<span class="o">)</span>setting permissions <span class="o">(</span>This might take a <span class="k">while</span>! Please be patient!<span class="o">)</span>... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Fixing <span class="s2">&#34;sudo-bug&#34;</span> by replacing sudo with gosu... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Initializing a fresh installation of ioBroker... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Hostname in ioBroker does not match the hostname of this container.
+</span></span><span class="line"><span class="cl">Updating hostname to <span class="s2">&#34;iobroker&#34;</span>... The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.admin.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;iobroker&#34;</span>.
+</span></span><span class="line"><span class="cl">The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.discovery.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;iobroker&#34;</span>.
+</span></span><span class="line"><span class="cl">The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.backitup.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;iobroker&#34;</span>.
+</span></span><span class="line"><span class="cl">Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                Step <span class="m">4</span> of 5: Applying special settings                -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Some adapters have special requirements/ settings which can be activated by the use of environment variables.
+</span></span><span class="line"><span class="cl">For more information see ioBroker Docker Image Docs <span class="o">(</span>https://docs.buanet.de/iobroker-docker-image/docs/<span class="o">)</span>.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                    Step <span class="m">5</span> of 5: ioBroker startup                     -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Starting ioBroker... 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1">##### #### ### ## # iobroker.js-controller log output # ## ### #### #####</span>
+</span></span><span class="line"><span class="cl">host.iobroker check instance <span class="s2">&#34;system.adapter.admin.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;iobroker&#34;</span>
+</span></span><span class="line"><span class="cl">host.iobroker check instance <span class="s2">&#34;system.adapter.discovery.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;iobroker&#34;</span>
+</span></span><span class="line"><span class="cl">host.iobroker check instance <span class="s2">&#34;system.adapter.backitup.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;iobroker&#34;</span>
+</span></span></code></pre></div><p>Wenn das Log ungefähr so aussieht, dann hat alles geklappt und wir können auf die ioBroker Admin UI zugreifen. Dazu verwenden wir die URL nach folgendem Schema:</p>
+<p><code>http://[Hostname_oder_IP_des_Docker_Host]:8081</code></p>
+<p>Es sollte der ioBroker Setup Assistent für die Ersteinrichtung erscheinen.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker1.png" title="ioBroker Setup Assistent" data-thumbnail="/img/posts/2023-02-26/iobroker1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker1.png"
+            data-srcset="/img/posts/2023-02-26/iobroker1.png, /img/posts/2023-02-26/iobroker1.png 1.5x, /img/posts/2023-02-26/iobroker1.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Setup Assistent" width="100%" />
+    </a>
+<p>Unser ioBroker Docker Container ist damit startklar.</p>
+<h3 id="bonus-i-mit-portainer-erstellen">Bonus I: Mit Portainer erstellen</h3>
+<p>Als kleine Zugabe zeige ich dir jetzt noch, wie du den oben bereits erstellten, einfachen ioBroker Container über die Portainer Weboberfläche erstellen kannst.</p>
+<p>Dazu öffnen wir die Portainer Weboberfläche und rufen den Menüpunkt &ldquo;Containers&rdquo; auf.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker2.png" title="ioBroker Portainer Container" data-thumbnail="/img/posts/2023-02-26/iobroker2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker2.png"
+            data-srcset="/img/posts/2023-02-26/iobroker2.png, /img/posts/2023-02-26/iobroker2.png 1.5x, /img/posts/2023-02-26/iobroker2.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container" width="100%" />
+    </a>
+<p>Über den Button &ldquo;+ Add container&rdquo; gelangen wir in die Oberfläche zur Erstellung eines neuen Containers.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker3.png" title="ioBroker Portainer Container Allgemein" data-thumbnail="/img/posts/2023-02-26/iobroker3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker3.png"
+            data-srcset="/img/posts/2023-02-26/iobroker3.png, /img/posts/2023-02-26/iobroker3.png 1.5x, /img/posts/2023-02-26/iobroker3.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container Allgemein" width="100%" />
+    </a>
+<p>Wir vergeben einen Namen, in meinem Fall <code>iobroker</code> und tragen unter &ldquo;Image&rdquo; das Image + Tag ein, welches wir verwenden wollen. Analog zum obigen Beispiel ist dies <code>buanet/iobroker:latest</code>.<br>
+Da wir den ioBroker Docker Container mit dem Standardnetzwerk Bridge starten werden, müssen wir unter &ldquo;Network ports configuration&rdquo; mit dem Button &ldquo;+ publish a new network port&rdquo; eine neue Portfreigabe für den ioBroker Admin Port <code>8081</code> erstellen. Wir reichen den Port 1:1 durch und füllen daher die Felder für host und port mit den identischen Werten.</p>
+<p>Weiter geht es mit den &ldquo;Advanced container settings&rdquo;. unter dem Punkt &ldquo;Volumes&rdquo; hätten wir die Möglichkeit unser eigenes Volume oder Verzeichnis für den ioBroker zu mounten. Analog zum obigen Beispiel verzichte ich allerdings darauf und lasse das Volume von Docker automatisch anlegen.</p>
+<p>Im Bereich &ldquo;Network&rdquo; überprüfen wir die Auswahl von <code>bridge</code> im Feld &ldquo;Network&rdquo;. Direkt darunter können wir den &ldquo;Hostname&rdquo; festlegen. Wie oben nutzen wir hier <code>iobroker</code>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker4.png" title="ioBroker Portainer Container Network" data-thumbnail="/img/posts/2023-02-26/iobroker4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker4.png"
+            data-srcset="/img/posts/2023-02-26/iobroker4.png, /img/posts/2023-02-26/iobroker4.png 1.5x, /img/posts/2023-02-26/iobroker4.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container Network" width="100%" />
+    </a>
+<p>Bleibt noch die Einstellung für die &ldquo;Restart policy&rdquo;, welche dafür sorgt, dass unser Container automatisch neu startet, wenn es ein Problem gibt. Die Einstellung finden wir um gleichnamigen Bereich. Wir wählen hier <code>always</code>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker5.png" title="ioBroker Portainer Container Restart Policy" data-thumbnail="/img/posts/2023-02-26/iobroker5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker5.png"
+            data-srcset="/img/posts/2023-02-26/iobroker5.png, /img/posts/2023-02-26/iobroker5.png 1.5x, /img/posts/2023-02-26/iobroker5.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container Restart Policy" width="100%" />
+    </a>
+<p>Das war es auch schon. Mit einem Klick auf den Button &ldquo;Deploy the container&rdquo; startet die Erstellung.</p>
+<p>Hier kann es jetzt mitunter ein wenig dauern, da das Docker Image beim ersten Mal erst einmal herunter geladen werden muss. Nach Abschluss des Vorgangs landen wir automatisch in der Übersicht der &ldquo;Containers&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker6.png" title="ioBroker Portainer Container Übersicht" data-thumbnail="/img/posts/2023-02-26/iobroker6.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker6.png"
+            data-srcset="/img/posts/2023-02-26/iobroker6.png, /img/posts/2023-02-26/iobroker6.png 1.5x, /img/posts/2023-02-26/iobroker6.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container Übersicht" width="100%" />
+    </a>
+<p>Mit einem Klick auf den Namen können wir uns die Details anzeigen lassen. Auch einen Link zu &ldquo;Logs&rdquo; finden wir hier.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker7.png" title="ioBroker Portainer Container Details" data-thumbnail="/img/posts/2023-02-26/iobroker7.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker7.png"
+            data-srcset="/img/posts/2023-02-26/iobroker7.png, /img/posts/2023-02-26/iobroker7.png 1.5x, /img/posts/2023-02-26/iobroker7.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Portainer Container Details" width="100%" />
+    </a>
+<p>Ab hier geht es dann wie im obigen Beispiel mit der Logausgabe weiter.</p>
+<h3 id="bonus-ii-mit-stacks-unter-portainer-erstellen">Bonus II: Mit Stacks unter Portainer erstellen</h3>
+<p>Wenn dir das manuelle Anlegen des Docker Containers über die Portainer Weboberfläche zu umständlich ist, kannst du dein Ziel auch über die <a href="https://docs.portainer.io/user/docker/stacks" target="_blank" rel="noopener noreffer ">Stacks</a>-Funktion von Portainer erreichen. Das Ganze funktioniert wie <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreffer ">docker-compose</a>, allerdings gestützt über die Portainer Weboberfläche inkl. Editor zum Bearbeiten des Stackfiles.</p>
+<p>Für die grundlegenden Instruktionen zum <a href="/posts/2023/02/15_verwenden_von_stacks_in_portainer/" rel="">Verwenden von Stacks in Portainer</a> empfehle ich dir, einen Blick in den verlinkten Artikel zu werfen.</p>
+<p>Das YAML-File für den einfachen ioBroker Docker Container (<a href="#per-kommandozeile-erstellen" rel="">siehe oben</a>) würde dabei so aussehen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">buanet/iobroker:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8081:8081&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>Einen Stack kannst du in der Portainer Weboberfläche unter &ldquo;Stacks&rdquo; erstellen. Mit einem Klick auf &ldquo;+Add stack&rdquo; gelangst du in den Webeditor. Vergib einen Namen und kopiere das Stackfile in den Editor.</p>
+<p>Ein Klick auf &ldquo;Deploy the stack&rdquo; startet die Erstellung des bzw. der Docker Container die im Stackfile definiert worden sind. Im Anschluss gelangst du automatisch in die Übersicht des Stacks und kannst, wie oben beschrieben, mit einem Blick in das Log fortfahren.</p>
+<hr>
+<p>Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über ioBroker unter Docker geben.<br>
+ <br>
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 26.02.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" data-title="ioBroker im Smarthome mit Docker" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" class="prev" rel="prev" title="Einrichtung eines MACVLAN Netzwerks mit Portainer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Einrichtung eines MACVLAN Netzwerks mit Portainer</a>
+            <a href="/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" class="next" rel="next" title="ioBroker unter Docker auf der Synology DiskStation">ioBroker unter Docker auf der Synology DiskStation<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

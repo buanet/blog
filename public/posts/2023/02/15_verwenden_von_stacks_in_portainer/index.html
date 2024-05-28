@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Verwenden von Stacks (aka docker-compose) in Portainer - blog.buanet.de</title><meta name="Description" content="Ein Tutorial zum Arbeiten mit Stacks (docker-compose) in Portainer"><meta property="og:url" content="http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="Verwenden von Stacks (aka docker-compose) in Portainer">
+  <meta property="og:description" content="Ein Tutorial zum Arbeiten mit Stacks (docker-compose) in Portainer">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-02-15T22:21:55+01:00">
+    <meta property="article:modified_time" content="2023-02-15T22:21:55+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="Verwenden von Stacks (aka docker-compose) in Portainer">
+  <meta name="twitter:description" content="Ein Tutorial zum Arbeiten mit Stacks (docker-compose) in Portainer">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/" /><link rel="prev" href="http://localhost:1313/posts/2023/02/12_portainer_auf_der_synology_diskstation/" /><link rel="next" href="http://localhost:1313/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Verwenden von Stacks (aka docker-compose) in Portainer",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/02\/15_verwenden_von_stacks_in_portainer\/"
+        },"genre": "posts","wordcount":  1528 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/02\/15_verwenden_von_stacks_in_portainer\/","datePublished": "2023-02-15T22:21:55+01:00","dateModified": "2023-02-15T22:21:55+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Ein Tutorial zum Arbeiten mit Stacks (docker-compose) in Portainer"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Verwenden von Stacks (aka docker-compose) in Portainer</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a>&nbsp;<a href="/categories/portainer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Portainer</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="15.02.2023">15.02.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1528 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-15/header.png"
+        data-srcset="/img/posts/2023-02-15/header.png, /img/posts/2023-02-15/header.png 1.5x, /img/posts/2023-02-15/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-15/header.png"
+        title="Ein Tutorial zum Arbeiten mit Stacks (docker-compose) in Portainer" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#grundlegende-funktionsweise">Grundlegende Funktionsweise</a></li>
+    <li><a href="#stacks-in-der-weboberfläche">Stacks in der Weboberfläche</a></li>
+    <li><a href="#stacks-am-beispiel-von-iobroker-und-redis">Stacks am Beispiel von ioBroker und Redis</a></li>
+    <li><a href="#konfiguration-eines-containers-über-stack-ändern">Konfiguration eines Containers über Stack ändern</a></li>
+    <li><a href="#kurze-zusammenfassung">Kurze Zusammenfassung</a></li>
+    <li><a href="#bonus-stackfile-snippets">Bonus: Stackfile Snippets</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>Stacks nennt sich eine beliebte Funktion in Portainer, mit der es möglich ist über eine einzige &ldquo;Konfigurationsdatei&rdquo; (Stackfile) einen oder mehrere Container, samt Netzwerken und Volumes, erstellen und entsprechend konfigurieren zu lassen. Das Ganze basiert dabei auf <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener noreffer ">&ldquo;docker-compose&rdquo;</a>, ist aber durch die vollständige Integration in die Portainer Weboberfläche für den Durchschnittsuser deutlich komfortabler zu bedienen.</p>
+<p>In diesem Tutorial möchte ich dir ein paar Grundlagen zur Verwendung von Portainer Stacks vermitteln und dir damit, anhand eines Beispiels, ein Tool an die Hand geben, dass du sicher gut in deinem Smarthome mit Docker gebrauchen kannst.</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Fangen wir wie üblich mit den Voraussetzungen für dieses Tutorial an.</p>
+<ul>
+<li>Vorhandensein eines auf Linux basierenden <a href="/posts/2023/02/01_grundlagen/" rel="">Docker Hosts oder NAS mit Docker</a></li>
+<li><a href="/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes" rel="">Portainer zur Verwaltung des Docker Dienstes</a></li>
+<li>Grundverständnis zum Thema <a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreffer ">Docker</a></li>
+</ul>
+<h2 id="grundlegende-funktionsweise">Grundlegende Funktionsweise</h2>
+<p>Wie eingangs bereits erwähnt, bieten uns Stacks unter Portainer die Möglichkeit einen oder mehrere Container samt Netzwerken und Volumes in einer Konfigurationsdatei, dem Stackfile, zu definieren und anschließend durch den Docker Dienst, voll automatisiert, erstellen zu lassen. Das Stackfile wird dabei in <a href="https://de.wikipedia.org/wiki/YAML" target="_blank" rel="noopener noreffer ">YAML (Yet Another Markup Language)</a> verfasst. YAML ist eine einfache <a href="https://de.wikipedia.org/wiki/Auszeichnungssprache" target="_blank" rel="noopener noreffer ">Auszeichnungssprache</a> mit deren Hilfe wir in unserem Fall dem Docker Dienst allerlei Konfigurationsparameter bereitstellen können, aus denen dieser dann unsere Docker Container, Netzwerke oder Volumes erstellt.</p>
+<p>Für ein funktionierendes Stackfile ist es wichtig, dass es bestimmten Regeln im Rahmen der YAML Formatierung folgt. Dies sind zum Beispiel Einrückungen, Trennzeichen und Anführungszeichen. Aber keine Angst, der in der Weboberfläche von Portainer eingebettete Webeditor hilft uns dabei, die Formatierungsregeln einzuhalten.</p>
+<p>Darüber hinaus ist es natürlich wichtig, dass wir in unserem Stackfile nur Parameter definieren, die der Docker Dienst auch verstehen und umsetzen kann. Hierzu stellt Docker mit der <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/" target="_blank" rel="noopener noreffer ">&ldquo;compose file reference&rdquo;</a> eine ausführlichen Leitfaden zur Verfügung, welcher die verfügbaren Parameter auflistet und erläutert.</p>
+<p>Ein sehr einfaches Beispiel für ein Stackfile könnte zum Beispiel so aussehen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">            </span><span class="c"># Version der compose file reference</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">               </span><span class="c"># Hier beginnt die definition der Services</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hello_world</span><span class="p">:</span><span class="w">          </span><span class="c"># Name des ersten Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">hello-world </span><span class="w"> </span><span class="c"># Verwendetes Docker Image</span><span class="w">
+</span></span></span></code></pre></div><p>Dabei wird dann allerdings lediglich ein einzelner Container aus dem &ldquo;hello-world&rdquo;-Docker Image erstellt, dessen einzige Aufgabe darin besteht, die Funktion des Docker Dienstes zu testen und eine entsprechende Ausgabe im Log zu erzeugen.<br>
+Weitere Infos zum Testimage findet ihr im Docker Hub: <a href="https://hub.docker.com/_/hello-world" target="_blank" rel="noopener noreffer ">https://hub.docker.com/_/hello-world</a></p>
+<h2 id="stacks-in-der-weboberfläche">Stacks in der Weboberfläche</h2>
+<p>Werfen wir nun zunächst einem Blick auf die Weboberfläche von Portainer. Unter dem Menüpunkt &ldquo;Stacks&rdquo; finden wir die Übersicht der von uns definierten Stacks.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks1.png" title="Portainer Stacks" data-thumbnail="/img/posts/2023-02-15/portainer_stacks1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks1.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks1.png, /img/posts/2023-02-15/portainer_stacks1.png 1.5x, /img/posts/2023-02-15/portainer_stacks1.png 2x"
+            data-sizes="auto"
+            alt="Portainer Stacks" width="100%" />
+    </a>
+<p>Mit einem Klick auf &ldquo;+ Add Stack&rdquo; gelangen wir in den Editor zum erstellen eines neuen Stackfiles.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks2.png" title="Portainer Stack Editor" data-thumbnail="/img/posts/2023-02-15/portainer_stacks2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks2.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks2.png, /img/posts/2023-02-15/portainer_stacks2.png 1.5x, /img/posts/2023-02-15/portainer_stacks2.png 2x"
+            data-sizes="auto"
+            alt="Portainer Stack Editor" width="100%" />
+    </a>
+<p>Hier können wir einen Namen festlegen und die &ldquo;Build method&rdquo; auswählen. Ich werde mich hier zunächst nur auf den Webeditor beschränken. Es ist aber natürlich auch möglich fertige Stackfiles hoch zu laden bzw. direkt aus einem Repository zu laden. Alternativ kann auch ein zuvor angelegtes Custom Template verwendet werden.</p>
+<p>Ausserdem befinden sich unterhalb des Editors noch weitere Optionen. Diese lassen wir fürs erste allerdings ebenfalls unbeachtet. Einzig der Button &ldquo;Deploy the stack&rdquo; ist für uns relevant. Ein Klick hierauf startet mit der Erstellung des Stacks und seiner Container.</p>
+<h2 id="stacks-am-beispiel-von-iobroker-und-redis">Stacks am Beispiel von ioBroker und Redis</h2>
+<p>Zeit für ein echtes (aber etwas vereinfachtes) Beispiel. Wir wollen einen ersten Stack, besehend aus zwei Containern und einem gemeinsamen Bridge Netzwerk erstellen. Dabei werden wir das Bridge Netzwerk natürlich nicht manuell anlegen, sondern dies ebenfalls im Stackfile definieren und automatisch erstellen lassen. Außerdem speichern wir die Daten der Container in zwei, ebenfalls im Stack definierten, Volumes. Dazu habe ich das folgende Stackfile vorbereitet und mit kurzen Kommentaren versehen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">                            </span><span class="c"># Version der compose file reference</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">                               </span><span class="c"># Hier beginnt die Definition der Services (Container)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">####### ioBroker #######</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker</span><span class="p">:</span><span class="w">                             </span><span class="c"># Name des ersten Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker           </span><span class="w"> </span><span class="c"># Container Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">buanet/iobroker:latest-v8   </span><span class="w"> </span><span class="c"># Docker Image und Tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker                 </span><span class="w"> </span><span class="c"># Hostname (als Instanz in ioBroker)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always                    </span><span class="w"> </span><span class="c"># Restart policy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">                           </span><span class="c"># Verbundene Netzwerke</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">bridge</span><span class="p">:</span><span class="w">                           </span><span class="c"># Name des Netzwerks wie weiter unten definiert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">                              </span><span class="c"># Ports</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8081:8081&#34;</span><span class="w">                     </span><span class="c"># Durchgereichter Port für Admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">                        </span><span class="c"># Umgebungsvariablen</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">IOB_STATESDB_HOST=redis        </span><span class="w"> </span><span class="c"># Host für die Datenbankverbindung der States DB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">IOB_STATESDB_PORT=6379         </span><span class="w"> </span><span class="c"># Port für die Datenbankverbindung der States DB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">IOB_STATESDB_TYPE=redis        </span><span class="w"> </span><span class="c"># Typ für die Datenbankverbindung der States DB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">                            </span><span class="c"># Verbundene Volumes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">iobroker-data:/opt/iobroker    </span><span class="w"> </span><span class="c"># Volume wue weiter unten definiert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">                         </span><span class="c"># Abhängigkeit des Containers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">####### redis #######</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">                                </span><span class="c"># Name des zweiten Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis              </span><span class="w"> </span><span class="c"># Container Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:latest                </span><span class="w"> </span><span class="c"># Docker Image und Tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always                    </span><span class="w"> </span><span class="c"># Restart policy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">                           </span><span class="c"># Verbundene Netzwerke</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">bridge</span><span class="p">:</span><span class="w">                           </span><span class="c"># Name des Netzwerks wie weiter unten definiert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">                            </span><span class="c"># Verbundene Volumes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">redis-data:/data               </span><span class="w"> </span><span class="c"># Volume wue weiter unten definiert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">####### Netzwerke #######</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">                               </span><span class="c"># Definition der zu erstellenden Netzwerke</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">bridge</span><span class="p">:</span><span class="w">                               </span><span class="c"># Name des Netzwerks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge                     </span><span class="w"> </span><span class="c"># Typ/ Treiber des Netzwerks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">####### Volumes #######</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">                                </span><span class="c"># Definition der zu erstellenden Volumes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker-data</span><span class="p">:</span><span class="w">                        </span><span class="c"># Name des Volumes </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis-data</span><span class="p">:</span><span class="w">                           </span><span class="c"># Name des Volumes</span><span class="w">
+</span></span></span></code></pre></div><p>Wir erstellen nun also einen neuen Stack (ich habe als Namen iobroker gewählt) und kopieren das vorbereitete Stackfile in den Editor. Sofern der Editor kein Syntaxfehler feststellt, starten wir die Erstellung des Stacks mit dem Button &ldquo;Deploy the stack&rdquo;.</p>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Habe etwas Geduld...<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Da beim Erstellen des Stacks in der Regel noch die Docker Images aus dem Internet herunter geladen werden müssen, kann es schonmal sein, dass dieser Prozess ein wenig Zeit in Anspruch nimmt. habe also ein wenig Geduld. Solange keine Fehlermeldung erscheint ist alles in Ordnung.</div>
+        </div>
+    </div>
+<p>Nach Einiger Zeit, wenn der Stack erstellt ist, landen wir automatisch in der Übersicht der Stacks.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks3.png" title="Portainer ioBroker Stack" data-thumbnail="/img/posts/2023-02-15/portainer_stacks3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks3.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks3.png, /img/posts/2023-02-15/portainer_stacks3.png 1.5x, /img/posts/2023-02-15/portainer_stacks3.png 2x"
+            data-sizes="auto"
+            alt="Portainer ioBroker Stack" width="100%" />
+    </a>
+<p>Mit einem Klick auf unseren Stack bekommen wir eine Übersicht des Stacks und seiner Container.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks4.png" title="Portainer ioBroker Stack Übersicht" data-thumbnail="/img/posts/2023-02-15/portainer_stacks4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks4.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks4.png, /img/posts/2023-02-15/portainer_stacks4.png 1.5x, /img/posts/2023-02-15/portainer_stacks4.png 2x"
+            data-sizes="auto"
+            alt="Portainer ioBroker Stack Übersicht" width="100%" />
+    </a>
+<p>Unter &ldquo;Networks&rdquo; sollten wir außerdem ein neues Netzwerk namens &ldquo;iobroker_bridge&rdquo; finden. Der Name resultiert aus dem Namen des Stacks und dem im Stack definierten Netzwerknamens.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks5.png" title="Portainer Networks" data-thumbnail="/img/posts/2023-02-15/portainer_stacks5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks5.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks5.png, /img/posts/2023-02-15/portainer_stacks5.png 1.5x, /img/posts/2023-02-15/portainer_stacks5.png 2x"
+            data-sizes="auto"
+            alt="Portainer Networks" width="100%" />
+    </a>
+<p>Gleiches gilt natürlich auch für die von uns definierten Volumes.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks6.png" title="Portainer Volumes" data-thumbnail="/img/posts/2023-02-15/portainer_stacks6.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks6.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks6.png, /img/posts/2023-02-15/portainer_stacks6.png 1.5x, /img/posts/2023-02-15/portainer_stacks6.png 2x"
+            data-sizes="auto"
+            alt="Portainer Volumes" width="100%" />
+    </a>
+<p>Damit ist unser Stack erstellt. Schaue dir auch gerne mal die Details der erstellten Elemente wie Container, Networks und Volumes an um zu verstehen wie diese Elemente zusammen hängen. Außerdem kannst du in den Details eine ganze Reihe an Informationen auslesen. Bei den Volumes z.B. den lokalen &ldquo;Mount path&rdquo;, oder bei den &ldquo;Networks&rdquo; die &ldquo;Containers in network&rdquo;. Unter Images findest du auch die beim Erstellen herunter geladenen Docker Images. Nutze einfach die Gelegenheit dich ein wenig mit Portainer vertraut zu machen. Der ein oder andere Menüpunkt wird dir in meinen weiteren Tutorials sicherlich noch über den Weg laufen.</p>
+<h2 id="konfiguration-eines-containers-über-stack-ändern">Konfiguration eines Containers über Stack ändern</h2>
+<p>Docker Container können ja bekanntlich im laufenden Betrieb nicht einfach umkonfiguriert werden. Stattdessen muss man bei Änderungen den alten Container meist löschen und einen Neuen mit geänderter Konfiguration anlegen. Auch wenn es dazu im Portainer in den &ldquo;Container details&rdquo; mittlerweile die Funktion &ldquo;Duplicate/Edit&rdquo; gibt, ist das nicht selten ein reges geklicke. Und wehe es geht was schief, dann heißt es den Container komplett neu anlegen.</p>
+<p>Hier bieten die Portainer Stacks einen großen Vorteil. So besteht die Möglichkeit einfach nachträglich Änderungen am Stack durchzuführen und den Stack neu zu deployen. Dabei kümmert sich dann Portainer selbstständig um die Neuerstellung der geänderten Container, währen die anderen Container des Stacks in der Regel einfach weiter laufen.</p>
+<p>Um das Ganze ein wenig bildlicher zu machen, werden wir im Folgenden eine Änderung am ioBroker Container durchführen. Über das Hinzufügen der Umgebungsvariable <code>PACKAGES</code> wollen wir beim Start im Container automatisch das Paket <code>nano</code> installieren lassen. Dafür müssen wir in die Konfiguration unter <code>environment:</code> die folgende Zeile hinzufügen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PACKAGES=nano</span><span class="w">
+</span></span></span></code></pre></div><p>Um dies zu erledigen öffnen wir die &ldquo;Stack details&rdquo; und wechseln in die Registerkarte &ldquo;Editor&rdquo;. Anschließend fügen wir die Zeile in der Konfiguration ein.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks7.png" title="Portainer Stacks Editor" data-thumbnail="/img/posts/2023-02-15/portainer_stacks7.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks7.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks7.png, /img/posts/2023-02-15/portainer_stacks7.png 1.5x, /img/posts/2023-02-15/portainer_stacks7.png 2x"
+            data-sizes="auto"
+            alt="Portainer Stacks Editor" width="100%" />
+    </a>
+<p>Ein Klick auf &ldquo;Update the stack&rdquo; startet die Aktualisierung. In der Übersicht sollte jetzt lediglich der ioBroker Container neustarten, während unsere Redis Datenbank einfach weiter läuft. Im Log des Containers sollte zudem ersichtlich werden, dass bei Start nun das Paket <code>nano</code> installiert wird.</p>
+<a class="lightgallery" href="/img/posts/2023-02-15/portainer_stacks8.png" title="Portainer Stacks Editor" data-thumbnail="/img/posts/2023-02-15/portainer_stacks8.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-15/portainer_stacks8.png"
+            data-srcset="/img/posts/2023-02-15/portainer_stacks8.png, /img/posts/2023-02-15/portainer_stacks8.png 1.5x, /img/posts/2023-02-15/portainer_stacks8.png 2x"
+            data-sizes="auto"
+            alt="Portainer Stacks Editor" width="100%" />
+    </a>
+<h2 id="kurze-zusammenfassung">Kurze Zusammenfassung</h2>
+<p>Fassen wir also kurz zusammen. Mit Stacks lassen sich schnell und einfach Container erstellen und ändern. Außerdem können in Stacks mehrere Container zusammen mit Netzwerken und Volumes definiert werden. Portainer übernimmt dabei das Management der Container und Ressourcen.<br>
+Das Stackfile wird in <a href="https://de.wikipedia.org/wiki/YAML" target="_blank" rel="noopener noreffer ">YAML</a> geschrieben. Der Webeditor hilft uns bei der Syntax. Die verfügbaren Parameter sind in der <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/" target="_blank" rel="noopener noreffer ">&ldquo;compose file reference&rdquo;</a> definiert. Soweit verstanden? Dann viel Spaß beim Ausprobieren. Du wirst nicht mehr ohne arbeiten wollen.</p>
+<h2 id="bonus-stackfile-snippets">Bonus: Stackfile Snippets</h2>
+<p>Als kleinen Bonus noch ein paar Ausschnitte aus meiner Stackfile Sammlung.</p>
+<h4 id="bridge-netzwerk-mit-benutzerdefiniertem-adressraum">Bridge Netzwerk mit benutzerdefiniertem Adressraum</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">bridge</span><span class="p">:</span><span class="w">                             </span><span class="c"># Name des Netzwerks innerhalb des Stacks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.18.0.0</span><span class="l">/16      </span><span class="w"> </span><span class="c"># Subnetz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">172.18.0.1</span><span class="w">         </span><span class="c"># Gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ip_range</span><span class="p">:</span><span class="w"> </span><span class="m">172.18.0.1</span><span class="l">/24    </span><span class="w"> </span><span class="c"># Adressbereich</span><span class="w">
+</span></span></span></code></pre></div><p>Mehr Infos zum <a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" rel="">benutzerdefinierten Bridge Netzwerk</a></p>
+<h4 id="macvlan-netzwerk-mit-benutzerdefiniertem-adressraum">MACVLAN Netzwerk mit benutzerdefiniertem Adressraum</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">my_macvlan</span><span class="p">:</span><span class="w">                             </span><span class="c"># Name des Netzwerks innerhalb des Stacks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">macvlan</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver_opts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l">eth0                       </span><span class="w"> </span><span class="c"># Parent network card</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.0</span><span class="l">/24        </span><span class="w"> </span><span class="c"># Subnetz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">gateway</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.1</span><span class="w">           </span><span class="c"># Gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ip_range</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.11.120</span><span class="l">/29    </span><span class="w"> </span><span class="c"># Adressbereich</span><span class="w">
+</span></span></span></code></pre></div><p>Mehr Infos zum <a href="/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" rel="">benutzerdefinierten MACVLAN Netzwerk</a>.</p>
+<h4 id="existierendes-netzwerk-einbinden">Existierendes Netzwerk einbinden</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">my_bridge</span><span class="p">:</span><span class="w">              </span><span class="c"># Name des Netzwerks innerhalb des Stacks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_bridge    </span><span class="w"> </span><span class="c"># Name des bereits existierenden Netzwerks</span><span class="w">
+</span></span></span></code></pre></div><h4 id="container-im-host-modus-ausführen">Container im Host Modus ausführen</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host   </span><span class="w"> </span><span class="c"># Netzwerkmodus Host</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<p>Ich hoffe ich konnte dir mit diesem Beitrag einen kleinen Überblick über das Arbeiten mit Portainer Stacks geben.<br>
+ <br>
+Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 15.02.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/" data-title="Verwenden von Stacks (aka docker-compose) in Portainer" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/12_portainer_auf_der_synology_diskstation/" class="prev" rel="prev" title="Portainer auf der Synology DiskStation"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Portainer auf der Synology DiskStation</a>
+            <a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" class="next" rel="next" title="Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer">Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

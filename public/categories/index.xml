@@ -1,30 +1,54 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Categories - Kategorie - blog.buanet.de</title>
-        <link>http://blog.buanet.de/categories/</link>
+        <link>http://localhost:1313/categories/</link>
         <description>Categories - Kategorie - blog.buanet.de</description>
-        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/categories/" rel="self" type="application/rss+xml" /><item>
-    <title>Portainer</title>
-    <link>http://blog.buanet.de/categories/portainer/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Fri, 31 Mar 2023 08:07:00 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>IoBroker</title>
+    <link>http://localhost:1313/categories/iobroker/</link>
+    <pubDate>Fri, 31 Mar 2023 08:07:00 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/categories/portainer/</guid>
+    <guid>http://localhost:1313/categories/iobroker/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Portainer</title>
+    <link>http://localhost:1313/categories/portainer/</link>
+    <pubDate>Sun, 05 Mar 2023 20:51:13 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/categories/portainer/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>Tutorials</title>
-    <link>http://blog.buanet.de/categories/tutorials/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
+    <link>http://localhost:1313/categories/tutorials/</link>
+    <pubDate>Sun, 05 Mar 2023 20:51:13 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/categories/tutorials/</guid>
+    <guid>http://localhost:1313/categories/tutorials/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>DiskStation</title>
+    <link>http://localhost:1313/categories/diskstation/</link>
+    <pubDate>Mon, 27 Feb 2023 21:50:05 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/categories/diskstation/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Docker Images</title>
+    <link>http://localhost:1313/categories/docker-images/</link>
+    <pubDate>Sun, 26 Feb 2023 22:25:17 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/categories/docker-images/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>Sonstiges</title>
-    <link>http://blog.buanet.de/categories/sonstiges/</link>
+    <link>http://localhost:1313/categories/sonstiges/</link>
     <pubDate>Wed, 01 Feb 2023 00:00:01 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/categories/sonstiges/</guid>
+    <guid>http://localhost:1313/categories/sonstiges/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

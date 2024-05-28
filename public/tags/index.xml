@@ -1,71 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Tags - Tag - blog.buanet.de</title>
-        <link>http://blog.buanet.de/tags/</link>
+        <link>http://localhost:1313/tags/</link>
         <description>Tags - Tag - blog.buanet.de</description>
-        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>container</title>
-    <link>http://blog.buanet.de/tags/container/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/container/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>docker</title>
-    <link>http://blog.buanet.de/tags/docker/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/docker/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>macvlan</title>
-    <link>http://blog.buanet.de/tags/macvlan/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/macvlan/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>netzwerk</title>
-    <link>http://blog.buanet.de/tags/netzwerk/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/netzwerk/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>portainer</title>
-    <link>http://blog.buanet.de/tags/portainer/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/portainer/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>bridge</title>
-    <link>http://blog.buanet.de/tags/bridge/</link>
-    <pubDate>Thu, 23 Feb 2023 20:49:17 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/bridge/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>diskstation</title>
-    <link>http://blog.buanet.de/tags/diskstation/</link>
-    <pubDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/diskstation/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>synology</title>
-    <link>http://blog.buanet.de/tags/synology/</link>
-    <pubDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</pubDate>
-    <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/tags/synology/</guid>
-    <description><![CDATA[]]></description>
-</item>
-</channel>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><atom:link href="http://localhost:1313/tags/" rel="self" type="application/rss+xml" /></channel>
 </rss>

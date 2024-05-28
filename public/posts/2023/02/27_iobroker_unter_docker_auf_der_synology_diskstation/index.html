@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ioBroker unter Docker auf der Synology DiskStation - blog.buanet.de</title><meta name="Description" content="Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation"><meta property="og:url" content="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="ioBroker unter Docker auf der Synology DiskStation">
+  <meta property="og:description" content="Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-02-27T21:50:05+01:00">
+    <meta property="article:modified_time" content="2023-02-27T21:50:05+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="ioBroker unter Docker auf der Synology DiskStation">
+  <meta name="twitter:description" content="Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" /><link rel="prev" href="http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" /><link rel="next" href="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ioBroker unter Docker auf der Synology DiskStation",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/02\/27_iobroker_unter_docker_auf_der_synology_diskstation\/"
+        },"genre": "posts","wordcount":  1758 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/02\/27_iobroker_unter_docker_auf_der_synology_diskstation\/","datePublished": "2023-02-27T21:50:05+01:00","dateModified": "2023-02-27T21:50:05+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ioBroker unter Docker auf der Synology DiskStation</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a>&nbsp;<a href="/categories/iobroker/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>IoBroker</a>&nbsp;<a href="/categories/diskstation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DiskStation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="27.02.2023">27.02.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1758 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-02-27/header.png"
+        data-srcset="/img/posts/2023-02-27/header.png, /img/posts/2023-02-27/header.png 1.5x, /img/posts/2023-02-27/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-02-27/header.png"
+        title="Ein Tutorial zur Einrichtung des ioBroker Docker Images auf der Synology DiskStation" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#vorbereitungen">Vorbereitungen</a>
+      <ul>
+        <li><a href="#persistente-datenspeicherung">Persistente Datenspeicherung</a></li>
+        <li><a href="#überlegungen-zum-netzwerk">Überlegungen zum Netzwerk</a></li>
+        <li><a href="#übernahme-von-konfigurationsdaten">Übernahme von Konfigurationsdaten</a></li>
+      </ul>
+    </li>
+    <li><a href="#container-mit-portainer-erstellen">Container mit Portainer erstellen</a></li>
+    <li><a href="#bonus-container-mit-portainer-stacks-erstellen">Bonus: Container mit Portainer Stacks erstellen</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>In diesem Tutorial zeige ich dir, wie du mit Hilfe von Docker und Portainer das ioBroker Docker Image auf deiner Synology DiskStation installierst.<br>
+Neben den verlinkten Informationen zu Docker und Portainer empfehle ich dir vorab einen Blick in meinen <a href="/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" rel="">letzten Beitrag</a> zu werfen. Hier habe ich bereits einmal die Grundlagen zum ioBroker Docker Image erläutert.</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Wie immer starte ich mit einer kurzen Liste der Voraussetzungen die zum Gelingen des Tutorials erfüllt sein sollten.</p>
+<ul>
+<li><a href="https://www.synology.com/de-de/dsm/packages/Docker" target="_blank" rel="noopener noreffer ">Synology DiskStation mit installiertem Docker Paket</a></li>
+<li><a href="https://www.synology.com/de-de/dsm" target="_blank" rel="noopener noreffer ">Synology DiskStation Manager (DSM) in Version 6 oder 7</a></li>
+<li><a href="/posts/2023/02/12_portainer_auf_der_synology_diskstation/" rel="">Portainer zur Verwaltung des Docker Dienstes</a></li>
+<li>Internetzugang</li>
+</ul>
+<h2 id="vorbereitungen">Vorbereitungen</h2>
+<h3 id="persistente-datenspeicherung">Persistente Datenspeicherung</h3>
+<p>Bevor wir den ioBroker Docker Container anlegen, sollten wir uns Gedanken um den Speicherort der ioBroker Konfigurationsdaten machen. Um später einen einfachen Zugriff auf die Daten zu haben, empfehle ich auf der DiskStation das Anlegen eines gemeinsamen Ordners <code>docker</code> auf den wir dann über die File Station in der Web UI unserer DiskStation zugreifen können. Solltest du bereits den Portainer nach meiner Anleitung installiert haben, ist dieses Verzeichnis vermutlich schon vorhanden und wir brauchen nur noch ein separates Unterverzeichnis für den ioBroker anlegen. Bei der Benennung wäre mein Vorschlag hier (analog zum Portainer Ordner) <code>iobroker-data</code>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology1.png" title="ioBroker Synology Folder" data-thumbnail="/img/posts/2023-02-27/iobroker_synology1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology1.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology1.png, /img/posts/2023-02-27/iobroker_synology1.png 1.5x, /img/posts/2023-02-27/iobroker_synology1.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Folder" width="100%" />
+    </a>
+<h3 id="überlegungen-zum-netzwerk">Überlegungen zum Netzwerk</h3>
+<p>Das Thema Docker und Netzwerk ist immer wieder ein Knackpunkt im Smarthome mit Docker. Prinzipiell reden wir hier über 3 mögliche Kandidaten: Bridge, Host und MACVLAN. Dabei hat jedes Netzwerk so seine Vor- und Nachteile. Im folgenden gebe ich einen wirklich kurzen, stark vereinfachten Überblick in Bezug auf ioBroker als kleine Entscheidungshilfe.</p>
+<h4 id="bridge">Bridge</h4>
+<p>Beim Bridge Netzwerk befindet sich der ioBroker Docker Container in einem abgeschotteten, virtuellen Netzwerk. Damit er dennoch mit der Außenwelt (deinem Heimnetzwerk) kommunizieren kann, müssen über das Bridge Netzwerk manuell alle Ports freigegeben werden, die für die Kommunikation benötigt werden. Je nach verwendeten ioBroker Adaptern kann das eine relativ lange Liste sein. Außerdem gibt es Einschränkungen bei Adaptern die z.B. eine Discovery-Funktion bereitstellen bzw. voraussetzen. Da die Kommunikation mit dem ioBroker nur über die freigegeben Ports möglich ist, gelangen <a href="https://de.wikipedia.org/wiki/Broadcast" target="_blank" rel="noopener noreffer ">Broad-</a> oder <a href="https://de.wikipedia.org/wiki/Multicast" target="_blank" rel="noopener noreffer ">Multicast</a>-Pakete nicht zum ioBroker und der betreffende Adapter kann ggf. nicht benutzt werden.</p>
+<h4 id="host">Host</h4>
+<p>Beim Host Netzwerk erhält der ioBroker Docker Container vollen Zugriff auf die Netzwerkschittstelle(n) der DiskStation. Er kümmert sich selbstständig um die zu öffnenden Ports und lauscht so auch auf alle anderen Pakete die die Netzwerkschnittstelle der DiskStation erreichen. Allerdings kann es hierbei zu Portkonflikten kommen. Dies geschieht, wenn der ioBroker versucht für sich oder einen seiner Adapter einen Port zu öffnen, den vielleicht schon der DiskStation Manager oder einer seiner Services verwendet.</p>
+<h4 id="macvlan">MACVLAN</h4>
+<p>Beim MACVLAN erhält der ioBroker Docker Container eine virtuelle IP-Adresse, z.B. aus dem Netzwerk Bereich in dem sich auch deine DiskStation befindet. Dadurch erscheint der Container im Netzwerk wie ein eigenständiges Gerät mit IP-Adresse und Hostnamen. Er kümmert sich selbstständig um die Freigabe von Ports. Durch die eigene IP-Adresse besteht keine Gefahr von Portkonflikten mit der DiskStation. Allerdings setzt die Konfiguration eines MACVLAN ein gewisses Maß an Wissen zum Thema Netzwerke voraus.</p>
+<h4 id="kurzes-fazit">Kurzes Fazit</h4>
+<p>Zusammengefasst lässt sich dazu also sagen:</p>
+<p>Mit Bridge macht man nichts kaputt, es ist allerdings aufwändiger zu konfigurieren und beinhaltet teils unangenehme Einschränkungen.</p>
+<p>Das Host Netzwerk ist einfach konfiguriert, gilt aber, aufgrund des weitreichenden Zugriffs auf die Netzwerkschnittstelle, als die potentiell unsicherste Lösung.</p>
+<p>MACVLAN kommt bei all dem noch am Besten weg, ist aber sicher nicht für jeden &ldquo;mal eben so&rdquo; zu konfigurieren.</p>
+<p>Kurzum: Für Einsteiger empfehle ich Host, der fortgeschrittene(re) User wagt sich an das MACVLAN. Zum &ldquo;Ausprobieren&rdquo; von ioBroker oder für die Kommunikation zu anderen Containern eignet sich das Bridge Netzwerk.</p>
+<p>Weiterführende Infos zum Thema Netzwerke in Docker findest du in den <a href="https://docs.docker.com/network/" target="_blank" rel="noopener noreffer ">Docker Docs</a>. Eine Anleitung zum Einrichten eines benutzerdefinierten Bridge Netzwerks in meinem Tutorial <a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" rel="">Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer</a>. Eine Anleitung zur Einrichtung eines MCVLAN in meinem Tutorial <a href="/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" rel="">Einrichtung eines MACVLAN Netzwerks mit Portainer</a>.</p>
+<h3 id="übernahme-von-konfigurationsdaten">Übernahme von Konfigurationsdaten</h3>
+<p>Solltest du ioBroker bereits auf einer anderen Platform betreiben, so kannst du per Backup &amp; Restore deine Daten vom Altsystem mitnehmen. Da der Restore erst nach dem Erstellen des Containers erfolgt, kannst du das Tutorial einfach bis zum Ende durcharbeiten und dich erst wenn der ioBroker in der Grundinstallation läuft um den Restore kümmern. Von einem kompletten Umzug des ioBroker Datenverzeichnisses (<code>/opt/iobroker</code>) zu Docker würde ich jedoch abraten. Das ist zwar theoretisch möglich, birgt aber viele kleine mögliche Fehlerquellen. Außerdem würdest du so auch alle Altlasten, wie temporäre Dateien, mit schleppen.<br>
+Weitere Details zu Backup &amp; Restore findest du in der <a href="https://www.iobroker.net/#de/documentation" target="_blank" rel="noopener noreffer ">offiziellen ioBroker Dokumentation</a> sowie in der <a href="https://docs.buanet.de/de/iobroker-docker-image/docs/" target="_blank" rel="noopener noreffer ">Doku zum Docker Image</a>.</p>
+<h2 id="container-mit-portainer-erstellen">Container mit Portainer erstellen</h2>
+<p>Nachdem alles Vorbereitet ist, können wir mit dem Erstellen des Docker Containers über Portainer beginnen. Dazu rufen wir mit einem Klick auf den Button &ldquo;+ Add container&rdquo; im Menüpunkt &ldquo;Containers&rdquo; den Dialog für die Erstellung eines neuen Containers auf.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology2.png" title="ioBroker Synology Portainer Create" data-thumbnail="/img/posts/2023-02-27/iobroker_synology2.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology2.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology2.png, /img/posts/2023-02-27/iobroker_synology2.png 1.5x, /img/posts/2023-02-27/iobroker_synology2.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer Create" width="100%" />
+    </a>
+<p>Wir vergeben einen Namen für unseren Container, in meinem Fall <code>iobroker</code> und füllen das Feld &ldquo;Image&rdquo; mit dem Namen und Tag des Images, welches wir verwenden wollen. In diesem Fall verwende ich <code>buanet/iobroker:latest</code>.</p>
+<p>Wenn wir vor hätten den Container mit einem Bridge Netzwerk auszuführen, dann bestünde an dieser Stelle, unter &ldquo;Manual network port publishing&rdquo;, die Möglichkeit das entsprechende Port Mapping durchzuführen. Da ich meinen Container allerdings mit der Host Netzwerk Option erstellen werde, kann ich diese Einstellung ignorieren.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Warum der Tag <code>latest</code> eigentlich keine gute Wahl für ein Produktivsystem ist, kannst du <a href="https://docs.buanet.de/de/iobroker-docker-image/docs/#vermeide-latest-tag" target="_blank" rel="noopener noreffer ">hier</a> nachlesen.</div>
+        </div>
+    </div>
+<p>Am unteren Ende des Dialogs finden wir die &ldquo;Advanced container settings&rdquo;. In der Registerkarte &ldquo;Volumes&rdquo; mounten wir nun unser Verzeichnis, welches wir in der File Station angelegt haben. Zunächst tragen wir den Pfad innerhalb des Containers (<code>/opt/iobroker</code>) ein und wählen &ldquo;Bind&rdquo;. Daraufhin können wir den Pfad unseres Ordners auf der DiskStation ausfüllen. In meinem Beispiel ist dies <code>/volume1/docker/iobroker-data</code>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology3.png" title="ioBroker Synology Portainer Volumes" data-thumbnail="/img/posts/2023-02-27/iobroker_synology3.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology3.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology3.png, /img/posts/2023-02-27/iobroker_synology3.png 1.5x, /img/posts/2023-02-27/iobroker_synology3.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer Volumes" width="100%" />
+    </a>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Wenn du in deiner DiskStation mehrere Volumes eingerichtet hast und dir sich nicht sicher bist, ob dein Verzeichnis auch unter <code>/volume1</code> liegt, kannst du den Pfad auch aus den Eigenschaften des Ordners (Rechtsklick &gt; Eigenschaften) in der File Station kopieren.</div>
+        </div>
+    </div>
+<p>In der Registerkarte &ldquo;Network&rdquo; wählen wir als Netzwerk <code>host</code>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology4.png" title="ioBroker Synology Portainer Network" data-thumbnail="/img/posts/2023-02-27/iobroker_synology4.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology4.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology4.png, /img/posts/2023-02-27/iobroker_synology4.png 1.5x, /img/posts/2023-02-27/iobroker_synology4.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer Network" width="100%" />
+    </a>
+<p>Die Angabe eines Hostnamen können wir uns sparen, da durch die verwendete Netzwerkoption automatisch der Hostname der DiskStation verwendet wird. Für den Fall dass du hier ein bereits vorbereitetes <a href="/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/" rel="">MACVLAN</a> oder <a href="/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/" rel="">Bridge Netzwerk</a> auswählst empfiehlt sich die Angabe eines Hostnamens, da dieser in ioBroker auch für die Instanz verwendet wird.</p>
+<p>Weiter geht es in der Registerkarte ENV. Hier haben wir die Möglichkeit Konfigurationsoptionen (Umgebungsvariablen) für unseren ioBroker Docker Container hinzuzufügen. Eine Lister der verfügbaren Optionen findest du in der <a href="https://docs.buanet.de/de/iobroker-docker-image/docs/#umgebungsvariablen-env" target="_blank" rel="noopener noreffer ">Dokumentation zum ioBroker Docker Image</a>.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology5.png" title="ioBroker Synology Portainer ENV" data-thumbnail="/img/posts/2023-02-27/iobroker_synology5.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology5.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology5.png, /img/posts/2023-02-27/iobroker_synology5.png 1.5x, /img/posts/2023-02-27/iobroker_synology5.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer ENV" width="100%" />
+    </a>
+<p>Exemplarisch habe ich hier einmal die Umgebungsvariable <code>PACKAGES</code> hinzugefügt und mit dem Wert <code>nano</code> belegt. Diese sorgt nun dafür, dass beim Start des Containers das Paket <code>nano</code>, welches nicht im Docker Image enthalten ist, installiert wird. Diese Option ist vor allem für ioBroker Adapter interessant, die zusätzliche Pakete erfordern. Infos dazu, welche Pakete ggf. benötigt werden, findest du in der jeweiligen Adapterdokumentation.</p>
+<p>Weiter geht es in der Registerkarte &ldquo;Restart policy&rdquo;.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology6.png" title="ioBroker Synology Portainer Restart Policy" data-thumbnail="/img/posts/2023-02-27/iobroker_synology6.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology6.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology6.png, /img/posts/2023-02-27/iobroker_synology6.png 1.5x, /img/posts/2023-02-27/iobroker_synology6.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer Restart Policy" width="100%" />
+    </a>
+<p>Hier wählen wir zu guter Letzt die Option <code>Always</code>. Diese sorgt dafür, dass der Container im Fehlerfall automatisch neu gestartet wird.</p>
+<p>Damit haben wir alle notwendigen Konfigurationen getätigt und können mit einem Klick auf &ldquo;Deploy the container&rdquo; oberhalb der &ldquo;Advanced container settings&rdquo; die Erstellung anstossen.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Hinweis<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Die Erstellung des Containers kann mitunter ein wenig Zeit in Anspruch nehmen, da Portainer im Hintergrund zunächst das ioBroker Docker Image herunter laden muss. Hab einfach ein wenig Geduld. Solange keine Fehlermeldung erscheint ist alles in Ordnung.</div>
+        </div>
+    </div>
+<p>Im Anschluss landen wir wieder in der Container Übersicht (&ldquo;Container list&rdquo;). Hier sollte nun unser iobroker auftauchen.</p>
+<a class="lightgallery" href="/img/posts/2023-02-27/iobroker_synology7.png" title="ioBroker Synology Portainer Container List" data-thumbnail="/img/posts/2023-02-27/iobroker_synology7.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-27/iobroker_synology7.png"
+            data-srcset="/img/posts/2023-02-27/iobroker_synology7.png, /img/posts/2023-02-27/iobroker_synology7.png 1.5x, /img/posts/2023-02-27/iobroker_synology7.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Synology Portainer Container List" width="100%" />
+    </a>
+<p>Ein Klick auf das erste Symbol in der Spalte &ldquo;Quick Actions&rdquo; öffnet die Logausgabe. Hier können wir den Startvorgang des Containers beobachten. Die Ausgabe sollte in etwa so aussehen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-------------------------     2023-03-28 21:19:46      -------------------------
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">----- ██╗  ██████╗  ██████╗  ██████╗   ██████╗  ██╗  ██╗ ███████╗ ██████╗  -----
+</span></span><span class="line"><span class="cl">----- ██║ ██╔═══██╗ ██╔══██╗ ██╔══██╗ ██╔═══██╗ ██║ ██╔╝ ██╔════╝ ██╔══██╗ -----
+</span></span><span class="line"><span class="cl">----- ██║ ██║   ██║ ██████╔╝ ██████╔╝ ██║   ██║ █████╔╝  █████╗   ██████╔╝ -----
+</span></span><span class="line"><span class="cl">----- ██║ ██║   ██║ ██╔══██╗ ██╔══██╗ ██║   ██║ ██╔═██╗  ██╔══╝   ██╔══██╗ -----
+</span></span><span class="line"><span class="cl">----- ██║ ╚██████╔╝ ██████╔╝ ██║  ██║ ╚██████╔╝ ██║  ██╗ ███████╗ ██║  ██║ -----
+</span></span><span class="line"><span class="cl">----- ╚═╝  ╚═════╝  ╚═════╝  ╚═╝  ╚═╝  ╚═════╝  ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝ -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----              Welcome to your ioBroker Docker container!              -----
+</span></span><span class="line"><span class="cl">-----                    Startupscript is now running!                     -----
+</span></span><span class="line"><span class="cl">-----                          Please be patient!                          -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                          System Information                          -----
+</span></span><span class="line"><span class="cl">-----                    arch:                x86_64                       -----
+</span></span><span class="line"><span class="cl">-----                    hostname:            vm-dsm7-test                 -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----                          Version Information                         -----
+</span></span><span class="line"><span class="cl">-----                    image:               v8.0.0                       -----
+</span></span><span class="line"><span class="cl">-----                    build:               2023-03-20T21:14:35+00:00    -----
+</span></span><span class="line"><span class="cl">-----                    node:                v18.15.0                     -----
+</span></span><span class="line"><span class="cl">-----                    npm:                 9.5.0                        -----
+</span></span><span class="line"><span class="cl">-----                                                                      -----
+</span></span><span class="line"><span class="cl">-----                        Environment Variables                         -----
+</span></span><span class="line"><span class="cl">-----                    PACKAGES:            nano                         -----
+</span></span><span class="line"><span class="cl">-----                    SETGID:              <span class="m">1000</span>                         -----
+</span></span><span class="line"><span class="cl">-----                    SETUID:              <span class="m">1000</span>                         -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                   Step <span class="m">1</span> of 5: Preparing container                   -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Updating Linux packages on first run... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">PACKAGES is set. Installing the following additional Linux packages: nano
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">nano is not installed. Installing... Done.
+</span></span><span class="line"><span class="cl">Registering maintenance script as command... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----             Step <span class="m">2</span> of 5: Detecting ioBroker installation             -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">There is no data detected in /opt/iobroker.
+</span></span><span class="line"><span class="cl">Restoring initial ioBroker installation... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----             Step <span class="m">3</span> of 5: Checking ioBroker installation              -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="o">(</span>Re<span class="o">)</span>setting permissions <span class="o">(</span>This might take a <span class="k">while</span>! Please be patient!<span class="o">)</span>... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Fixing <span class="s2">&#34;sudo-bug&#34;</span> by replacing sudo with gosu... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Initializing a fresh installation of ioBroker... Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Hostname in ioBroker does not match the hostname of this container.
+</span></span><span class="line"><span class="cl">Updating hostname to <span class="s2">&#34;vm-dsm7-test&#34;</span>... The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.admin.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;vm-dsm7-test&#34;</span>.
+</span></span><span class="line"><span class="cl">The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.discovery.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;vm-dsm7-test&#34;</span>.
+</span></span><span class="line"><span class="cl">The host <span class="k">for</span> instance <span class="s2">&#34;system.adapter.backitup.0&#34;</span> was changed from <span class="s2">&#34;buildkitsandbox&#34;</span> to <span class="s2">&#34;vm-dsm7-test&#34;</span>.
+</span></span><span class="line"><span class="cl">Done.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                Step <span class="m">4</span> of 5: Applying special settings                -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Some adapters have special requirements/ settings which can be activated by the use of environment variables.
+</span></span><span class="line"><span class="cl">For more information see ioBroker Docker Image Docs <span class="o">(</span>https://docs.buanet.de/iobroker-docker-image/docs/<span class="o">)</span>.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">-----                    Step <span class="m">5</span> of 5: ioBroker startup                     -----
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Starting ioBroker... 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1">##### #### ### ## # iobroker.js-controller log output # ## ### #### #####</span>
+</span></span><span class="line"><span class="cl">host.vm-dsm7-test check instance <span class="s2">&#34;system.adapter.admin.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;vm-dsm7-test&#34;</span>
+</span></span><span class="line"><span class="cl">host.vm-dsm7-test check instance <span class="s2">&#34;system.adapter.discovery.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;vm-dsm7-test&#34;</span>
+</span></span><span class="line"><span class="cl">host.vm-dsm7-test check instance <span class="s2">&#34;system.adapter.backitup.0&#34;</span> <span class="k">for</span> host <span class="s2">&#34;vm-dsm7-test&#34;</span>
+</span></span></code></pre></div><p>Ist ioBroker erfolgreich gestartet, so können wir über die URL nach folgendem Schema auf die ioBroker Admin UI zugreifen:</p>
+<p><code>http://[Hostname_oder_IP_des_Docker_Host]:8081</code></p>
+<p>Es sollte der ioBroker Setup Assistent für die Ersteinrichtung erscheinen.</p>
+<a class="lightgallery" href="/img/posts/2023-02-26/iobroker1.png" title="ioBroker Setup Assistent" data-thumbnail="/img/posts/2023-02-26/iobroker1.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-02-26/iobroker1.png"
+            data-srcset="/img/posts/2023-02-26/iobroker1.png, /img/posts/2023-02-26/iobroker1.png 1.5x, /img/posts/2023-02-26/iobroker1.png 2x"
+            data-sizes="auto"
+            alt="ioBroker Setup Assistent" width="100%" />
+    </a>
+<p>Unser ioBroker Docker Container ist damit startklar.</p>
+<h2 id="bonus-container-mit-portainer-stacks-erstellen">Bonus: Container mit Portainer Stacks erstellen</h2>
+<p>Zum <a href="/posts/2023/02/15_verwenden_von_stacks_in_portainer/" rel="">Verwenden von Stacks in Portainer</a> habe ich ja bereits ein Tutorial gemacht. Als Stackfile würde das Beispiel von oben dann so aussehen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">buanet/iobroker:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PACKAGES=nano</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/volume1/docker/iobroker-data:/opt/iobroker</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<p>Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 27.02.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" data-title="ioBroker unter Docker auf der Synology DiskStation" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/26_iobroker_im_smarthome_mit_docker/" class="prev" rel="prev" title="ioBroker im Smarthome mit Docker"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ioBroker im Smarthome mit Docker</a>
+            <a href="/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/" class="next" rel="next" title="USB-Geräte im ioBroker Docker Container">USB-Geräte im ioBroker Docker Container<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,27 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Docker Images - Kategorie - blog.buanet.de</title>
+        <link>http://localhost:1313/categories/docker-images/</link>
+        <description>Docker Images - Kategorie - blog.buanet.de</description>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Sun, 26 Feb 2023 22:25:17 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/docker-images/" rel="self" type="application/rss+xml" /><item>
+    <title>ioBroker im Smarthome mit Docker</title>
+    <link>http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/</link>
+    <pubDate>Sun, 26 Feb 2023 22:25:17 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/26_iobroker_im_smarthome_mit_docker/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-26/header.png" referrerpolicy="no-referrer">
+            </div>Eine zentrale Rolle in meinem Smarthome mit Docker spielt ioBroker. In diesem Artikel will ich dir einen kurzen Überblick über ioBroker geben und zeigen, wie einfach und schnell du einen ioBroker Docker Container für einen ersten Test aufsetzen kannst&hellip;]]></description>
+</item>
+<item>
+    <title>Portainer zur Verwaltung des Docker Dienstes</title>
+    <link>http://localhost:1313/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/</link>
+    <pubDate>Fri, 10 Feb 2023 20:23:42 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-10/header.png" referrerpolicy="no-referrer">
+            </div>Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück&hellip;]]></description>
+</item>
+</channel>
+</rss>

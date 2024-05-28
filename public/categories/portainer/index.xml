@@ -1,29 +1,67 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Portainer - Kategorie - blog.buanet.de</title>
-        <link>http://blog.buanet.de/categories/portainer/</link>
+        <link>http://localhost:1313/categories/portainer/</link>
         <description>Portainer - Kategorie - blog.buanet.de</description>
-        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</lastBuildDate><atom:link href="http://blog.buanet.de/categories/portainer/" rel="self" type="application/rss+xml" /><item>
-    <title>Einrichtung eines MACVLAN Netzwerks über Portainer</title>
-    <link>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_%C3%BCber_portainer/</link>
-    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Sun, 05 Mar 2023 20:51:13 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/portainer/" rel="self" type="application/rss+xml" /><item>
+    <title>Verwaltung mehrerer Docker Hosts mit Portainer</title>
+    <link>http://localhost:1313/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/</link>
+    <pubDate>Sun, 05 Mar 2023 20:51:13 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_%C3%BCber_portainer/</guid>
+    <guid>http://localhost:1313/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/img/posts/2023-02-23/header.png" referrerpolicy="no-referrer">
-            </div>Einleitung In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. Hier geht es zum Beispiel um Broadcast oder Multicast Traffic, der den Container über das Bridge Netzwerk schlicht nicht erreichen kann, aber von vielen Tools und Protokollen benötigt wird. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an.
-Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse im Netzwerk und ist damit von anderen Geräten vollständig erreichbar.]]></description>
+                <img src="/img/posts/2023-03-05/header.png" referrerpolicy="no-referrer">
+            </div>In diesem Tutorial zeige ich dir, wie du mit einer Portainer Instanz, ohne großen Aufwand, auch mehrere Docker Hosts verwalten kannst&hellip;]]></description>
 </item>
 <item>
-    <title>Einrichtung eines benutzerdefinierten Bridge Netzwerks über Portainer</title>
-    <link>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/</link>
-    <pubDate>Thu, 23 Feb 2023 20:49:17 &#43;0100</pubDate>
+    <title>Einrichtung eines MACVLAN Netzwerks mit Portainer</title>
+    <link>http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/</link>
+    <pubDate>Thu, 23 Feb 2023 22:31:15 &#43;0100</pubDate>
     <author>André (buanet)</author>
-    <guid>http://blog.buanet.de/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_%C3%BCber_portainer/</guid>
+    <guid>http://localhost:1313/posts/2023/02/23_einrichtung_eines_macvlan_netzwerks_mit_portainer/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/posts/2023-02-23/header.png" referrerpolicy="no-referrer">
-            </div>Einleitung Wer mehrere Container über das Standard-Netzwerk „bridge“ verbindet, wird wohl früher oder später darüber stolpern: Im Standard-Bridge-Netzwerk von Docker gibt es unter anderem nicht nur keine Namensauflösung (DNS) sondern auch keine Möglichkeit den Containern feste IP-Adressen im virtuellen Netz zu vergeben (alle Einschränkungen zum Nachlesen in den Docker Docs). Doch es gibt eine Lösung. Legt man sich nämlich sein eigenes Bridge-Netzwerk an umgeht man die Beschränkungen.
-Wie man ein benutzerdefiniertes Bridge Netzwerk über Portainer anlegt, das zeige ich dir in diesem Tutorial.]]></description>
+            </div>In machen Fällen benötigt ein Docker Container mehr Zugriff auf das heimische Netzwerk, als über ein Bridge Netzwerk möglich ist. In diesem Fall bietet sich die Verwendung eines MACVLAN Netzwerks an. Hierbei bekommt der Container eine eigene (virtuelle) IP-Adresse im Netzwerk und ist damit von anderen Geräten vollständig erreichbar&hellip;.]]></description>
+</item>
+<item>
+    <title>Einrichtung eines benutzerdefinierten Bridge Netzwerks mit Portainer</title>
+    <link>http://localhost:1313/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/</link>
+    <pubDate>Thu, 23 Feb 2023 20:49:17 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/23_einrichtung_eines_benutzerdefinierten_bridge_netzwerks_mit_portainer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-23/header.png" referrerpolicy="no-referrer">
+            </div>Wer mehrere Docker Container über das Standard-Netzwerk &ldquo;bridge&rdquo; verbindet, wird früher oder später die Einschränkungen dieses Netzwerks kennenlernen. Doch es gibt eine Lösung. Ein benutzerdefiniertes Bridge Netzwerk muss her. Wie du dieses einrichtest zeige ich dir in diesem Tutorial&hellip;]]></description>
+</item>
+<item>
+    <title>Verwenden von Stacks (aka docker-compose) in Portainer</title>
+    <link>http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/</link>
+    <pubDate>Wed, 15 Feb 2023 22:21:55 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/15_verwenden_von_stacks_in_portainer/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-15/header.png" referrerpolicy="no-referrer">
+            </div>Stacks nennt sich eine beliebte Funktion in Portainer, mit der es möglich ist über eine einzige &ldquo;Konfigurationsdatei&rdquo; (Stackfile) einen oder mehrere Container, samt Netzwerken und Volumes, erstellen und entsprechend konfigurieren zu lassen. Das Ganze basiert dabei auf &ldquo;docker-compose&rdquo;&hellip;]]></description>
+</item>
+<item>
+    <title>Portainer auf der Synology DiskStation</title>
+    <link>http://localhost:1313/posts/2023/02/12_portainer_auf_der_synology_diskstation/</link>
+    <pubDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/12_portainer_auf_der_synology_diskstation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-12/header.png" referrerpolicy="no-referrer">
+            </div>Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst&hellip;.]]></description>
+</item>
+<item>
+    <title>Portainer zur Verwaltung des Docker Dienstes</title>
+    <link>http://localhost:1313/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/</link>
+    <pubDate>Fri, 10 Feb 2023 20:23:42 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/10_portainer_zur_verwaltung_des_docker_dienstes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-10/header.png" referrerpolicy="no-referrer">
+            </div>Bei Docker handelt es sich ja bekanntlich um einen Dienst der normalerweise über die Kommandozeile bedient wird. Wer allerdings keine Lust hat Kommandos auswendig zu lernen oder lange Befehlsaufrufe aus verschiedenen Parametern zusammen zu stellen, der greift gerne auf eine grafische Oberfläche zurück&hellip;]]></description>
 </item>
 </channel>
 </rss>

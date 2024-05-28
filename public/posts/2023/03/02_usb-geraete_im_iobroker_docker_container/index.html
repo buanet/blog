@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>USB-Geräte im ioBroker Docker Container - blog.buanet.de</title><meta name="Description" content="Wie kann ich USB-Geräte im ioBroker Docker Container nutzen?"><meta property="og:url" content="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/">
+  <meta property="og:site_name" content="blog.buanet.de">
+  <meta property="og:title" content="USB-Geräte im ioBroker Docker Container">
+  <meta property="og:description" content="Wie kann ich USB-Geräte im ioBroker Docker Container nutzen?">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-03T21:25:42+01:00">
+    <meta property="article:modified_time" content="2023-03-03T21:25:42+01:00">
+    <meta property="og:image" content="http://localhost:1313/img/og/default.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og/default.png">
+  <meta name="twitter:title" content="USB-Geräte im ioBroker Docker Container">
+  <meta name="twitter:description" content="Wie kann ich USB-Geräte im ioBroker Docker Container nutzen?">
+      <meta name="twitter:site" content="@buanetde">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/" /><link rel="prev" href="http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" /><link rel="next" href="http://localhost:1313/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "USB-Geräte im ioBroker Docker Container",
+        "inLanguage": "de",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2023\/03\/02_usb-geraete_im_iobroker_docker_container\/"
+        },"genre": "posts","wordcount":  905 ,
+        "url": "http:\/\/localhost:1313\/posts\/2023\/03\/02_usb-geraete_im_iobroker_docker_container\/","datePublished": "2023-03-03T21:25:42+01:00","dateModified": "2023-03-03T21:25:42+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "André (buanet)"
+            },"description": "Wie kann ich USB-Geräte im ioBroker Docker Container nutzen?"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Beiträge </a><a class="menu-item" href="/categories/"> Kategorien </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog.buanet.de"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/img/logo_wide.png"
+        data-srcset="/img/logo_wide.png, /img/logo_wide.png 1.5x, /img/logo_wide.png 2x"
+        data-sizes="auto"
+        alt="/img/logo_wide.png"
+        title="/img/logo_wide.png" /><span class="header-title-pre"> </span>blog.buanet.de</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Suche nach Titel und Inhalt..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Suche">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Leeren">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Abbrechen
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Beiträge</a><a class="menu-item" href="/categories/" title="">Kategorien</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Darstellung ändern">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Inhalt</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">USB-Geräte im ioBroker Docker Container</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>André (buanet)</a></span>&nbsp;<span class="post-category">in <a href="/categories/tutorials/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorials</a>&nbsp;<a href="/categories/iobroker/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>IoBroker</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="03.03.2023">03.03.2023</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;905 Wörter&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 Minuten&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/posts/2023-03-02/header.png"
+        data-srcset="/img/posts/2023-03-02/header.png, /img/posts/2023-03-02/header.png 1.5x, /img/posts/2023-03-02/header.png 2x"
+        data-sizes="auto"
+        alt="/img/posts/2023-03-02/header.png"
+        title="Wie kann ich USB-Geräte im ioBroker Docker Container nutzen?" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Inhalt</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#einleitung">Einleitung</a></li>
+    <li><a href="#voraussetzungen">Voraussetzungen</a></li>
+    <li><a href="#usb-gerät-auf-dem-host-identifizieren">USB-Gerät auf dem Host identifizieren</a>
+      <ul>
+        <li><a href="#best-practice-nutze-devserialby-id">Best Practice: Nutze /dev/serial/by-id/&hellip;</a></li>
+      </ul>
+    </li>
+    <li><a href="#iobroker-docker-container-konfigurieren">ioBroker Docker Container konfigurieren</a></li>
+    <li><a href="#überprüfung-nach-start-des-containers">Überprüfung nach Start des Containers</a></li>
+    <li><a href="#bonus-durchreichen-des-usb-geräts-mit-docker-compose-portainer-stacks">Bonus: Durchreichen des USB-Geräts mit docker-compose (Portainer Stacks)</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="einleitung">Einleitung</h2>
+<p>In diesem Tutorial zeige ich dir wie du ein USB-Gerät in deinen ioBroker Container durchreichen kannst um zum Beispiel einen Zigbee-Stick in ioBroker verwenden zu können.</p>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Folgendes setze ich voraus:</p>
+<ul>
+<li>Linux basierter Docker Host (NAS Systeme basieren in der Regel auf Linux)</li>
+<li>Zugriff auf die Kommandozeile des Docker Hosts</li>
+<li>Installierter und gestarteter Docker Dienst</li>
+<li>Eingerichteter ioBroker Docker Container</li>
+</ul>
+<h2 id="usb-gerät-auf-dem-host-identifizieren">USB-Gerät auf dem Host identifizieren</h2>
+<p>Damit wir das USB-Gerät in den Docker Container durchreichen können müssen wir erst einmal identifizieren unter welchem Pfad es auf unserem Docker Host zur Verfügung steht und angesprochen werden kann.<br>
+Unter Linux befinden sich die Geräte (devices) in der Regel im Verzeichnis <code>/dev</code>. Doch welches Gerät ist jetzt unser USB-Stick?</p>
+<p>Die einfachste Lösung das herauszufinden ist das Ausführen des Befehls <code>dmesg</code> unmittelbar nach dem Anstecken des USB-Geräts. Ziemlich am Ende der Ausgabe sollte sich erkennen lassen, dass ein USB-Gerät angesteckt worden ist.</p>
+<p>Bei mir auf der DiskStation sieht das dann in etwa so aus:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/01_dmesg.png" title="Ausgabe Kommandozeile dmesg" data-thumbnail="/img/posts/2023-03-02/01_dmesg.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/01_dmesg.png"
+            data-srcset="/img/posts/2023-03-02/01_dmesg.png, /img/posts/2023-03-02/01_dmesg.png 1.5x, /img/posts/2023-03-02/01_dmesg.png 2x"
+            data-sizes="auto"
+            alt="Ausgabe Kommandozeile dmesg" width="100%" />
+    </a>
+<p>An der Ausgabe ist zu erkennen, dass mein USB-Gerät als <code>ttyACM0</code> auf dem Host zur Verfügung steht. Der Pfad wäre dann damit <code>/dev/ttyACM0</code>.</p>
+<p>Falls dieses Vorgehen bei dir nicht zum Erfolg führt, kannst du es auch mit dem Befehl <code>lsusb</code> versuchen. Damit bekommst du eine Liste aller USB-Geräte angezeigt.<br>
+Auf meiner DiskStation sieht das dann so aus:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/02_lsusb.png" title="Ausgabe Kommandozeile lsusb" data-thumbnail="/img/posts/2023-03-02/02_lsusb.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/02_lsusb.png"
+            data-srcset="/img/posts/2023-03-02/02_lsusb.png, /img/posts/2023-03-02/02_lsusb.png 1.5x, /img/posts/2023-03-02/02_lsusb.png 2x"
+            data-sizes="auto"
+            alt="Ausgabe Kommandozeile lsusb" width="100%" />
+    </a>
+<p>Da ich weiß, das es sich neo meinem Zigbee-Stick um einen Stick von Texas Instruments handelt, kann ich der Ausgabe entnehmen, dass er an den USB-Port <code>usb2</code>, genauer sogar an <code>2-1</code> gesteckt wurde. Mit dem Befehl <code>ll /sys/class/tty | grep usb2</code> oder <code>ll /sys/class/tty | grep 2-1</code> kann ich nun ebenfalls ermitteln dass mein Stick unter dem Alias <code>ttyACM0</code> zu finden ist:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/03_ll.png" title="Ausgabe Kommandozeile ll" data-thumbnail="/img/posts/2023-03-02/03_ll.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/03_ll.png"
+            data-srcset="/img/posts/2023-03-02/03_ll.png, /img/posts/2023-03-02/03_ll.png 1.5x, /img/posts/2023-03-02/03_ll.png 2x"
+            data-sizes="auto"
+            alt="Ausgabe Kommandozeile ll" width="100%" />
+    </a>
+<p>Der Pfad meines USB-Geräts auf dem Docker Host ist also <code>/dev/ttyACM0</code>.</p>
+<h3 id="best-practice-nutze-devserialby-id">Best Practice: Nutze /dev/serial/by-id/&hellip;</h3>
+<p>Die beiden bisher genannten Wege zur Ermittlung des Pfades unter dem das USB-Gerät ansprechbar ist, sind Beispiele von meiner DiskStation. Auf anderen Linux Systemen, wie z.B. einem Raspberry Pi, haben wir in der Regel die Möglichkeit ein Gerät nicht nur über den Alias (z. B. <code>ttyACM0</code>), sondern auch <code>by-id</code> anzusprechen. Dazu kann man mit dem Befehl <code>ls -al /dev/serial/by-id/</code> eine Liste der Geräte ausgeben lassen, die sich per eindeutige ID ansprechen lassen.</p>
+<p>In der Ausgabe sieht dies dann so aus:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/03a_ls.png" title="Ausgabe Kommandozeile ls" data-thumbnail="/img/posts/2023-03-02/03a_ls.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/03a_ls.png"
+            data-srcset="/img/posts/2023-03-02/03a_ls.png, /img/posts/2023-03-02/03a_ls.png 1.5x, /img/posts/2023-03-02/03a_ls.png 2x"
+            data-sizes="auto"
+            alt="Ausgabe Kommandozeile ls" width="100%" />
+    </a>
+<p>Auch hier erkennen wir wieder meinen USB-Stick von Texas Instruments (<code>usb-Texas_Instruments…</code>). Zusätzlich sehen wir auch die Verlinkung zum Alias <code>ttyACM0</code>.<br>
+Wenngleich die Nutzung der ID des Geräts aufgrund der Länge komplizierter zu sein scheint, so hat diese Methode einen entscheidenden Vorteil. Während es nämlich möglich ist, dass bei einem Neustart den verwendeten USB-Geräten andere Aliase zugeordnet werden, so ist die ID eindeutig und bleibt damit immer gleich.<br>
+Wenn dein Linux Host also diese Variante unterstützt, empfiehlt es sich, vor Alle bei mehreren USB-Devices, den „by-id“-Pfad zu verwenden und nicht den Alias.</p>
+<p>Der Vollständigkeit halber sei gesagt, dass es natürlich auch noch andere Wege gibt, den Pfad des USB-Geräts zu ermitteln. Welche Möglichkeiten du hast hängt dabei natürlich auch von dem Verwendeten System ab. Google ist hier in der Regel eine gute Anlaufstelle für weitere Informationen.</p>
+<h2 id="iobroker-docker-container-konfigurieren">ioBroker Docker Container konfigurieren</h2>
+<p>Nachdem wir den Pfad unseres USB-Geräts ermitteln konnten, ist es nun Zeit das Gerät in den ioBroker Docker Container durchzureichen.</p>
+<p>Dabei müssen wir gleich an zwei Stellen die Konfiguration unseres ioBroker Docker Containers anpassen. Zunächst reichen wir den ermittelten Pfad in den Docker Container durch. Dazu werfen wir beim Erstellen bzw, Bearbeiten des Containers über Portainer einen Blick auf die „Advanced container settings“, genauer in den Bereich „Runtime &amp; Resources“. Dort gibt es einen Punkt „Devices“. Über „add device“ können wir ein Gerät hinzufügen</p>
+<p>Unter „host“ ist der zuvor ermittelte Pfad des Geräts zu hinterlegen. Bei Verwendung des Alias-Pfads (also z.B. <code>/dev/ttyACM0</code>) empfehle ich das Gerät auch innerhalb des Container unter dem gleichen Pfad verfügbar zu machen um nicht durcheinander zu kommen. Das Ganze sieht dann in etwa so aus:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/04_portainer_devices.png" title="Portainer Devices" data-thumbnail="/img/posts/2023-03-02/04_portainer_devices.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/04_portainer_devices.png"
+            data-srcset="/img/posts/2023-03-02/04_portainer_devices.png, /img/posts/2023-03-02/04_portainer_devices.png 1.5x, /img/posts/2023-03-02/04_portainer_devices.png 2x"
+            data-sizes="auto"
+            alt="Portainer Devices" width="100%" />
+    </a>
+<p>Für den Fall, dass wir den eindeutigen, langen „by-id“-Pfad verwenden wollen, empfiehlt es sich zumindest im Container einen Alias zu verwenden. Möglich wäre z.B. <code>/dev/serial/by-id/zigbee</code> für einen Zigbee-Stick.</p>
+<p>Der zweite Teil der Konfiguration bezieht sich auf die Umgebungsvariable <code>USBDEVICES</code>. Um Sicher zu stellen, dass der ioBroker innerhalb des Containers über die notwendigen Rechte für den Zugriff auf das Gerät verfügt, setzen wir unter „Advanced container settings“ im Punkt „Env“ die Umgebungsvariable <code>USBDEVICES</code> und füllen den Wert mit dem Pfad des Gerätes innerhalb des Containers, also entweder <code>/dev/ttyACM0</code> oder <code>/dev/serial/by-id/zigbee</code>. Weitere Infos zur Verwendung der Umgebungsvariable findest du in der <a href="https://docs.buanet.de/de/iobroker-docker-image/docs/#umgebungsvariablen-env" target="_blank" rel="noopener noreffer ">Dokumentation zum Docker Image</a>.</p>
+<p>Für mein Beispiel würde die Konfiguration also so aussshen:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/05_env.png" title="Portainer Umgebungsvariable" data-thumbnail="/img/posts/2023-03-02/05_env.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/05_env.png"
+            data-srcset="/img/posts/2023-03-02/05_env.png, /img/posts/2023-03-02/05_env.png 1.5x, /img/posts/2023-03-02/05_env.png 2x"
+            data-sizes="auto"
+            alt="Portainer Umgebungsvariable" width="100%" />
+    </a>
+<p>Anschließend starten wir den Container.</p>
+<h2 id="überprüfung-nach-start-des-containers">Überprüfung nach Start des Containers</h2>
+<p>Nach dem Start sollte das USB-Gerät nun innerhalb des Containers zur Verfügung stehen. Prüfen lässt sich das recht einfach über ein <code>ls -al /dev/*</code> bzw. <code>ls -al /dev/serial/by-id/*</code> auf der Kommandozeile des Containers.<br>
+Hier sollte nun das durchgereichte Gerät auftauchen und die folgenden Berechtigungseinstellungen besitzen:</p>
+<a class="lightgallery" href="/img/posts/2023-03-02/06_check.png" title="Ausgabe Kommandozeile ls" data-thumbnail="/img/posts/2023-03-02/06_check.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/posts/2023-03-02/06_check.png"
+            data-srcset="/img/posts/2023-03-02/06_check.png, /img/posts/2023-03-02/06_check.png 1.5x, /img/posts/2023-03-02/06_check.png 2x"
+            data-sizes="auto"
+            alt="Ausgabe Kommandozeile ls" width="100%" />
+    </a>
+<p>Das sollte es dann auch schon gewesen sein. Jetzt müsst ihr nur noch den entsprechenden Adapter installieren und euer Gerät in der Adapter-Konfiguration entsprechend angeben.</p>
+<h2 id="bonus-durchreichen-des-usb-geräts-mit-docker-compose-portainer-stacks">Bonus: Durchreichen des USB-Geräts mit docker-compose (Portainer Stacks)</h2>
+<p>Selbstverständlich lässt sich die Konfiguration auch in docker-compose bzw. Portainer Stacks abbilden. Hier ein Beispiel des ioBroker Docker Containers aus <a href="/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" rel="">diesem Tutorial</a> mit dem USB-Gerät von oben:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">iobroker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">iobroker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">buanet/iobroker:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">PACKAGES=nano</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">USBDEVICES=/dev/ttyACM0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">devices</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/dev/ttyACM0:/dev/ttyACM0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/volume1/docker/iobroker-data:/opt/iobroker</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<p>Für Fragen und Feedback nutze gerne die Kommentarfunktion zu diesem Beitrag.<br>
+ <br>
+MfG,<br>
+André</p>
+</div><div class="author-card">
+    <img class="author-card" src="/img/andre.jpg">
+    <div class="author-info">
+        <h1>André (buanet)</h1>
+        <p>Familienvater und Fachinformatiker bei Tag, Tech-Gadget-Junkie und Docker-Smart-Homer bei Nacht. Kann nichts mit Kaffee anfangen und isst viel zu gerne Pizza.
+            <br>Beschäftigt sich seit 2015 intensiv mit dem Thema Smarthome und ist seit 2017 Teil der ioBroker OpenSource Entwickler Community.</p>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Aktualisiert am 03.03.2023</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Teilen auf Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/" data-title="USB-Geräte im ioBroker Docker Container" data-via="buanetde"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Teilen auf Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/2023/03/02_usb-geraete_im_iobroker_docker_container/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Zurück</a></span>&nbsp;|&nbsp;<span><a href="/">Startseite</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/" class="prev" rel="prev" title="ioBroker unter Docker auf der Synology DiskStation"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ioBroker unter Docker auf der Synology DiskStation</a>
+            <a href="/posts/2023/03/05_verwaltung_mehrerer_docker_hosts_mit_portainer/" class="next" rel="next" title="Verwaltung mehrerer Docker Hosts mit Portainer">Verwaltung mehrerer Docker Hosts mit Portainer<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><a href="https://github.com/buanet/blog">Hosted on GitHub</a> | <a href="/impressum">Impressum</a></div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">André (buanet)</a></span>&nbsp;|&nbsp;<span class="license"><a href="/license">MIT License</a></span></div>
+        </div>
+        <script type="text/javascript" src="/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/css/lightbox.css">
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Nach oben">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="Kommentare anzeigen">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.de.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"In Zwischenablage kopieren","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"de","maxResultLength":10,"noResultsFound":"Keine Ergebnisse gefunden","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

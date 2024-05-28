@@ -1,0 +1,27 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DiskStation - Kategorie - blog.buanet.de</title>
+        <link>http://localhost:1313/categories/diskstation/</link>
+        <description>DiskStation - Kategorie - blog.buanet.de</description>
+        <generator>Hugo -- gohugo.io</generator><language>de</language><lastBuildDate>Mon, 27 Feb 2023 21:50:05 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/categories/diskstation/" rel="self" type="application/rss+xml" /><item>
+    <title>ioBroker unter Docker auf der Synology DiskStation</title>
+    <link>http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/</link>
+    <pubDate>Mon, 27 Feb 2023 21:50:05 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/27_iobroker_unter_docker_auf_der_synology_diskstation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-27/header.png" referrerpolicy="no-referrer">
+            </div>In diesem Tutorial zeige ich dir, wie du mit Hilfe von Docker und Portainer das ioBroker Docker Image auf deiner Synology DiskStation installierst&hellip;]]></description>
+</item>
+<item>
+    <title>Portainer auf der Synology DiskStation</title>
+    <link>http://localhost:1313/posts/2023/02/12_portainer_auf_der_synology_diskstation/</link>
+    <pubDate>Sun, 12 Feb 2023 21:12:44 &#43;0100</pubDate>
+    <author>André (buanet)</author>
+    <guid>http://localhost:1313/posts/2023/02/12_portainer_auf_der_synology_diskstation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/posts/2023-02-12/header.png" referrerpolicy="no-referrer">
+            </div>Nachdem ich in meinem letzten Beitrag schon Einiges allgemein über Portainer geschrieben habe, möchte ich dir in diesem Tutorial zeigen, wie du Portainer speziell auf deine Synology DiskStation bekommst&hellip;.]]></description>
+</item>
+</channel>
+</rss>
